@@ -1,0 +1,149 @@
+.banner{
+	background-image:url('https://riyadly.com/wp-content/uploads/2020/09/smtp-cover.png');
+	text-align: center;
+    color: #fff;
+   
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.cover-text h3{
+	
+	 text-shadow: 1px 1px black;
+}
+
+.banner-text{
+padding : 60px;	
+}
+
+.kauniaweblogo{
+margin-top:35px;
+
+
+}
+
+
+.card-link,.card-link2,.card-link3,.card-link4{
+text-decoration: none !important;
+color: inherit;	
+	
+}
+.card-link:hover{
+color: #FFAF46;
+}
+.card-link2:hover{
+color: #6CBCC0;
+}
+.card-link3:hover{
+color: #F45858;
+}
+.card-link4:hover{
+color: #8399FE;
+}
+
+a.button-get-started{
+    display: inline-block;
+    padding: 0.8em 1.2em;
+    margin:0 0.1em 0.1em 0;
+   color: #8788E0;
+    background-color:#FCF764;
+    border-radius:2em;
+    box-sizing: border-box;
+    text-decoration:none;
+    margin-top: 30px !important;
+  
+   
+}
+a:hover{
+     text-decoration:none;
+}
+
+a.button-get-started2{
+    display: inline-block;
+    padding: 0.8em 1.2em;
+    margin:0 0.1em 0.1em 0;
+   color: white;
+   background-color:#4CE98B;
+    border-radius:2em;
+    box-sizing: border-box;
+    text-decoration:none;
+    margin-top: 30px !important;
+  
+   
+}
+
+.smtp-description{
+    margin-top: 80px !important;
+    color:#707070;
+
+}
+
+
+.settings-container{
+   margin-top: 80px !important; 
+   margin-bottom:32px;
+}
+
+.card{
+	
+	padding:20px;
+	background-color:#F5F5F5;
+	
+}
+.card-desc{
+    color: #707070;
+}
+.card4{
+	
+}
+.for-break {
+  height: 60px;
+}
+.list-group-flush{
+    margin-top: 97px;
+   text-align: right;
+}
+.list-group-flush2{
+    margin-top: 80px;
+   text-align: left;
+}
+ li{
+     height: 45px;
+    
+}
+
+.smtp-features-head{
+	margin-top: 80px !important; 
+	margin-bottom: 80px !important; 
+}
+
+.list-group-item{
+font-style:italic;
+border:none !important;
+color:#ACACAC;
+}
+.smtp-features-li1{
+    margin-top: 64px;
+text-align:right;
+}
+.smtp-features-li2{
+    margin-top: 35px;
+
+}
+.smtp-features-li1 li{
+
+margin-top:30px;
+
+margin-bottom:12px;}
+
+.smtp-features-li2 li{
+	margin-top:30px;
+
+margin-bottom:5px;
+	
+}
