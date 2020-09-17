@@ -91,7 +91,7 @@ a:hover,a:focus{
 
 
 .cover-img{
-    background-image:url('https://riyadly.com/wp-content/uploads/2020/09/setting-cover.png');
+    background-image:url('https://riyadly.com/wp-content/uploads/2020/09/smtp-cover.png');
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: center center;
@@ -101,23 +101,22 @@ a:hover,a:focus{
     background-size: cover;
 }
 
-.cover-img-text h2{
-	color:#282828;
+.cover-img-text h1{
+  color:#FCF764;
+  text-shadow: 1px 1px #313030;
 	
 }
 
 .cover-img-text{
+
     margin: 40px;
+    color:white;
+    text-shadow: 1px 1px #313030;
+	
     
 }
 
 
-.brandingby{
-
-color:white;
-font-size:20px;
-text-shadow: 1px 1px black;
-}
 
 
 /* header close here */
@@ -240,6 +239,7 @@ input:checked + .slider:before {
 }
 
 .label-text{
+    margin-left: 10px;
     color:#949393 !important;
 }
 
@@ -342,48 +342,16 @@ a.reset-settings{
   }
 }
 
-.nav-pills .nav-color1, .nav-pills .show>.nav-color1{
-     background: linear-gradient(to bottom right, #fcb53b 0%, #f94c52 100%);
 
-    margin-bottom: 10px;
-}
-.nav-pills .nav-color2, .nav-pills .show>.nav-color2{
-      background: linear-gradient(to top right, #88ceff 0%, #1ba0fe 100%);
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
 
-    margin-bottom: 10px;
-}
-.nav-pills .nav-color3, .nav-pills .show>.nav-color3{
-   background: linear-gradient(to bottom right, #ea59ce 0%, #9866ec 100%);
-    margin-bottom: 10px;
-}
-.nav-pills .nav-color4, .nav-pills .show>.nav-color4{
-   background: linear-gradient(to top right, #28ede4 0%, #bff9b4 100%);
-
-    
-}
-
-.nav-pills .nav-color1.active, .nav-pills .show>.nav-color1{
-   background: linear-gradient(to bottom right, #fcb53b 0%, #f94c52 100%);
-
-
-
-}
-
-.nav-pills .nav-color2.active, .nav-pills .show>.nav-color2{
-background: linear-gradient(to top right, #88ceff 0%, #1ba0fe 100%);
-}
-.nav-pills .nav-color3.active, .nav-pills .showbackground>.nav-color3{
-   background: linear-gradient(to bottom right, #ea59ce 0%, #9866ec 100%);
-}
-.nav-pills .nav-color4.active, .nav-pills .show>.nav-color4{
- background: linear-gradient(to top right, #28ede4 0%, #bff9b4 100%);
-
+  background: linear-gradient(to right, #0099ff -35%, #ff6699 100%);
 }
 
 
 .smtp-main-container{
 
-margin-top:100px !important;
+margin-top:70px !important;
 }
 .settings-tabs{
 margin:39px !important;
@@ -408,64 +376,7 @@ margin:39px !important;
     margin-left: -5px;
     margin-right: 10px;
 }
-.menu-label1{
-    
-   font-size: 17px;
-   text-align: center;
-   margin-left:0px;
-   margin-bottom: 50px;
-    
-}
-.bg-color{
-	width:auto;
-	color:white;
-	padding-left:30px !important;
-	padding-right:30px !important;
-   background: linear-gradient(to bottom right, #fcb53b 0%, #f94c52 100%);
 
-}
-.bg-color2{
-	width:auto;
-	color:white;
-	padding-left:30px !important;
-	padding-right:30px !important;
-    background: linear-gradient(to top right, #88ceff 0%, #1ba0fe 100%);
-}
-.bg-color3{
-	width:auto;
-	color:white;
-	padding-left:30px !important;
-	padding-right:30px !important;
-    background: linear-gradient(to bottom right, #ea59ce 0%, #9866ec 100%);
-}
-.bg-color4{
-	width:auto;
-	color:white;
-	padding-left:30px !important;
-	padding-right:30px !important;
-   background: linear-gradient(to top right, #28ede4 0%, #bff9b4 100%);
-}
-.menu-label1-hr{
-	width:97%;
-	
-   margin-top:  -1px;
-  border-top: 1px solid #FA5C4F;  
-}
-.menu-label2-hr{
-	width:97%;
-   margin-top:  -1px;
-  border-top: 1px solid #54B8FE;  
-}
-.menu-label3-hr{
-	width:97%;
-   margin-top:  -1px;
-  border-top: 1px solid #9F65EA;  
-}
-.menu-label4-hr{
-	width:97%;
-   margin-top:  -1px;
-  border-top: 1px solid #6AF2CF;  
-}
 .lebelpossition{
     margin-left: -5px;
 }
@@ -488,9 +399,15 @@ input.redio-color {
 	margin-left:-26px !important;
 }
 
-input[type=email],input[type=text] {
-  border-radius: 18px;
+
+.kauniawebbranding{
+ 
+  padding-top: 30px !important;
 }
 
+#smtpTab{
+  padding-bottom: 35px;
+  padding-top: 35px;
+}
 
 
