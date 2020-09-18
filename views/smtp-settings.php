@@ -36,7 +36,7 @@
 						
 						
 
-                            <div class="form-group row col-12 testing">
+                            <div class="form-group row col-12 ">
 
                                 <label for="mailer option" class="col-3 col-form-label font-weight-bold">Mailer Option</label>
                                            <div class="col-sm-9">
@@ -44,7 +44,7 @@
 										<div class="container mailer-type">
 
 											<label class="btn btn-default active">
-                                            <input type="radio" class="redio-color" id="mailer-type-smtp" name="mailer-type" value="1"  /><span class="connection-type-label font-italic font-weight-bold">SMTP.com</span> 
+                                            <input type="radio" class="redio-color" id="mailer-type-smtp" name="mailer-type" value="1"  /><span class="connection-type-label font-italic font-weight-bold">SMTP</span> 
 											</label>
 											<label class="btn btn-default active">
 												<input type="radio" class="redio-color" id="mailer-type-gmail" name="mailer-type" value="1"  /> <span class="connection-type-label font-italic font-weight-bold">Gmaill</span>

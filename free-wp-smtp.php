@@ -26,15 +26,19 @@ function smtp_admin_styles() {
     $screen = get_current_screen();
    
     if ('toplevel_page_smtp-startup' === $screen->id) {
-      
+        wp_enqueue_style('bootstrap4', 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css');
         wp_enqueue_style('smtp_startup_admin_css', plugins_url('css/startup.css', __FILE__), array(), '1.0');
+        
+        wp_enqueue_script( 'wpsmtp_admin_js', plugins_url('js/smtp-settings.js', __FILE__), array(), '1.0');
+        wp_enqueue_script( 'bootjquery','https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js', array( 'jquery' ),'',true );
+
       
     } elseif('free-wp-smtp_page_smtp_settings' === $screen->id) {
        // echo "<script type='text/javascript'>alert('worked');</script>";
       wp_enqueue_script( 'wpsmtp_admin_js', plugins_url('js/smtp-settings.js', __FILE__), array(), '1.0');
       wp_enqueue_script( 'bootjquery','https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js', array( 'jquery' ),'',true );  
       wp_enqueue_script( 'bootjquery2','https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js', array( 'jquery' ),'',true );
-      wp_enqueue_script( 'bootjquery3','https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js', array( 'jquery' ),'',true );  
+      
 
       wp_enqueue_style('smtp_settings_admin_css', plugins_url('css/smtp-settings-style.css', __FILE__), array(), '1.0');
       wp_enqueue_style('bootstrap4', 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css');
