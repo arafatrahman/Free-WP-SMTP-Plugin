@@ -1,5 +1,5 @@
 <?php
-class smtp_admin extends smtp_setting{
+class smtp_admin extends smtpSetting{
 
 	 public static function Init(){
 		 add_action("admin_menu",array(__CLASS__,"add_smtp_menu"));
