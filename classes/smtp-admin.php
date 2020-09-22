@@ -8,8 +8,8 @@ class smtp_admin{
          public static function add_smtp_menu(){
             
 
-             add_menu_page('WP SMTP Startup Page', 'Free WP SMTP', 'manage_options', 'smtp-startup',array(__CLASS__,"main_menu"));
-            add_submenu_page( 'smtp-startup', 'SMTP Settings Page', 'SMTP Settings', 'manage_options', "smtp_settings",array(__CLASS__,"smtp_settings"));           
+             add_menu_page('WP SMTP Startup Page', 'Free WP SMTP', 'manage_options', 'smtpstartup',array(__CLASS__,"main_menu"));
+            add_submenu_page( 'smtpstartup', 'SMTP Settings Page', 'SMTP Settings', 'manage_options', "smtp_settings",array(__CLASS__,"smtp_settings"));           
             
 
          }
@@ -20,7 +20,7 @@ class smtp_admin{
 
          public static function smtp_settings(){
 					
-            include_once SMTP_PATH .  "/views/smtp-settings-view.php" ;
+            include_once SMTP_PATH .  "/views/settings-view.php" ;
          }
 
        

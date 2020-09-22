@@ -25,7 +25,7 @@ add_action('admin_enqueue_scripts', 'smtp_admin_styles');
 function smtp_admin_styles() {
     $screen = get_current_screen();
    
-    if ('toplevel_page_smtp-startup' === $screen->id) {
+    if ('toplevel_page_smtpstartup' === $screen->id) {
         wp_enqueue_style('bootstrap4', 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css');
         wp_enqueue_style('smtp_startup_admin_css', plugins_url('css/startup.css', __FILE__), array(), '1.0');
         

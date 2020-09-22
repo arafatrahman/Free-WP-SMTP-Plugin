@@ -47,7 +47,7 @@
                                             <input type="radio" class="redio-color" id="mailer-type-smtp" name="mailer-type" value="1"  /><span class="connection-type-label font-italic font-weight-bold">SMTP</span> 
 											</label>
 											<label class="btn btn-default active">
-												<input type="radio" class="redio-color" id="mailer-type-gmail" name="mailer-type" value="1"  /> <span class="connection-type-label font-italic font-weight-bold">Gmaill</span>
+												<input type="radio" class="redio-color" id="mailer-type-gmail" name="mailer-type" value="1"  /> <span class="connection-type-label font-italic font-weight-bold">Gmail</span>
 											</label>
 											<label class="btn btn-default active">
 												<input type="radio" class="redio-color" id="mailer-type-microsoft" name="mailer-type" value="1"  /> <span class="connection-type-label font-italic font-weight-bold">Microsoft</span>
