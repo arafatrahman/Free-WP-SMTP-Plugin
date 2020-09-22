@@ -411,3 +411,28 @@ input.redio-color {
 }
 
 
+.savebtn {
+  background-color: #00B050 !important ;
+  border: none !important;
+  color: white !important;
+  padding: 15px 20px !important;
+  font-size: 16px !important;
+  cursor: pointer !important;
+  border-radius: 25px !important;
+}
+
+.resetbtn {
+  background-color:#FB9042 !important ;
+  border: none !important;
+  color: white !important;
+  padding: 15px 20px !important;
+  font-size: 16px !important;
+  cursor: pointer !important;
+  border-radius: 25px !important;
+  
+}
+
+/* Darker background on mouse-over */
+.savebtn:hover,.resetbtn:hover{
+    background: linear-gradient(to right, #0099ff -35%, #ff6699 100%) !important;
+}

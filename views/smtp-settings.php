@@ -1,8 +1,6 @@
-<div id="smtp" role="tabpanel" aria-labelledby="home-tab" class="tab-pane fade px-4 py-5 show active">
+<div id="smtp" role="tabpanel" aria-labelledby="home-tab" class="tab-pane fade px-4 py-5 show active">  
 
-
-
-                     
+<form role="form" name="smtp-settings-form" id="smtp-settings-form" method="post" action="" enctype="multipart/form-data">
 
                         <div class=" well smtp-setting-one-content ">
 
@@ -10,7 +8,7 @@
                                 <label for="smtpactivation" class="col-sm-3 col-form-label font-weight-bold">SMTP Activation</label>
                                 <div class="col-sm-5">
                                     <label class="switch">
-                                        <input type="checkbox" id="smtp-activation">
+                                        <input name="smtp-activation" type="checkbox" id="smtp-activation">
                                         <span class="slider round"></span>
                                     </label> 
                                 </div>
@@ -20,13 +18,13 @@
                             <div class="form-group row ">
                                 <label for="fromemail" class="col-sm-3 col-form-label font-weight-bold">From Email Address</label>
                                 <div class="col-sm-5">
-                                    <input type="email" class="form-control" id="from-email" placeholder="From Email Address">
+                                    <input type="email" name="from-email" class="form-control" id="from-email" placeholder="From Email Address">
                                 </div>
                             </div>
                             <div class="form-group row ">
                                 <label for="fromname" class="col-sm-3 col-form-label font-weight-bold">From Name</label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="from-name" placeholder="From Name">
+                                    <input type="text" name="from-name" class="form-control" id="from-name" placeholder="From Name">
                                 </div>
                             </div>
 
@@ -111,7 +109,7 @@
 
                                         <label for="gmailclientid" class="col-sm-3 col-form-label font-weight-bold">Client ID</label>
                                         <div class="col-sm-5">
-                                            <input type="email" class="form-control" id="gmail-client-id" placeholder="Enter Gmail Client ID">
+                                            <input type="text" class="form-control" name="gmail-client-id" id="gmail-client-id" placeholder="Enter Gmail Client ID">
                                             <div class="gmail-client-id-label font-italic label-text ">At registration the client application is assigned a client ID and a client secret (password) by the authorization server</div>
                                         </div>
 
@@ -120,7 +118,7 @@
 
                                         <label for="gmailclientsecret" class="col-sm-3 col-form-label font-weight-bold">Client Secret</label>
                                         <div class="col-sm-5">
-                                            <input type="text" class="form-control" id="gmail-client-secret" placeholder="Enter Gmail Client Secret">
+                                            <input type="text" class="form-control" name="gmail-client-secret" id="gmail-client-secret" placeholder="Enter Gmail Client Secret">
                                             <div class="gmail-client-secret-label font-italic label-text">At registration the client application is assigned a client ID and a client secret (password) by the authorization server</div>
                                         </div>
 
@@ -130,7 +128,7 @@
 
                                         <label for="gmailredirectURI" class="col-sm-3 col-form-label font-weight-bold">Authorized redirect URI</label>
                                         <div class="col-sm-5">
-                                            <input type="text" class="form-control" id="gmailredirectURI" placeholder="Authorized redirect URI Goes Here">
+                                            <input type="text" class="form-control"name="gmailredirectURI" id="gmailredirectURI" placeholder="Authorized redirect URI Goes Here">
                                             <div class="gmailredirectURI-label font-italic label-text">Please copy this URL into the "Authorized redirect URIs" field of your Google web application.</div>
                                         </div>
 
@@ -141,7 +139,7 @@
                                         <label for="authorization" class="col-sm-3 col-form-label font-weight-bold">Authorization</label>
                                         <div class="col-sm-4">
                                             <label class="switch">
-                                                <input type="checkbox" id="gmail-authorization" >
+                                                <input type="checkbox" name="gmail-authorization" id="gmail-authorization" >
                                                 <span class="slider round"></span>
 
                                             </label>  
@@ -179,7 +177,7 @@
 
                                         <label for="smtpapikey" class="col-sm-3 col-form-label font-weight-bold">API Key</label>
                                         <div class="col-sm-5">
-                                            <input type="text" class="form-control" id="mo-smtp-api-key" placeholder="Enter SMTP API Key">
+                                            <input type="text" name="mo-smtp-api-key" class="form-control" id="mo-smtp-api-key" placeholder="Enter SMTP API Key">
                                             <div class="gmail-client-id-label font-italic label-text">Follow this link to get an API Key from SMTP.com: <a href="https://my.smtp.com/settings/api"></a>Get API Key.</div>
                                         </div>
 
@@ -188,7 +186,7 @@
 
                                         <label for="smtpsendername" class="col-sm-3 col-form-label font-weight-bold">Sender Name</label>
                                         <div class="col-sm-5">
-                                            <input type="text" class="form-control" id="mo-smtp-sender-name" placeholder="Enter SMTP Sender Name">
+                                            <input type="text" class="form-control" name="mo-smtp-sender-name" id="mo-smtp-sender-name" placeholder="Enter SMTP Sender Name">
                                             <div class="gmail-client-secret-label font-italic label-text">Follow this link to get a Sender Name from SMTP.com: <a href="https://my.smtp.com/senders/">Get Sender Name.</a></div>
                                         </div>
 
@@ -198,7 +196,7 @@
 
                                         <label for="smtpredirectURI" class="col-sm-3 col-form-label font-weight-bold">Authorized redirect URI</label>
                                         <div class="col-sm-5">
-                                            <input type="text" class="form-control" id="mo-smtpredirectURI" placeholder="Enter Gmail Client Secret">
+                                            <input type="text" class="form-control" name="mo-smtpredirectURI" id="mo-smtpredirectURI" placeholder="Enter Gmail Client Secret">
                                             <div class="smtpredirectURI-label font-italic label-text">Please copy this URL into the "Authorized redirect URIs" field of your Google web application.</div>
                                         </div>
 
@@ -209,7 +207,7 @@
                                         <label for="authorization" class="col-sm-3 col-form-label font-weight-bold">Authorization</label>
                                         <div class="col-sm-4">
                                             <label class="switch">
-                                                <input type="checkbox" id="gmail-authorization" >
+                                                <input type="checkbox" name="gmail-authorization" id="gmail-authorization" >
                                                 <span class="slider round"></span>
 
                                             </label>  
@@ -245,7 +243,7 @@
 
                                         <label for="smtpapikey" class="col-sm-3 col-form-label font-weight-bold">API Key</label>
                                         <div class="col-sm-5">
-                                            <input type="text" class="form-control" id="smtp-api-key" placeholder="Enter SMTP API Key">
+                                            <input type="text" name="smtp-api-key" class="form-control" id="smtp-api-key" placeholder="Enter SMTP API Key">
                                             <div class="gmail-client-id-label font-italic label-text">Follow this link to get an API Key from SMTP.com: <a href="https://my.smtp.com/settings/api"></a>Get API Key.</div>
                                         </div>
 
@@ -254,7 +252,7 @@
 
                                         <label for="smtpsendername" class="col-sm-3 col-form-label font-weight-bold">Sender Name</label>
                                         <div class="col-sm-5">
-                                            <input type="text" class="form-control" id="smtp-sender-name" placeholder="Enter SMTP Sender Name">
+                                            <input type="text" name="smtp-sender-name" class="form-control" id="smtp-sender-name" placeholder="Enter SMTP Sender Name">
                                             <div class="gmail-client-secret-label font-italic label-text">Follow this link to get a Sender Name from SMTP.com: <a href="https://my.smtp.com/senders/">Get Sender Name.</a></div>
                                         </div>
 
@@ -264,7 +262,7 @@
 
                                         <label for="smtpredirectURI" class="col-sm-3 col-form-label font-weight-bold">Authorized redirect URI</label>
                                         <div class="col-sm-5">
-                                            <input type="text" class="form-control" id="smtpredirectURI" placeholder="Enter Gmail Client Secret">
+                                            <input type="text"name="smtpredirectURI" class="form-control" id="smtpredirectURI" placeholder="Enter Gmail Client Secret">
                                             <div class="smtpredirectURI-label font-italic label-text">Please copy this URL into the "Authorized redirect URIs" field of your Google web application.</div>
                                         </div>
 
@@ -275,7 +273,7 @@
                                         <label for="authorization" class="col-sm-3 col-form-label font-weight-bold">Authorization</label>
                                         <div class="col-sm-4">
                                             <label class="switch">
-                                                <input type="checkbox" id="gmail-authorization" >
+                                                <input type="checkbox" name="gmail-authorization" id="gmail-authorization" >
                                                 <span class="slider round"></span>
 
                                             </label>  
@@ -308,7 +306,7 @@
 
                                 <label for="smtphost" class="col-sm-3 col-form-label font-weight-bold">SMTP Host/Server</label>
                                 <div class="col-sm-5">
-                                    <input type="email" class="form-control" id="smtp-host" placeholder="smtp.example.com">
+                                    <input type="text" name="smtp-host" class="form-control" id="smtp-host" placeholder="smtp.example.com">
                                     <div class="smtp-host-label font-italic label-text">The SMTP server which will be used to send email. for example smtp.gmail.com</div>
                                 </div>
 
@@ -322,7 +320,7 @@
                                 <label for="smtp-authorization" class="col-sm-3 col-form-label font-weight-bold">SMTP Authorization</label>
                                 <div class="col-sm-6">
                                     <label class="switch ">
-                                        <input type="checkbox" id="smtp-authorization" >
+                                        <input type="checkbox" name="smtp-authorization" id="smtp-authorization" >
                                         <span class="slider round "></span>
                                     </label><div class="smtp-authorization-label font-italic label-text">Use Authentication when sending an email ( recommended: True)</div>
                                 </div>
@@ -336,7 +334,7 @@
 
                                 <label for="username-smtp" class="col-sm-3 col-form-label font-weight-bold">SMTP Username</label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="username-smtp" placeholder="Enter Your SMTP Username">
+                                    <input type="text" name="username-smtp" class="form-control" id="username-smtp" placeholder="Enter Your SMTP Username">
                                     <div class="username-smtp-label font-italic label-text">Your SMTP username goes here</div>
                                 </div>
 
@@ -347,7 +345,7 @@
 
                                 <label for="password-smtp" class="col-sm-3 col-form-label font-weight-bold">SMTP Password</label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="password-smtp" placeholder="Enter Your SMTP Password">
+                                    <input type="text" name="password-smtp" class="form-control" id="password-smtp" placeholder="Enter Your SMTP Password">
                                     <div class="password-smtp-label font-italic label-text">You need enter password every time you update the settings for security reason</div>
                                 </div>
 
@@ -364,13 +362,13 @@
 
                                     <div class="btn-group rediobox-btn" >
                                         <label class="btn btn-default active">
-                                            <input type="radio" class="redio-color" id="mailer-type-smtp" name="quality[25]" value="1" checked /><span class="connection-type-label font-italic font-weight-bold">None</span> 
+                                            <input type="radio" class="redio-color" id="mailer-type-smtp" name="connection-type" value="smtp" checked /><span class="connection-type-label font-italic font-weight-bold">None</span> 
                                         </label>
                                         <label class="btn btn-default active">
-                                            <input type="radio" class="redio-color" id="mailer-type-gmail" name="quality[25]" value="1"  /> <span class="connection-type-label font-italic font-weight-bold">SSL</span>
+                                            <input type="radio" class="redio-color" id="mailer-type-gmail" name="connection-type" value="gmail"  /> <span class="connection-type-label font-italic font-weight-bold">SSL</span>
                                         </label>
                                         <label class="btn btn-default active">
-                                            <input type="radio" class="redio-color" id="mailer-type-microsoft" name="quality[25]" value="1"  /> <span class="connection-type-label font-italic font-weight-bold">TSL</span>
+                                            <input type="radio" class="redio-color" id="mailer-type-microsoft" name="connection-type" value="microsoft"  /> <span class="connection-type-label font-italic font-weight-bold">TSL</span>
                                         </label>
 
                                     </div>
@@ -397,7 +395,7 @@
 
                                 <label for="port-smtp" class="col-sm-3 col-form-label font-weight-bold">SMTP Port</label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="port-smtp" placeholder="Enter Your SMTP Port">
+                                    <input type="text" class="form-control" name="port-smtp" id="port-smtp" placeholder="Enter Your SMTP Port">
                                     <div class="password-smtp-label font-italic label-text">Enter the mail server port.Most mail servers use port 465.</div>
                                 </div>
 
@@ -409,7 +407,7 @@
                                 <label for="ssl-verification" class="col-sm-3 col-form-label font-weight-bold">SSL Certificate Verification</label>
                                 <div class="col-sm-9">
                                     <label class="switch ">
-                                        <input type="checkbox" id="ssl-verification" >
+                                        <input type="checkbox"name="ssl-verification" id="ssl-verification" >
                                         <span class="slider round "></span>
                                     </label><div class="ssl-verification-label font-italic label-text">Fix the SSL configurations instead of bypassing it.</div>
                                 </div>
@@ -419,18 +417,20 @@
 
                         </div> 
 
-
+                      
 
                         <div class="row">
                             <div class="col-6">
-                                <a href="something" class="save-settings" ><img src="https://riyadly.com/wp-content/uploads/2020/09/menu-icon1.png"  width="30" height="30"><b>Save Settings</b></a>
+                            <button type="submit" class="btn savebtn" value="submit"><i class="fa fa-cog" aria-hidden="true" ></i><b> Save Settings</b></button>
                             </div>
                             
                             <div class="col-6 float-right text-right">
-                                <a href="something" class="reset-settings" ><img src="https://riyadly.com/wp-content/uploads/2020/09/menu-icon1.png"  width="30" height="30"><b>Reset Settings</b></a>
+                            <button type="submit" class="btn resetbtn"><i class="fa fa-cog" aria-hidden="true" value="Submit"></i><b> Reset Settings</b></button>
                             </div>
 
                         </div>
-
+            
 
                     </div>
+                    
+ </form>                
