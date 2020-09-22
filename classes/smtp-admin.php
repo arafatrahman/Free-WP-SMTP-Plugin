@@ -1,5 +1,5 @@
 <?php
-class smtp_admin extends smtp_setting{
+class smtp_admin extends Setting{
 
 	 public static function Init(){
 		 add_action("admin_menu",array(__CLASS__,"add_smtp_menu"));
@@ -19,40 +19,20 @@ class smtp_admin extends smtp_setting{
          }
 
          public static function smtp_settings(){
-           	
-        
-            
-         $smtpSettings=array(
-            'smtp-activation'=>$_POST['smtp-activation'],
-            'from-email'=>$_POST['from-email'],
-            'from-name'=>$_POST['from-name'],
-            'mailer-type'=>$_POST['mailer-type'],
-            'gmail-client-secret'=>$_POST['gmail-client-secret'],
-            'gmailredirectURI'=>$_POST['gmailredirectURI'],
-            'gmail-authorization'=>$_POST['gmail-authorization'],
-            'mo-smtp-api-key'=>$_POST['mo-smtp-api-key'],
-            'mo-smtp-sender-name'=>$_POST['mo-smtp-sender-name'],
-            'smtp-api-key'=>$_POST['smtp-api-key'],
-            'smtp-sender-name'=>$_POST['smtp-sender-name'],
-            'smtpredirectURI'=>$_POST['smtpredirectURI'],
-            'smtp-host'=>$_POST['smtp-host'],
-            'smtp-authorization'=>$_POST['smtp-authorization'],
-            'username-smtp'=>$_POST['username-smtp'],
-            'password-smtp'=>$_POST['password-smtp'],
-            'connection-type'=>$_POST['connection-type'],
-            'port-smtp'=>$_POST['port-smtp'],
-            'ssl-verification'=>$_POST['ssl-verification'],
-        );
 
-         self::save_smtp_settings($smtpSettings);
-       
+
+         if(!empty($_POST) && $_SERVER['REQUEST_METHOD'] == 'POST'){
+
+            self::saveSMTP($_POST);
+            self::saveMISC($_POST);
+            self::saveEmailTesting($_POST);
+            
+            
+         }
+        
+         
          include_once SMTP_PATH .  "/views/settings-view.php" ;
          }
-
-   
-
        
-
-        
 
 }
