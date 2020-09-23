@@ -3,15 +3,7 @@
 
 <?php 
 
-$miscValue = self::getSMTP();
-
-print_r($miscValue);
-/*$debugActivation = (isset($miscValue['debug-activation']) ? $miscValue["debug-activation"] : false);
-$emailNotSend =(isset($miscValue["email-not-send"]) ? $miscValue["email-not-send"] : false);
-$hideError = (isset($miscValue['hide-error'])? $miscValue["hide-error"] : false);
-$invalidSslAllow = (isset($miscValue['invalid-ssl-allow'])? $miscValue["invalid-ssl-allow"] : false);
-$allowTraking = (isset($miscValue['allow-traking'])? $miscValue["allow-traking"] : false); */
-
+$miscValue = self::getMISC();
 
 
 ?>
@@ -36,7 +28,7 @@ $allowTraking = (isset($miscValue['allow-traking'])? $miscValue["allow-traking"]
                                <label for="smtpactivation" class="col-sm-3 col-form-label font-weight-bold">Email Do Not Send</label>
                                <div class="col-sm-1">
                                    <label class="switch">
-                                       <input type="checkbox" id="email-not-send" name="email-not-send"  value="1"  <?php if($emailNotSend=="1") echo 'checked'; ?>>
+                                       <input type="checkbox" id="email-not-send" name="email-not-send"  value="1" <?php  $emailNotSend  = (kauget('email-not-send',$miscValue))? 'checked' : false ; echo $emailNotSend; ?> >
                                        <span class="slider round"></span>
                                    </label>
                                </div>
@@ -47,7 +39,7 @@ $allowTraking = (isset($miscValue['allow-traking'])? $miscValue["allow-traking"]
                                <label for="smtpactivation" class="col-sm-3 col-form-label font-weight-bold">Hide Email Delivery Error</label>
                                <div class="col-sm-1">
                                    <label class="switch">
-                                       <input type="checkbox" id="hide-error" name="hide-error" value="1"  <?php if($hideError=="1") echo 'checked'; ?>>
+                                       <input type="checkbox" id="hide-error" name="hide-error" value="1" <?php  $hideError  = (kauget('hide-error',$miscValue))? 'checked' : false ; echo  $hideError; ?>>
                                        <span class="slider round"></span>
                                    </label>
                                </div>
@@ -58,7 +50,7 @@ $allowTraking = (isset($miscValue['allow-traking'])? $miscValue["allow-traking"]
                                <label for="smtpactivation" class="col-sm-3 col-form-label font-weight-bold">Allow Invalid SSL</label>
                                <div class="col-sm-1">
                                    <label class="switch">
-                                       <input type="checkbox" id="invalid-ssl-allow" name="invalid-ssl-allow"  value="1"  <?php if($invalidSslAllow=="1") echo 'checked'; ?>>
+                                       <input type="checkbox" id="invalid-ssl-allow" name="invalid-ssl-allow"  value="1" <?php if(kauget('invalid-ssl-allow',$miscValue)=="1") echo 'checked'; ?>>
                                        <span class="slider round"></span>
                                    </label>
                                </div>
@@ -69,8 +61,8 @@ $allowTraking = (isset($miscValue['allow-traking'])? $miscValue["allow-traking"]
                                <label for="smtpactivation" class="col-sm-3 col-form-label font-weight-bold">Allow Usage Traking</label>
                                <div class="col-sm-2">
                                    <select class="form-control" id="allow-traking"  name="allow-traking">
-                                       <option value="off" <?php if($allowTraking=="off") echo 'selected="selected"'; ?>>OFF</option>
-                                       <option value="on" <?php if($allowTraking=="on") echo 'selected="selected"'; ?>>ON</option>
+                                       <option value="off" <?php if(kauget('allow-traking',$miscValue)=="off") echo 'selected="selected"'; ?>>OFF</option>
+                                       <option value="on" <?php if(kauget('allow-traking',$miscValue)=="on") echo 'selected="selected"'; ?>>ON</option>
 
                                    </select>
                                </div>
@@ -83,7 +75,7 @@ $allowTraking = (isset($miscValue['allow-traking'])? $miscValue["allow-traking"]
 
                        <div class="row">
                             <div class="col-6">
-                            <input type="hidden" name="misc-submitted" value="true" />
+                           
                             <button type="submit" name="kau_form_submit" class="btn savebtn" value="kau_misc_settings"><i class="fa fa-cog" aria-hidden="true" ></i><b> Save Settings</b></button>
                             </div>
                             

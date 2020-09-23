@@ -110,8 +110,51 @@ jQuery(document).ready(function($){
 
           
             });
+
+
+
+
+            $("#kau-from-email").change(function(){
+
+              var smtpEmail = $('#kau-from-email').val();
+              
+             
+             if(IsEmail(smtpEmail)==false ){
+                 $('#kau-invalid-msg').show();
+                 $('#kau-from-email').css('border-color', 'red');
+                 return false;
+             }
+
+             if(IsEmail(smtpEmail)==true ){
+
+             
+              $('#kau-invalid-msg').hide();
+              $('#kau-valid-msg').show();
+                 $('#kau-from-email').css('border-color', 'green');
+                 return false;
+
+
+             }
+            
+
+
+
+
+
+            });
+
+
+            function IsEmail(smtpEmail) {
+
+              
+              var pattern = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+
+              return $.trim(smtpEmail).match(pattern) ? true : false;
+            }
+
+
+
     
-    
-    });
+});
 
   

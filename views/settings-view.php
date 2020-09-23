@@ -24,14 +24,21 @@
         </div> 
   <!-- Header Section close -->
 
-
         
 <!-- Main Settings Section start -->        
-<div class="col-1"></div>
 
-        <div class="container smtp-main-container  col-10">
+
+        <div class="container smtp-main-container  col-12">
 
             <div class="p-5 bg-white rounded shadow mb-5">
+
+            <div class="notice notice-error is-dismissible  " id ="kau-settings-alert" style="display:none" >
+            <p class=" text-danger "> <i class="fa fa-exclamation-circle " aria-hidden="true"></i> Settings Cannot be saved due to {error causes}</p>
+            </div>
+
+            <div class="notice notice-success is-dismissible" id ="kau-settings-alert" style="display:none">
+            <p class=" text-success"> <i class="fa fa-check-circle"></i> Settings Cannot be saved due to {error causes}</p>
+            </div>
 
             <div id="smtpTab" class="col-12">
             <ul  role="tablist" class="nav nav-tabs nav-pills flex-column flex-sm-row text-center bg-light border-0 rounded-nav">
@@ -50,6 +57,8 @@
             </ul>
             </div>
 
+            
+
 
                 <div id="myTabContent" class="tab-content">
                    <?php include_once "smtp-settings.php" ;	?>
@@ -61,4 +70,4 @@
                
             </div>
         </div>
-<div class="col-1"></div>  <!-- Main Settings Section Close --> 
+ <!-- Main Settings Section Close --> 

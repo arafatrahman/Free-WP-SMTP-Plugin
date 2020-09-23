@@ -10,7 +10,7 @@ class smtp_admin extends Setting{
          public static function add_smtp_menu(){
             
 
-             add_menu_page('WP SMTP Startup Page', 'Free WP SMTP', 'manage_options', 'smtpstartup',array(__CLASS__,"main_menu"));
+            add_menu_page('WP SMTP Startup Page', 'Free WP SMTP', 'manage_options', 'smtpstartup',array(__CLASS__,"main_menu"));
             add_submenu_page( 'smtpstartup', 'SMTP Settings Page', 'SMTP Settings', 'manage_options', "smtp_settings",array(__CLASS__,"smtp_settings"));           
             
 
@@ -25,12 +25,14 @@ class smtp_admin extends Setting{
 
          if(!empty($_POST) && $_SERVER['REQUEST_METHOD'] == 'POST'){
 
-            $todo  = KAU_GET("kau_form_submit")  ;
+            $todo = kauget('kau_form_submit',$_POST);
+                    
             if($todo == "kau_misc_settings"){
                 self::saveMISC($_POST);
             }
             else if($todo == "kau_smtp_settings"){
-                 self::saveSMTP($_POST);
+
+               self::saveSMTP($_POST);
             }
             else if($todo == "kau_testing_settings"){
                  self::saveEmailTesting($_POST);

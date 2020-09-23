@@ -42,7 +42,7 @@ if (!function_exists('kauget')) {
     function kauget($name, $array = null) {
 
         if (!isset($array)) {
-            return ESIG_GET($name);
+            return KAU_GET($name);
         }
 
         if (is_array($array)) {

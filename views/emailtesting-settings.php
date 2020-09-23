@@ -4,16 +4,6 @@
 
 $testingValue = self::getEmailTesting();
 
-
-
-
-$emailSubject = (isset($testingValue['email-subject']) ? $testingValue["email-subject"] : false);
-$emailBody =(isset($testingValue["email-body"]) ? $testingValue["email-body"] : false);
-$recipientEmail = (isset($testingValue['recipient-email'])? $testingValue["recipient-email"] : false);
-
-
-
-
 ?>
 
 
@@ -27,7 +17,7 @@ $recipientEmail = (isset($testingValue['recipient-email'])? $testingValue["recip
 
                                 <label for="emailsubject" class="col-sm-3 col-form-label font-weight-bold">Email Subject</label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="email-subject" id="email-subject" placeholder="Enter Email Subject"  value="<?php echo $emailSubject;  ?>">
+                                    <input type="text" class="form-control" name="email-subject" id="email-subject" placeholder="Enter Email Subject"  value="<?php echo kauget('email-subject',$testingValue);   ?>">
                                     <div class="emailsubject-label font-italic label-text">Subject of the email you want to send</div>
                                 </div>
 
@@ -37,7 +27,7 @@ $recipientEmail = (isset($testingValue['recipient-email'])? $testingValue["recip
 
                                 <label for="emailbody" class="col-sm-3 col-form-label font-weight-bold">Email Body</label>
                                 <div class="col-sm-5">
-                                    <textarea class="form-control" name="email-body" id="email-body" rows="4"  value="<?php $emailBody;  ?>"><?php echo $emailBody;  ?></textarea>
+                                    <textarea class="form-control" name="email-body" id="email-body" rows="4"  value="<?php kauget('email-body',$testingValue); ?>"><?php echo kauget('email-body',$testingValue);   ?></textarea>
                                     <div class="email-body-label font-italic label-text">Your Message Goes Here......</div>
                                 </div>
 
@@ -47,7 +37,7 @@ $recipientEmail = (isset($testingValue['recipient-email'])? $testingValue["recip
 
                                 <label for="recipientemail" class="col-sm-3 col-form-label font-weight-bold"> Recipient Email Address</label>
                                 <div class="col-sm-5">
-                                    <input type="email" class="form-control" name="recipient-email"  id="recipient-email" placeholder="Enter Recipient Email Address"  value="<?php echo $recipientEmail ;  ?>">
+                                    <input type="email" class="form-control" name="recipient-email"  id="recipient-email" placeholder="Enter Recipient Email Address"  value="<?php echo kauget('recipient-email',$testingValue) ;  ?>">
                                     <div class="recipient-email-label font-italic label-text">Enter an Email Address where testing email will be send</div>
                                 </div>
 
@@ -59,8 +49,7 @@ $recipientEmail = (isset($testingValue['recipient-email'])? $testingValue["recip
 
                         <div class="row">
                             <div class="col-6">
-                            <input type="hidden" name="email-testing" value="true" />
-                            <button type="submit" name="kau_form_submit" class="btn savebtn" value="kau_testing_settings"><i class="fa fa-paper-plane" aria-hidden="true" ></i><b> Email Testing</b></button>
+                            <button type="submit" id="emailTestingSubmit" name="kau_form_submit" class="btn savebtn" value="kau_testing_settings"><i class="fa fa-paper-plane" aria-hidden="true" ></i><b> Email Testing</b></button>
                             </div>
                             
                             <div class="col-6 float-right text-right">
