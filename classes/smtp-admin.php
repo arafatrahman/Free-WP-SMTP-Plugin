@@ -25,10 +25,17 @@ class smtp_admin extends Setting{
 
          if(!empty($_POST) && $_SERVER['REQUEST_METHOD'] == 'POST'){
 
-            self::saveSMTP($_POST);
-            self::saveMISC($_POST);
-            self::saveEmailTesting($_POST);
-            
+            $todo  = KAU_GET("kau_form_submit")  ;
+            if($todo == "kau_misc_settings"){
+                self::saveMISC($_POST);
+            }
+            else if($todo == "kau_smtp_settings"){
+                 self::saveSMTP($_POST);
+            }
+            else if($todo == "kau_testing_settings"){
+                 self::saveEmailTesting($_POST);
+            }
+           
             
          }
         

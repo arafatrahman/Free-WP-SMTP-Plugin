@@ -36,13 +36,13 @@ $sslVerification = (isset($smtpValue['ssl-verification'])? $smtpValue["ssl-verif
 
 
 
-
+print_r($_POST);
 
 ?>
 
 
 
-<form role="form" name="smtp-settings-form" id="smtp-settings-form" method="post" action="" enctype="multipart/form-data">
+<form role="form" name="smtp_settings_form" id="smtp-settings-form" method="post" action="" enctype="multipart/form-data">
 
                         <div class=" well smtp-setting-one-content ">
 
@@ -466,7 +466,7 @@ $sslVerification = (isset($smtpValue['ssl-verification'])? $smtpValue["ssl-verif
                             <div class="col-6">
                             <input type="hidden" name="smtp-submitted" value="true" />
                            
-                            <button type="submit" class="btn savebtn" value="submit"><i class="fa fa-cog" aria-hidden="true" ></i><b> Save Settings</b></button>
+                            <button type="submit" name="kau_form_submit" class="btn savebtn" value="kau_smtp_settings"><i class="fa fa-cog" aria-hidden="true" ></i><b> Save Settings</b></button>
                             </div>
                             
                             <div class="col-6 float-right text-right">

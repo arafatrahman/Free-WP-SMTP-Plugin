@@ -19,7 +19,7 @@ $recipientEmail = (isset($testingValue['recipient-email'])? $testingValue["recip
 
 
                  
-<form role="form" name="misc-settings-form" id="misc-settings-form" method="post" action="" enctype="multipart/form-data">
+<form role="form" name="email_testing_form" id="email-testing-form" method="post" action="" enctype="multipart/form-data">
 
                         <div class=" well smtp-setting-one-content ">
 
@@ -60,7 +60,7 @@ $recipientEmail = (isset($testingValue['recipient-email'])? $testingValue["recip
                         <div class="row">
                             <div class="col-6">
                             <input type="hidden" name="email-testing" value="true" />
-                            <button type="submit" class="btn savebtn" value="submit"><i class="fa fa-paper-plane" aria-hidden="true" ></i><b> Email Testing</b></button>
+                            <button type="submit" name="kau_form_submit" class="btn savebtn" value="kau_testing_settings"><i class="fa fa-paper-plane" aria-hidden="true" ></i><b> Email Testing</b></button>
                             </div>
                             
                             <div class="col-6 float-right text-right">

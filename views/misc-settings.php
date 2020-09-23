@@ -5,12 +5,12 @@
 
 $miscValue = self::getSMTP();
 
-
-$debugActivation = (isset($miscValue['debug-activation']) ? $miscValue["debug-activation"] : false);
+print_r($miscValue);
+/*$debugActivation = (isset($miscValue['debug-activation']) ? $miscValue["debug-activation"] : false);
 $emailNotSend =(isset($miscValue["email-not-send"]) ? $miscValue["email-not-send"] : false);
 $hideError = (isset($miscValue['hide-error'])? $miscValue["hide-error"] : false);
 $invalidSslAllow = (isset($miscValue['invalid-ssl-allow'])? $miscValue["invalid-ssl-allow"] : false);
-$allowTraking = (isset($miscValue['allow-traking'])? $miscValue["allow-traking"] : false);
+$allowTraking = (isset($miscValue['allow-traking'])? $miscValue["allow-traking"] : false); */
 
 
 
@@ -25,7 +25,7 @@ $allowTraking = (isset($miscValue['allow-traking'])? $miscValue["allow-traking"]
                                <label for="smtpactivation" class="col-sm-3 col-form-label font-weight-bold">Debug Mode Enable</label>
                                <div class="col-sm-1">
                                    <label class="switch">
-                                       <input type="checkbox" id="debug-activation" name="debug-activation" value="1"  <?php if($debugActivation=="1") echo 'checked'; ?>>
+                                       <input type="checkbox" id="debug-activation" name="debug-activation" value="1"  <?php  $debugActivation  = (kauget('debug-activation',$miscValue))? 'checked' : false ; echo $debugActivation; ?>>
                                        <span class="slider round"></span>
                                    </label>
                                </div>
@@ -84,7 +84,7 @@ $allowTraking = (isset($miscValue['allow-traking'])? $miscValue["allow-traking"]
                        <div class="row">
                             <div class="col-6">
                             <input type="hidden" name="misc-submitted" value="true" />
-                            <button type="submit" class="btn savebtn" value="submit"><i class="fa fa-cog" aria-hidden="true" ></i><b> Save Settings</b></button>
+                            <button type="submit" name="kau_form_submit" class="btn savebtn" value="kau_misc_settings"><i class="fa fa-cog" aria-hidden="true" ></i><b> Save Settings</b></button>
                             </div>
                             
                             <div class="col-6 float-right text-right">
