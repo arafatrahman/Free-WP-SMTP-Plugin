@@ -1,4 +1,4 @@
-<div id="smtp" role="tabpanel" aria-labelledby="home-tab" class="tab-pane fade px-4 py-5 show active">  
+<div id="smtp" role="tabpanel" aria-labelledby="home-tab" class="tab-pane fade px-4 py-5 <?php if(kauget('kau_form_submit',$_POST) == "kau_smtp_settings"){ echo "show active";}?> <?php if(kauget('kau_form_submit',$_POST) == ""){ echo "show active";}?>">  
 
 
 <?php 

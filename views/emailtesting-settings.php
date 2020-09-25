@@ -1,4 +1,7 @@
-<div id="emailtesting" role="tabpanel" aria-labelledby="contact-tab" class="tab-pane fade px-4 py-5">
+
+
+
+<div id="emailtesting" role="tabpanel" aria-labelledby="contact-tab" class="tab-pane fade px-4 py-5 <?php if(kauget('kau_form_submit',$_POST) == "kau_testing_settings"){ echo "show active";} ?>">
 
 <?php 
 

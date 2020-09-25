@@ -43,16 +43,16 @@
             <div id="smtpTab" class="col-12">
             <ul  role="tablist" class="nav nav-tabs nav-pills flex-column flex-sm-row text-center bg-light border-0 rounded-nav">
             <li class="nav-item flex-sm-fill">
-                <a id="home-tab" data-toggle="tab" href="#smtp" role="tab" aria-controls="home" aria-selected="true" class="nav-link border-0 text-uppercase font-weight-bold active">SMTP Settings</a>
+                <a id="home-tab" data-toggle="tab" href="#smtp" role="tab" aria-controls="home" aria-selected="true" class="nav-link border-0 text-uppercase font-weight-bold  <?php if(kauget('kau_form_submit',$_POST) == "kau_smtp_settings"){ echo "show active";}?> <?php if(kauget('kau_form_submit',$_POST) == ""){ echo "show active";}?> ">SMTP Settings</a>
             </li>
             <li class="nav-item flex-sm-fill">
-                <a id="profile-tab" data-toggle="tab" href="#misc" role="tab" aria-controls="profile" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold">MISC Settings</a>
+                <a id="profile-tab" data-toggle="tab" href="#misc" role="tab" aria-controls="profile" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold <?php if(kauget('kau_form_submit',$_POST) == "kau_misc_settings") echo "show active"?>">MISC Settings</a>
             </li>
             <li class="nav-item flex-sm-fill">
                 <a id="contact-tab" data-toggle="tab" href="#emaillogs" role="tab" aria-controls="contact" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold">Email Logs</a>
             </li>
             <li class="nav-item flex-sm-fill">
-                <a id="contact-tab" data-toggle="tab" href="#emailtesting" role="tab" aria-controls="contact" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold">Email Testing</a>
+                <a id="contact-tab" data-toggle="tab" href="#emailtesting" role="tab" aria-controls="contact" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold <?php if(kauget('kau_form_submit',$_POST) == "kau_testing_settings"){ echo "show active";} ?>">Email Testing</a>
             </li>
             </ul>
             </div>
