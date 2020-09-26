@@ -370,3 +370,34 @@ input.redio-color {
 .savebtn:hover,.resetbtn:hover{
     background: linear-gradient(to right, #0099ff -35%, #ff6699 100%) !important;
 }
+
+a.authentication-button{
+    display: inline-block;
+    padding: 0.8em 1.2em;
+    margin:0 0.1em 0.1em 0;
+   color: #8788E0;
+    background-color:#00B050;
+    border-radius:2em;
+    box-sizing: border-box;
+    text-decoration:none;
+    margin-top: 30px !important;
+  
+   
+}
+a:hover{
+     text-decoration:none !important;
+}
+
+a.authentication-button{
+    display: inline-block;
+    padding: 0.8em 1.2em;
+    margin:0 0.1em 0.1em 0;
+    color: white;
+    background-color:#00B050;
+    border-radius:2em;
+    box-sizing: border-box;
+    text-decoration:none;
+    margin-top: 30px !important;
+  
+   
+}

@@ -12,6 +12,7 @@
 define("SMTP_PATH", dirname(__FILE__));
 
 function SMTP_plugin_load() {
+    include_once dirname(__FILE__) . "/classes/gmail-auth.php" ;
     include_once dirname(__FILE__) . "/includes/functions.php" ;
     include_once dirname(__FILE__) . "/classes/smtp-settings.php" ;
     if (is_admin()) {

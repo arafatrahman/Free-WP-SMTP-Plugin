@@ -4,6 +4,32 @@
 <?php 
 
 $smtpValue = self::getSMTP();
+KauGmailAuth2::getGmailClient();
+
+
+$authenticationButton = '';
+
+$kauGmailClientID = kauget('gmail-client-id',$smtpValue);
+$kauGmailClientSecret = kauget('gmail-client-secret',$smtpValue);
+
+if(!empty($kauGmailClientID ) && !empty($kauGmailClientSecret)){
+    
+    $test = "riyad + mila";
+    
+    $authenticationButton  = ' 
+        
+                    <div class="form-group row ">
+                        <div class="col-6">
+                          <a href="'. KauGmailAuth2::getGmailClient()->createAuthUrl().'" class="authentication-button" >         
+                              
+                             <i class="fa fa-google" aria-hidden="true"></i><b> Authentication </b>
+                                
+                           </a>  
+                        </div>
+                    </div> ';
+    
+ 
+}
 
 ?>
 
@@ -157,7 +183,9 @@ $smtpValue = self::getSMTP();
                                             <div class="gmail-authorization-label font-italic label-text">You need to save settings with Client ID and Client Secret before you can proceed.</div>
                                         </div>
 
-                                    </div>                                            
+                                    </div>       
+                                    
+                                    <?php echo $authenticationButton ?>
 
                                 </div>
 
@@ -433,8 +461,6 @@ $smtpValue = self::getSMTP();
 
                         <div class="row">
                             <div class="col-6">
-                            <input type="hidden" name="smtp-submitted" value="true" />
-                           
                             <button type="submit" name="kau_form_submit" class="btn savebtn" value="kau_smtp_settings"><i class="fa fa-cog" aria-hidden="true" ></i><b> Save Settings</b></button>
                             </div>
                             
