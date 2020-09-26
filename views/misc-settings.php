@@ -1,4 +1,4 @@
-<div id="misc" role="tabpanel" aria-labelledby="profile-tab" class="tab-pane fade px-4 py-5 <?php if(kauget('kau_form_submit',$_POST) == "kau_misc_settings") echo "show active"?>">
+<div id="misc" role="tabpanel" aria-labelledby="profile-tab" class="tab-pane fade px-4 py-5 <?php if(kauget('kau_form_submit',$_POST) == "kau_misc_settings") echo "show active"?> <?php if(kauget('kau_form_submit',$_POST) == "kau_misc_reset_settings") echo "show active"?>">
 
 
 <?php 
@@ -81,7 +81,7 @@ $miscValue = self::getMISC();
                             
                             <div class="col-6 float-right text-right">
 
-                            <button type="submit" class="btn resetbtn"><i class="fa fa-cog" aria-hidden="true" value="Submit"></i><b> Reset Settings</b></button>
+                            <button type="submit" name="kau_form_submit" class="btn savebtn" value="kau_misc_reset_settings" class="btn resetbtn"><i class="fa fa-cog" aria-hidden="true" value="Submit"></i><b> Reset Settings</b></button>
                             </div>
 
                         </div>

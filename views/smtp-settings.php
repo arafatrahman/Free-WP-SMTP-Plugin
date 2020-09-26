@@ -1,4 +1,4 @@
-<div id="smtp" role="tabpanel" aria-labelledby="home-tab" class="tab-pane fade px-4 py-5 <?php if(kauget('kau_form_submit',$_POST) == "kau_smtp_settings"){ echo "show active";}?> <?php if(kauget('kau_form_submit',$_POST) == ""){ echo "show active";}?>">  
+<div id="smtp" role="tabpanel" aria-labelledby="home-tab" class="tab-pane fade px-4 py-5 <?php if(kauget('kau_form_submit',$_POST) == "kau_smtp_settings"){ echo "show active";}?> <?php if(kauget('kau_form_submit',$_POST) == "kau_smtp_reset_settings") echo "show active"?> <?php if(kauget('kau_form_submit',$_POST) == ""){ echo "show active";}?>">  
 
 
 <?php 
@@ -139,7 +139,7 @@ $smtpValue = self::getSMTP();
 
                                         <label for="gmailredirectURI" class="col-sm-3 col-form-label font-weight-bold">Authorized redirect URI</label>
                                         <div class="col-sm-5">
-                                            <input type="text" class="form-control"name="gmailredirectURI" id="gmailredirectURI" placeholder="Authorized redirect URI Goes Here" value="<?php echo kauget('gmailredirectURI',$smtpValue)  ;  ?>">
+                                            <input type="text" class="form-control"name="gmailredirectURI" id="gmailredirectURI" placeholder="Authorized redirect URI Goes Here" value="<?php echo esc_url_raw(admin_url("admin.php?page=smtp_settings")); ?>" readonly >
                                             <div class="gmailredirectURI-label font-italic label-text">Please copy this URL into the "Authorized redirect URIs" field of your Google web application.</div>
                                         </div>
 
@@ -440,7 +440,7 @@ $smtpValue = self::getSMTP();
                             
                             <div class="col-6 float-right text-right">
                            
-                            <button type="submit" class="btn resetbtn"><i class="fa fa-cog" aria-hidden="true" value="Submit"></i><b> Reset Settings</b></button>
+                            <button type="submit" class="btn resetbtn"  name="kau_form_submit" class="btn savebtn" value="kau_smtp_reset_settings"><i class="fa fa-cog" aria-hidden="true"></i><b> Reset Settings</b></button>
                             </div>
 
                         </div>

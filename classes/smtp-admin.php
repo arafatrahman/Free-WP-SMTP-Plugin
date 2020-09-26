@@ -37,6 +37,15 @@ class smtp_admin extends Setting{
             else if($todo == "kau_testing_settings"){
                  self::saveEmailTesting($_POST);
             }
+            
+            if($todo == "kau_smtp_reset_settings"){
+                delete_option( self::SMTP_SETTINGS );
+            }
+            else if($todo == "kau_misc_reset_settings"){
+             delete_option( self::MISC_SETTINGS );
+
+            }
+           
            
             
          }

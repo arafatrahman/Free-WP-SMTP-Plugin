@@ -47,6 +47,16 @@
         
     }
     
+     public static function deleteMISC() {
+
+        $miscSettings = json_decode(get_option(self::MISC_SETTINGS), true);
+            if (is_array($miscSettings)) {
+                return $miscSettings;
+            }
+            return false;
+        
+    }
+    
     
     
 }
