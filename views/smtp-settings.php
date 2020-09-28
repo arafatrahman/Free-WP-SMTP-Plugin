@@ -11,6 +11,7 @@ $authenticationButton = '';
 
 $kauGmailClientID = kauget('gmail-client-id',$smtpValue);
 $kauGmailClientSecret = kauget('gmail-client-secret',$smtpValue);
+$gmailAuthSuccess = '';
 
 if(!empty($kauGmailClientID ) && !empty($kauGmailClientSecret)){
     
@@ -31,6 +32,14 @@ if(!empty($kauGmailClientID ) && !empty($kauGmailClientSecret)){
  
 }
 
+
+if( isset($_GET['code'])){
+    
+    $authenticationButton = '';
+    
+    $gmailAuthSuccess = 'true';
+    $authenticationButton = '';
+}
 ?>
 
 
@@ -147,7 +156,7 @@ if(!empty($kauGmailClientID ) && !empty($kauGmailClientSecret)){
                                         <label for="gmailclientid" class="col-sm-3 col-form-label font-weight-bold">Client ID</label>
                                         <div class="col-sm-5">
                                             <input type="text" class="form-control" name="gmail-client-id" id="gmail-client-id" placeholder="Enter Gmail Client ID" value="<?php echo  kauget('gmail-client-id',$smtpValue);   ?>">
-                                            <div class="gmail-client-id-label font-italic label-text ">At registration the client application is assigned a client ID and a client secret (password) by the authorization server</div>
+                                            <div class="gmail-client-id-label font-italic label-text ">At registration the client application is assigned a client ID and a client secret (password) by the authorization server <a href="https://console.developers.google.com/apis/credentials" target="_blank" >Get Client ID</a></div>
                                         </div>
 
                                     </div>
@@ -156,7 +165,7 @@ if(!empty($kauGmailClientID ) && !empty($kauGmailClientSecret)){
                                         <label for="gmailclientsecret" class="col-sm-3 col-form-label font-weight-bold">Client Secret</label>
                                         <div class="col-sm-5">
                                             <input type="text" class="form-control" name="gmail-client-secret" id="gmail-client-secret" placeholder="Enter Gmail Client Secret" value="<?php echo kauget('gmail-client-secret',$smtpValue) ;  ?>">
-                                            <div class="gmail-client-secret-label font-italic label-text">At registration the client application is assigned a client ID and a client secret (password) by the authorization server</div>
+                                            <div class="gmail-client-secret-label font-italic label-text">At registration the client application is assigned a client ID and a client secret (password) by the authorization server <a href="https://console.developers.google.com/apis/credentials" target="_blank" >Get Client Secret</a></div>
                                         </div>
 
                                     </div>
@@ -173,14 +182,14 @@ if(!empty($kauGmailClientID ) && !empty($kauGmailClientSecret)){
 
                                     <div class="form-group row ">
 
-                                        <label for="authorization" class="col-sm-3 col-form-label font-weight-bold">Authorization</label>
+                                        <label for="authorization" class="col-sm-3 col-form-label font-weight-bold">Authorization Status</label>
                                         <div class="col-sm-4">
                                             <label class="switch">
-                                                <input type="checkbox" name="gmail-authorization" id="gmail-authorization" value="1" <?php  $gmailAuthorization  = (kauget('gmail-authorization',$smtpValue))? 'checked' : false ; echo $gmailAuthorization; ?>>
+                                                <input type="checkbox" name="gmail-authorization" id="gmail-authorization" value="1" <?php if( $gmailAuthSuccess == "true" ) echo 'checked' ; ?> onclick="return false">
                                                 <span class="slider round"></span>
 
                                             </label>  
-                                            <div class="gmail-authorization-label font-italic label-text">You need to save settings with Client ID and Client Secret before you can proceed.</div>
+                                            
                                         </div>
 
                                     </div>       

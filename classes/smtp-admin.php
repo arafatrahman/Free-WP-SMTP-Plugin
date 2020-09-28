@@ -39,6 +39,7 @@ class smtp_admin extends Setting{
             }
             
             if($todo == "kau_smtp_reset_settings"){
+                unset($_GET);
                 delete_option( self::SMTP_SETTINGS );
             }
             else if($todo == "kau_misc_reset_settings"){

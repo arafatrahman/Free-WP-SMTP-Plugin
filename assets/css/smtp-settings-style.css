@@ -8,8 +8,8 @@
 }
 
 a:hover,a:focus{
-    outline: none;
-    text-decoration: none;
+    outline: none !important;
+    text-decoration: none !important;
 }
 
 
@@ -386,6 +386,8 @@ a.authentication-button{
 }
 a:hover{
      text-decoration:none !important;
+    
+;
 }
 
 a.authentication-button{
@@ -401,3 +403,4 @@ a.authentication-button{
   
    
 }
+
