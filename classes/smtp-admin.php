@@ -46,8 +46,7 @@ class smtp_admin extends Setting{
                 $messageText = "free wp smtp pluginfree wp smtp pluginfree wp smtp plugin";
                 $message = KauGmailAuth2::createMessage($sender, $to, $subject, $messageText);
                
-         
-             // KauGmailAuth2::sendMessage($service, $message);
+              KauGmailAuth2::sendMessage($service, $message);
             }
             
             if($todo == "kau_smtp_reset_settings"){

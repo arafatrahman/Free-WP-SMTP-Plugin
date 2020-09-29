@@ -12,6 +12,7 @@
 define("SMTP_PATH", dirname(__FILE__));
 
 function SMTP_plugin_load() {
+    require_once dirname(__FILE__)  . '/vendor/autoload.php';
     include_once dirname(__FILE__) . "/classes/gmail-auth.php" ;
     include_once dirname(__FILE__) . "/includes/functions.php" ;
     include_once dirname(__FILE__) . "/classes/smtp-settings.php" ;
@@ -20,8 +21,8 @@ function SMTP_plugin_load() {
         smtp_admin::Init();
     }
 }
-
-add_action("wp_loaded", "SMTP_plugin_load");
+SMTP_plugin_load();
+//add_action("wp_loaded", "SMTP_plugin_load");
 add_action('admin_enqueue_scripts', 'smtp_admin_styles');
 function smtp_admin_styles() {
     $screen = get_current_screen();

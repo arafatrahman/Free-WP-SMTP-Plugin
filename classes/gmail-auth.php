@@ -4,9 +4,6 @@ class KauGmailAuth2 {
 
     public static function getGmailClient() {
 
-
-        require_once SMTP_PATH . '/vendor/autoload.php';
-
         //Make object of Google API Client for call Google API
         $google_client = new Google_Client();
 
