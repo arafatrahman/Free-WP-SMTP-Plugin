@@ -146,7 +146,7 @@ if(!empty($kauGmailClientID ) && !empty($kauGmailClientSecret)){
                                         <label for="gmailclientid" class="col-sm-3 col-form-label font-weight-bold">Client ID</label>
                                         <div class="col-sm-5">
                                             <input type="text" class="form-control" name="gmail-client-id" id="gmail-client-id" placeholder="Enter Gmail Client ID" value="<?php echo  kauget('gmail-client-id',$smtpValue);   ?>">
-                                            <div class="gmail-client-id-label font-italic label-text ">At registration the client application is assigned a client ID and a client secret (password) by the authorization server</div>
+                                            <div class="gmail-client-id-label font-italic label-text ">At registration the client application is assigned a <a target="_blank" href="https://console.developers.google.com/apis/credentials">client ID </a>and a client secret (password) by the authorization server</div>
                                         </div>
 
                                     </div>
@@ -155,7 +155,7 @@ if(!empty($kauGmailClientID ) && !empty($kauGmailClientSecret)){
                                         <label for="gmailclientsecret" class="col-sm-3 col-form-label font-weight-bold">Client Secret</label>
                                         <div class="col-sm-5">
                                             <input type="text" class="form-control" name="gmail-client-secret" id="gmail-client-secret" placeholder="Enter Gmail Client Secret" value="<?php echo kauget('gmail-client-secret',$smtpValue) ;  ?>">
-                                            <div class="gmail-client-secret-label font-italic label-text">At registration the client application is assigned a client ID and a client secret (password) by the authorization server</div>
+                                            <div class="gmail-client-secret-label font-italic label-text">At registration the client application is assigned a client ID and a <a target="_blank" href="https://console.developers.google.com/apis/credentials">client secret</a> (password) by the authorization server</div>
                                         </div>
 
                                     </div>
