@@ -11,9 +11,11 @@ $authenticationButton = '';
 
 $kauGmailClientID = kauget('gmail-client-id',$smtpValue);
 $kauGmailClientSecret = kauget('gmail-client-secret',$smtpValue);
+$gmailAuthSuccess = '';
 
 if(!empty($kauGmailClientID ) && !empty($kauGmailClientSecret)){
-
+    
+    $test = "riyad + mila";
     
     $authenticationButton  = ' 
         
@@ -30,6 +32,14 @@ if(!empty($kauGmailClientID ) && !empty($kauGmailClientSecret)){
  
 }
 
+
+if( isset($_GET['code'])){
+    
+    $authenticationButton = '';
+    
+    $gmailAuthSuccess = 'true';
+    $authenticationButton = '';
+}
 ?>
 
 
@@ -146,7 +156,7 @@ if(!empty($kauGmailClientID ) && !empty($kauGmailClientSecret)){
                                         <label for="gmailclientid" class="col-sm-3 col-form-label font-weight-bold">Client ID</label>
                                         <div class="col-sm-5">
                                             <input type="text" class="form-control" name="gmail-client-id" id="gmail-client-id" placeholder="Enter Gmail Client ID" value="<?php echo  kauget('gmail-client-id',$smtpValue);   ?>">
-                                            <div class="gmail-client-id-label font-italic label-text ">At registration the client application is assigned a <a target="_blank" href="https://console.developers.google.com/apis/credentials">client ID </a>and a client secret (password) by the authorization server</div>
+                                            <div class="gmail-client-id-label font-italic label-text ">At registration the client application is assigned a <a target="_blank" href="https://console.developers.google.com/apis/credentials">Client ID</a> and a client secret (password) by the authorization server </div>
                                         </div>
 
                                     </div>
@@ -155,7 +165,7 @@ if(!empty($kauGmailClientID ) && !empty($kauGmailClientSecret)){
                                         <label for="gmailclientsecret" class="col-sm-3 col-form-label font-weight-bold">Client Secret</label>
                                         <div class="col-sm-5">
                                             <input type="text" class="form-control" name="gmail-client-secret" id="gmail-client-secret" placeholder="Enter Gmail Client Secret" value="<?php echo kauget('gmail-client-secret',$smtpValue) ;  ?>">
-                                            <div class="gmail-client-secret-label font-italic label-text">At registration the client application is assigned a client ID and a <a target="_blank" href="https://console.developers.google.com/apis/credentials">client secret</a> (password) by the authorization server</div>
+                                            <div class="gmail-client-secret-label font-italic label-text">At registration the client application is assigned a client ID and a <a target="_blank" href="https://console.developers.google.com/apis/credentials">Client secret</a> (password) by the authorization server </div>
                                         </div>
 
                                     </div>
@@ -179,7 +189,7 @@ if(!empty($kauGmailClientID ) && !empty($kauGmailClientSecret)){
                                                 <span class="slider round"></span>
 
                                             </label>  
-                                            <div class="gmail-authorization-label font-italic label-text">You need to save settings with Client ID and Client Secret before you can proceed.</div>
+                                            
                                         </div>
 
                                     </div>       
@@ -328,20 +338,20 @@ if(!empty($kauGmailClientID ) && !empty($kauGmailClientSecret)){
 
                             </div>
                             <!-- Mailer option Microsoft Settings Close Here--> 
+                            <div class="smtp-settings-field" id="default-settings-id" style="display: none" >
 
-                            <div class="gmail-settings-field" id="default-settings-id" style="display: none">
-
-                                <div class=" smtp-setting-one-content ">
-                                    
-                                    
-                                    <div class="form-group row mailer-section-label">
+                                <div class="form-group row mailer-section-label">
                                     <div class="col-md-12 mailerlabel">
                                         <div class="p-2 mb-2 bg-warning text-white col-md-3 "><b>Default Settings</b></div>
                                         <hr class="default-section-hr">
                                     </div>
                                 </div>
 
-                            <div class="form-group row ">
+
+
+                                <div class="settings-content">
+
+                                    <div class="form-group row ">
 
                                 <label for="smtphost" class="col-sm-3 col-form-label font-weight-bold">SMTP Host/Server</label>
                                 <div class="col-sm-5">
@@ -453,10 +463,7 @@ if(!empty($kauGmailClientID ) && !empty($kauGmailClientSecret)){
                                     </label><div class="ssl-verification-label font-italic label-text">Fix the SSL configurations instead of bypassing it.</div>
                                 </div>
 
-                            </div>           
-
-
-                        </div> 
+                            </div>                                                    
 
                                 </div>
 
@@ -472,8 +479,9 @@ if(!empty($kauGmailClientID ) && !empty($kauGmailClientSecret)){
 
 
 
+
                         </div>
-                        
+                    
                
 
                         <div class="row">
@@ -492,4 +500,4 @@ if(!empty($kauGmailClientID ) && !empty($kauGmailClientSecret)){
                     </div>
                     
   
-                    </form>                  
+                    </form> 
