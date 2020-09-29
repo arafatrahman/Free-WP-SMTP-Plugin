@@ -172,10 +172,10 @@ if(!empty($kauGmailClientID ) && !empty($kauGmailClientSecret)){
 
                                     <div class="form-group row ">
 
-                                        <label for="authorization" class="col-sm-3 col-form-label font-weight-bold">Authorization</label>
+                                        <label for="authorization" class="col-sm-3 col-form-label font-weight-bold">Authorization Status</label>
                                         <div class="col-sm-4">
                                             <label class="switch">
-                                                <input type="checkbox" name="gmail-authorization" id="gmail-authorization" value="1" <?php  $gmailAuthorization  = (kauget('gmail-authorization',$smtpValue))? 'checked' : false ; echo $gmailAuthorization; ?>>
+                                                <input type="checkbox" name="gmail-authorization" id="gmail-authorization" value="1" <?php if( $gmailAuthSuccess == "true" ) echo 'checked' ; ?> onclick="return false">
                                                 <span class="slider round"></span>
 
                                             </label>  
