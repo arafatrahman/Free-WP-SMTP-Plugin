@@ -16,6 +16,7 @@ jQuery(document).ready(function($){
               $("#gmail-settings-label").hide();
               $("#microsoft-settings-label").hide();
               $("#default-settings-label").hide();
+               $("#default-settings-id").hide();
       
     };
 
@@ -28,6 +29,7 @@ jQuery(document).ready(function($){
       $("#smtp-settings-label").hide();
       $("#microsoft-settings-label").hide();
       $("#default-settings-label").hide();
+      $("#default-settings-id").hide();
 
   
     };
@@ -41,6 +43,7 @@ jQuery(document).ready(function($){
       $("#gmail-settings-label").hide();
       $("#smtp-settings-label").hide();
       $("#default-settings-label").hide();
+      $("#default-settings-id").hide();
 
   
     };
@@ -48,6 +51,7 @@ jQuery(document).ready(function($){
 
   
       if ($('input#mailer-type-default').is(':checked')) {
+          $("#default-settings-id").show();
       $("#default-settings-label").show();
       $("#smtp-settings-id").hide();
       $("#gmail-settings-id").hide();
@@ -69,6 +73,7 @@ jQuery(document).ready(function($){
               $("#gmail-settings-label").hide();
               $("#microsoft-settings-label").hide();
               $("#default-settings-label").hide();
+              $("#default-settings-id").hide();
 
 
           
@@ -82,6 +87,7 @@ jQuery(document).ready(function($){
               $("#smtp-settings-label").hide();
               $("#microsoft-settings-label").hide();
               $("#default-settings-label").hide();
+              $("#default-settings-id").hide();
 
           
             });
@@ -95,12 +101,14 @@ jQuery(document).ready(function($){
               $("#gmail-settings-label").hide();
               $("#smtp-settings-label").hide();
               $("#default-settings-label").hide();
+              $("#default-settings-id").hide();
 
           
             });
             
             $('#mailer-type-default').click(function(){
               $("#default-settings-label").show();
+              $("#default-settings-id").show();
               $("#smtp-settings-id").hide();
               $("#gmail-settings-id").hide();
               $("#gmail-settings-label").hide();

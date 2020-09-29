@@ -329,16 +329,17 @@ if(!empty($kauGmailClientID ) && !empty($kauGmailClientSecret)){
                             </div>
                             <!-- Mailer option Microsoft Settings Close Here--> 
 
+                            <div class="gmail-settings-field" id="default-settings-id" style="display: none">
 
-
-
-
-
-
-
-
-                        </div>
-                        <div class=" well smtp-setting-one-content ">
+                                <div class=" smtp-setting-one-content ">
+                                    
+                                    
+                                    <div class="form-group row mailer-section-label">
+                                    <div class="col-md-12 mailerlabel">
+                                        <div class="p-2 mb-2 bg-warning text-white col-md-3 "><b>Default Settings</b></div>
+                                        <hr class="default-section-hr">
+                                    </div>
+                                </div>
 
                             <div class="form-group row ">
 
@@ -456,6 +457,23 @@ if(!empty($kauGmailClientID ) && !empty($kauGmailClientSecret)){
 
 
                         </div> 
+
+                                </div>
+
+
+
+
+
+                            </div>
+
+
+
+
+
+
+
+                        </div>
+                        
                
 
                         <div class="row">

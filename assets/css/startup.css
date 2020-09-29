@@ -1,8 +1,8 @@
 .banner{
-	background-image:url('https://riyadly.com/wp-content/uploads/2020/09/smtp-cover.png');
+	 background: linear-gradient(to right, #0099ff -35%, #ff6699 100%);
 	text-align: center;
     color: #fff;
-   
+   height: auto;
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: center center;

@@ -10,14 +10,14 @@ $smtp_url =  admin_url()."admin.php?page=smtp_settings";
 	   <div class="container col-12">
 
         <div class="row banner-text">
-        <div class="col-4 cover-text text-left">
-                <h3><strong>FREE WP SMTP PUGIN</strong></h3>
+        <div class="col-5 cover-text text-left">
+            <h3 class="text-white"><strong>FREE WP SMTP PUGIN</strong></h3>
                 <h6 class="font-italic">Having problems with your WordPress site not sending emails? You’re not alone.Our goal is to make email deliverability easy and reliable. We want to ensure your emails reach the inbox.</h6>
                <a href="<?php echo $smtp_url; ?>" class="button-get-started" ><b>GET STARTED</b></a>
 
             </div>
 			
-			<div class="col-8 text-right align-middle kauniaweblogo">
+			<div class="col-7 text-right align-middle kauniaweblogo">
               <a href="http://kauniaweb.com/"> <img  src="https://riyadly.com/wp-content/uploads/2020/09/kblogo.png"  ></a>
 
             </div>
@@ -41,7 +41,7 @@ $smtp_url =  admin_url()."admin.php?page=smtp_settings";
 
 
             <div class="col-10 text-center">
-                <h5 class="font-italic align-middle" >SMTP stands for Simple Mail Transfer Protocol. SMTP is a set ofcommunication guidelinesthat allow software to transmit an electronic mail over the internet is called Simple Mail Transfer </br>Protocol. It is aprogram used for sending messages to other </br>computer users based on e-mail addresses.</h5>
+                <h5 class="font-italic align-middle" >SMTP stands for Simple Mail Transfer Protocol. SMTP is a set ofcommunication guidelinesthat allow software to transmit an electronic mail over the internet is called Simple Mail Transfer Protocol. It is aprogram used for sending messages to other </br>computer users based on e-mail addresses.</h5>
 
             </div>
             <div class="col-1">
@@ -163,13 +163,13 @@ $smtp_url =  admin_url()."admin.php?page=smtp_settings";
     <div class="container">
 
         <div class="row">
-            <div class="col-5">
+            <div class="col-4">
                 <hr />
             </div>
-            <div class="col-2">
-                <h5><b>SMTP FEATURES</b></h5>
+            <div class="col-4 text-center">
+                <h5><b >SMTP FEATURES DETAILS</b></h5>
             </div>
-            <div class="col-5">
+            <div class="col-4">
                 <hr />
             </div>
         </div>

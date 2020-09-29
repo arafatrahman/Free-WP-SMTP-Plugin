@@ -14,7 +14,7 @@ a:hover,a:focus{
 
 
 .cover-img{
-    background-image:url('https://riyadly.com/wp-content/uploads/2020/09/smtp-cover.png');
+   background: linear-gradient(to right, #0099ff -35%, #ff6699 100%);
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: center center;
@@ -161,6 +161,11 @@ input:checked + .slider:before {
   border-top: 1px solid #17A2B8;  
 }
 
+.default-section-hr{
+  margin-top:  -9px;
+  border-top: 1px solid #FFC107;  
+}
+
 .label-text{
     margin-left: 10px;
     color:#949393 !important;
@@ -289,7 +294,7 @@ margin:39px !important;
 
 .mailer-option-label{
     margin-left: 20px;
-     margin-right:  15px;
+     margin-right:  20px;
     color :#707070;
     font-style: italic;
 }
