@@ -36,6 +36,18 @@ class smtp_admin extends Setting{
             }
             else if($todo == "kau_testing_settings"){
                  self::saveEmailTesting($_POST);
+                 
+                $service = KauGmailAuth2::getGmailClient();
+                $smtpValue = self::getSMTP();
+              
+                $sender = kauget('from-email',$smtpValue);
+                $to = "webkaunia@gmail.com";
+                $subject = "free wp smtp plugin";
+                $messageText = "free wp smtp pluginfree wp smtp pluginfree wp smtp plugin";
+                $message = KauGmailAuth2::createMessage($sender, $to, $subject, $messageText);
+               
+         
+             // KauGmailAuth2::sendMessage($service, $message);
             }
             
             if($todo == "kau_smtp_reset_settings"){
@@ -46,6 +58,8 @@ class smtp_admin extends Setting{
              delete_option( self::MISC_SETTINGS );
 
             }
+            
+           
            
            
             
