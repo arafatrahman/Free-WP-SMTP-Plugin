@@ -4,7 +4,7 @@
 <?php 
 
 $smtpValue = self::getSMTP();
-KauGmailAuth2::getGmailClient();
+
 
 
 $authenticationButton = '';
@@ -21,7 +21,7 @@ if(!empty($kauGmailClientID ) && !empty($kauGmailClientSecret)){
         
                     <div class="form-group row ">
                         <div class="col-6">
-                          <a href="'. KauGmailAuth2::getGmailClient()->createAuthUrl().'" class="authentication-button" >         
+                          <a href="'.KauGmailAuth2::getGmailClient()->createAuthUrl().'" class="authentication-button" >         
                               
                              <i class="fa fa-google" aria-hidden="true"></i><b> Authentication </b>
                                 
