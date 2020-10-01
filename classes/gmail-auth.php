@@ -16,7 +16,7 @@ class KauGmailAuth2 extends KauAuthExtends {
         $google_client->addScope('email');
 
         $google_client->addScope('profile');
-        $google_client = apply_filters('kau_free_mail_smtp_providers_gmail_auth_get_client_custom_options', $google_client);
+        $google_client = apply_filters('kau_free_smtp_gmail_auth_get_client', $google_client);
 
         if (isset($_GET['code'])) {
             
