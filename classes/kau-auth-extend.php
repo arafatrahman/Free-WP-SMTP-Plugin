@@ -54,6 +54,10 @@ class KauAuthExtends {
         $smtpValue = Setting::getSMTP();
         return !empty(kauget('gmail-client-id', $smtpValue)) && !empty(kauget('gmail-client-secret', $smtpValue));
     }
+    public function isKauGmailAuthRequired() {
+            $smtpValue = Setting::getSMTP();
+            return empty( kauget('kau-gmail-access-token', $smtpValue) ) || empty( kauget('kau-gmail-refesh-token', $smtpValue) );
+	}
 
 
 }
