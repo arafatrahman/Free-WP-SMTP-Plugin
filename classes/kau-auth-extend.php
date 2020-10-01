@@ -17,7 +17,6 @@ class KauAuthExtends {
 
         return $google_client;
     }
-    
 
     public static function createMessage($sender, $to, $subject, $messageText) {
         $message = new Google_Service_Gmail_Message();
@@ -50,5 +49,11 @@ class KauAuthExtends {
 
         return null;
     }
+
+    public static function isKauGmailClientsSaved() {
+        $smtpValue = Setting::getSMTP();
+        return !empty(kauget('gmail-client-id', $smtpValue)) && !empty(kauget('gmail-client-secret', $smtpValue));
+    }
+
 
 }

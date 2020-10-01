@@ -13,11 +13,10 @@ $kauGmailClientID = kauget('gmail-client-id',$smtpValue);
 $kauGmailClientSecret = kauget('gmail-client-secret',$smtpValue);
 $gmailAuthSuccess = '';
 
-if(!empty($kauGmailClientID ) && !empty($kauGmailClientSecret)){
+if(KauAuthExtends::isKauGmailClientsSaved()){ 
     
-    $test = "riyad + mila";
-    
-    $authenticationButton  = ' 
+    if(KauAuthExtends::isKauGmailAuthRequired()){
+      $authenticationButton  = ' 
         
                     <div class="form-group row ">
                         <div class="col-6">
@@ -27,16 +26,15 @@ if(!empty($kauGmailClientID ) && !empty($kauGmailClientSecret)){
                                 
                            </a>  
                         </div>
-                    </div> ';
+                    </div> ';  
+    }
     
+ 
  
 }
 
 
-if( isset($_GET['code'])){
-    
-    $authenticationButton = '';
-    
+if(kauget('kau-gmail-access-token',$smtpValue)){
     $gmailAuthSuccess = 'true';
     $authenticationButton = '';
 }
