@@ -13,7 +13,6 @@ define("SMTP_PATH", dirname(__FILE__));
 
 function SMTP_plugin_load() {
 
-session_start();
     require_once dirname(__FILE__)  . '/vendor/autoload.php';
     include_once dirname(__FILE__) . "/classes/kau-auth-extend.php" ;
     include_once dirname(__FILE__) . "/classes/gmail-auth.php" ;

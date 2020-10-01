@@ -18,18 +18,6 @@ class KauAuthExtends {
         return $google_client;
     }
     
-     public static function updateAccessToken($token) {
-       return update_option('kau-gmail-access-token',$token);
-     }
-     
-     public static function updateRefeshToken($refeshToken) {
-       return update_option('kau-gmail-refesh-token',$refeshToken);
-    }
-
-    public static function GetAccessToken($code) {
-       $getToken =  $google_client->authenticate($code);
-       return $getToken['access_token']  ;
-    }
 
     public static function createMessage($sender, $to, $subject, $messageText) {
         $message = new Google_Service_Gmail_Message();
