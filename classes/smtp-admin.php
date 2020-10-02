@@ -36,6 +36,13 @@ class smtp_admin extends Setting{
             }
             else if($todo == "kau_testing_settings"){
                  self::saveEmailTesting($_POST);
+                 $smtpValue = self::getSMTP();
+                 $from = kauget('from-email',$smtpValue);
+                 $fname = kauget('from-name',$smtpValue);
+                 $subject = kauget('email-subject',$_POST);
+                 $to = kauget('recipient-email',$_POST);
+                 $msg = kauget('email-body',$_POST);
+                 KauAuthExtends::sendTestMail($from, $fname, $subject, $to, $msg);
                  
             }
             
