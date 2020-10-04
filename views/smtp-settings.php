@@ -54,22 +54,24 @@ if(kauget('kau-gmail-access-token',$smtpValue)){
                                         <span class="slider round"></span>
                                     </label> 
                                 </div>
+                                
                             </div>
 
 
                             <div class="form-group row ">
                                 <label for="fromemail" class="col-sm-3 col-form-label font-weight-bold">From Email Address</label>
                                 <div class="col-sm-5">
-                                    <input type="email" name="from-email" class="form-control" id="kau-from-email" placeholder="From Email Address" value="<?php echo kauget('from-email',$smtpValue);  ?>">  
+                                    <input type="email" name="kau-from-email" class="form-control" id="kau-from-email" placeholder="From Email Address" value="<?php echo kauget('kau-from-email',$smtpValue);  ?>">  
                                 </div>
 
-                                <div class="col-sm-4 kau-error-msg" id="kau-alert-msg" > <span class="error text-danger text-center" id="kau-invalid-msg" style="display:none" > <i class="fa fa-exclamation-circle " aria-hidden="true"></i> Email Address invalid</span> <span class="error text-success text-center" id="kau-valid-msg" style="display:none" > <i class="fa fa-check-circle"></i></i> WOW! Look great</span></div>
+                                <div class="col-sm-4 kau-error-msg" id="kau-alert-msg" > <span class="error text-danger text-center" id="kau-invalid-msg" style="display:none" > <i class="fa fa-exclamation-circle " aria-hidden="true"></i> Email Address invalid</span> <span class="error text-success text-center" id="kau-valid-msg" style="display:none" > <i class="fa fa-check-circle"></i></i> WOW! Look great</span>   <span class="error text-danger text-center" id="kau-from-email-empty" style="display:none" > <i class="fa fa-exclamation-circle " aria-hidden="true"></i> Can't be Empty</span></div>
                             </div>
                             <div class="form-group row ">
                                 <label for="fromname" class="col-sm-3 col-form-label font-weight-bold">From Name</label>
                                 <div class="col-sm-5">
-                                    <input type="text" name="from-name" class="form-control" id="from-name" placeholder="From Name" value="<?php echo kauget('from-name',$smtpValue); ?>">
+                                    <input type="text" name="kau-from-name" class="form-control" id="kau-from-name" placeholder="From Name" value="<?php echo kauget('kau-from-name',$smtpValue); ?>">
                                 </div>
+                                <div class="col-sm-4 kau-error-msg" id="kau-alert-msg" > <span class="error text-danger text-center" id="kau-from-name-empty" style="display:none" > <i class="fa fa-exclamation-circle " aria-hidden="true"></i> Can't be Empty</span> </div>
                             </div>
 
 
@@ -162,7 +164,7 @@ if(kauget('kau-gmail-access-token',$smtpValue)){
 
                                         <label for="gmailclientsecret" class="col-sm-3 col-form-label font-weight-bold">Client Secret</label>
                                         <div class="col-sm-5">
-                                            <input type="text" class="form-control" name="gmail-client-secret" id="gmail-client-secret" placeholder="Enter Gmail Client Secret" value="<?php echo kauget('gmail-client-secret',$smtpValue) ;  ?>">
+                                            <input type="password" class="form-control" name="gmail-client-secret" id="gmail-client-secret" placeholder="Enter Gmail Client Secret" value="<?php echo kauget('gmail-client-secret',$smtpValue) ;  ?>">
                                             <div class="gmail-client-secret-label font-italic label-text">At registration the client application is assigned a client ID and a <a target="_blank" href="https://console.developers.google.com/apis/credentials">Client secret</a> (password) by the authorization server </div>
                                         </div>
 
@@ -484,7 +486,7 @@ if(kauget('kau-gmail-access-token',$smtpValue)){
 
                         <div class="row">
                             <div class="col-6">
-                            <button type="submit" name="kau_form_submit" class="btn savebtn" value="kau_smtp_settings"><i class="fa fa-cog" aria-hidden="true" ></i><b> Save Settings</b></button>
+                            <button type="submit" name="kau_form_submit" id="kau_smtp_settings_save" class="btn savebtn" value="kau_smtp_settings"><i class="fa fa-cog" aria-hidden="true" ></i><b> Save Settings</b></button>
                             </div>
                             
                             <div class="col-6 float-right text-right">

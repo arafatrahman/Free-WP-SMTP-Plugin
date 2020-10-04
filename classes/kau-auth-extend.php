@@ -60,7 +60,7 @@ class KauAuthExtends {
         return empty(kauget('kau-gmail-access-token', $smtpValue)) || empty(kauget('kau-gmail-refesh-token', $smtpValue));
     }
 
-    public static function sendTestMail($from,$fname,$subject,$to,$msg) {
+    public static function sendTestMail($from, $fname, $subject, $to, $msg) {
 
         require_once ABSPATH . WPINC . '/class-phpmailer.php';
         $mail = new PHPMailer\PHPMailer\PHPMailer;
@@ -86,7 +86,9 @@ class KauAuthExtends {
         $service = new Google_Service_Gmail(KauGmailAuth2::getGmailClient());
         $message->setRaw($mime);
         $message = $service->users_messages->send('me', $message);
-       
+
+        return $message;
+        
     }
 
 }
