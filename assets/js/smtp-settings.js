@@ -261,6 +261,8 @@ jQuery(document).ready(function ($) {
     
         $('#kau_smtp_settings_save').click(function () {
 
+        $('#kau-settings-save-alert').show();
+        
         var formEmail = $('#kau-from-email').val();
         var formName = $('#kau-from-name').val();
         
@@ -278,7 +280,7 @@ jQuery(document).ready(function ($) {
             $('#kau-from-name').css('border-color', 'red');
             return false;
         }
-
+        
         return true;
 
 

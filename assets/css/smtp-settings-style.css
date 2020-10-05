@@ -1,5 +1,47 @@
 
+
+
 /* header start here */
+
+.banner{
+	 background: linear-gradient(to right, #0099ff -35%, #ff6699 100%);
+	text-align: center;
+    color: #fff;
+   height: auto;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+
+.banner-text{
+padding : 20px;	
+}
+
+.kauniaweblogo{
+    margin-top: 15px !important; 
+}
+
+a.button-get-started{
+    display: inline-block;
+    padding: 0.8em 1.2em;
+   
+   color: #8788E0;
+    background-color:#FCF764;
+    border-radius:2em;
+    box-sizing: border-box;
+    text-decoration:none;
+    margin-top: 18px !important;
+  
+   
+}
+a:hover{
+     text-decoration:none;
+}
 .well{
     padding:20px;
     background-color:#F5F5F5;
@@ -13,31 +55,8 @@ a:hover,a:focus{
 }
 
 
-.cover-img{
-   background: linear-gradient(to right, #0099ff -35%, #ff6699 100%);
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    background-position: center center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
 
-.cover-img-text h1{
-  color:#FCF764;
-  text-shadow: 1px 1px #313030;
-	
-}
 
-.cover-img-text{
-
-    margin: 40px;
-    color:white;
-    text-shadow: 1px 1px #313030;
-	
-    
-}
 
 
 
@@ -282,9 +301,9 @@ a.reset-settings{
 }
 
 
-.smtp-main-container{
+#kau-settings-save-alert{
+margin-bottom: 25px !important ;
 
-margin-top:70px !important;
 }
 .settings-tabs{
 margin:39px !important;
@@ -339,8 +358,8 @@ input.redio-color {
 }
 
 #smtpTab{
-  padding-bottom: 35px;
-  padding-top: 35px;
+  padding-bottom: 15px;
+  padding-top: 15px;
 }
 
 
