@@ -34,7 +34,7 @@ if (isset($_SERVER['QUERY_STRING']) == 'page=smtp_settings') {
 
 function SMTP_plugin_load() {
 
-    require_once dirname(__FILE__) . '/vendor/autoload.php';
+    
     include_once dirname(__FILE__) . "/classes/outlook-auth.php";
     include_once dirname(__FILE__) . "/classes/kau-auth-extend.php";
     include_once dirname(__FILE__) . "/classes/gmail-auth.php";

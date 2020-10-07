@@ -5,7 +5,7 @@ class KauGmailAuth2 extends KauAuthExtends {
     public static function getGmailClient() {
 
         //Make object of Google API Client for call Google API
-
+       // require_once dirname(__FILE__) . '/vendor/autoload.php';
         $google_client = self::getGoogleClientConfig();
         $google_client->setAccessType('offline');
         $google_client->setApprovalPrompt('force');
