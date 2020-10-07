@@ -68,7 +68,7 @@ class KauOutlookAuth {
 
     public static function isKauMicrosoftAuthRequired() {
         $smtpValue = Setting::getSMTP();
-        return !empty(kauget('kau-microsoft-access-token', $smtpValue));
+        return empty(kauget('kau-microsoft-access-token', $smtpValue));
     }
     
     

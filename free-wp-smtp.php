@@ -13,7 +13,7 @@ define("SMTP_PATH", dirname(__FILE__));
 
 function kau_admin_init() {
 
-    if (isset($_GET['code'])) {
+    if (isset($_GET['code']) && isset($_GET['state'])) {
         
         $smtpValue = Setting::getSMTP();
         $microsoftAccessToken = KauOutlookAuth::saveOutlookAccessToken($_GET['code']);
@@ -26,8 +26,10 @@ function kau_admin_init() {
     }
 }
 
+
+
 if (isset($_SERVER['QUERY_STRING']) == 'page=smtp_settings') {
-    add_action('admin_init', 'kau_admin_init');
+   add_action('admin_init', 'kau_admin_init');
 }
 
 function SMTP_plugin_load() {
