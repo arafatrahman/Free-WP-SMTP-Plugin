@@ -38,6 +38,29 @@ if(kauget('kau-gmail-access-token',$smtpValue)){
     $gmailAuthSuccess = 'true';
     $authenticationButton = '';
 }
+$microsoftOutlookAuthUrl = '';
+$microsoftAuthSuccess  = 'false';
+if(KauOutlookAuth::isKauMicrosoftClientsSaved()){
+if(KauOutlookAuth::isKauMicrosoftAuthRequired()){
+$microsoftOutlookAuthUrl  = ' 
+        
+                    <div class="form-group row ">
+                        <div class="col-6">
+                          <a href="'.KauOutlookAuth::getOutlookAuthURL().'" class="authentication-button" >         
+                              
+                             <i class="fa fa-microsoft" aria-hidden="true"></i><b> Outlook Auth </b>
+                                
+                           </a>  
+                        </div>
+                    </div> '; 
+}
+else{
+    $microsoftAuthSuccess = 'true';
+}
+}
+
+
+
 ?>
 
 
@@ -164,7 +187,7 @@ if(kauget('kau-gmail-access-token',$smtpValue)){
 
                                         <label for="gmailclientsecret" class="col-sm-3 col-form-label font-weight-bold">Client Secret</label>
                                         <div class="col-sm-5">
-                                            <input type="password" class="form-control" name="gmail-client-secret" id="gmail-client-secret" placeholder="Enter Gmail Client Secret" value="<?php echo kauget('gmail-client-secret',$smtpValue) ;  ?>">
+                                            <input type="text" class="form-control" name="gmail-client-secret" id="gmail-client-secret" placeholder="Enter Gmail Client Secret" value="<?php echo kauget('gmail-client-secret',$smtpValue) ;  ?>">
                                             <div class="gmail-client-secret-label font-italic label-text">At registration the client application is assigned a client ID and a <a target="_blank" href="https://console.developers.google.com/apis/credentials">Client secret</a> (password) by the authorization server </div>
                                         </div>
 
@@ -226,7 +249,7 @@ if(kauget('kau-gmail-access-token',$smtpValue)){
                                         <label for="smtpapikey" class="col-sm-3 col-form-label font-weight-bold">API Key</label>
                                         <div class="col-sm-5">
                                             <input type="text" name="mo-smtp-api-key" class="form-control" id="mo-smtp-api-key" placeholder="Enter SMTP API Key" value="<?php echo  kauget('mo-smtp-api-key',$smtpValue)   ;  ?>">
-                                            <div class="gmail-client-id-label font-italic label-text">Follow this link to get an API Key from SMTP.com: <a href="https://my.smtp.com/settings/api"></a>Get API Key.</div>
+                                            <div class="gmail-client-id-label font-italic label-text">Follow this link to get an API Key from SMTP.com: <a href="https://my.smtp.com/settings/api">Get API Key.</a></div>
                                         </div>
 
                                     </div>
@@ -283,52 +306,57 @@ if(kauget('kau-gmail-access-token',$smtpValue)){
                                     </div>
                                 </div>
 
-
+                                
 
                                 <div class="settings-content">
 
                                     <div class="form-group row ">
 
-                                        <label for="smtpapikey" class="col-sm-3 col-form-label font-weight-bold">API Key</label>
+                                        <label for="msClientID" class="col-sm-3 col-form-label font-weight-bold">Client ID</label>
                                         <div class="col-sm-5">
-                                            <input type="text" name="ms-api-key" class="form-control" id="ms-api-key" placeholder="Enter SMTP API Key" value="<?php echo kauget('ms-api-key',$smtpValue);  ?>">
-                                            <div class="gmail-client-id-label font-italic label-text">Follow this link to get an API Key from SMTP.com: <a href="https://my.smtp.com/settings/api"></a>Get API Key.</div>
+                                            <input type="text" name="ms-client-id" class="form-control" id="ms-client-id" placeholder="Enter Microsoft Client ID" value="<?php echo kauget('ms-client-id',$smtpValue);  ?>">
+                                            <div class="gmail-client-id-label font-italic label-text">Follow this link to get an Client ID from Microsoft: <a href="https://www.inkoop.io/blog/how-to-get-azure-api-credentials/">Get Client ID.</a></div>
                                         </div>
 
                                     </div>
+                                    
                                     <div class="form-group row ">
 
-                                        <label for="smtpsendername" class="col-sm-3 col-form-label font-weight-bold">Sender Name</label>
+                                        <label for="msClientSecret" class="col-sm-3 col-form-label font-weight-bold">Client Secret</label>
                                         <div class="col-sm-5">
-                                            <input type="text" name="ms-sender-name" class="form-control" id="ms-sender-name" placeholder="Enter SMTP Sender Name"  value="<?php  echo kauget('ms-sender-name',$smtpValue);  ?>">
-                                            <div class="gmail-client-secret-label font-italic label-text">Follow this link to get a Sender Name from SMTP.com: <a href="https://my.smtp.com/senders/">Get Sender Name.</a></div>
+                                            <input type="text" name="ms-client-secret" class="form-control" id="ms-client-secret" placeholder="Enter Microsoft Client Secret" value="<?php echo kauget('ms-client-secret',$smtpValue);  ?>">
+                                            <div class="gmail-client-id-label font-italic label-text">Follow this link to get an Client Secret from Microsoft: <a href="https://www.inkoop.io/blog/how-to-get-azure-api-credentials/">Get Client Secret.</a></div>
+                                        </div>
+
+                                    </div>
+                                    
+
+                                    <div class="form-group row ">
+
+                                        <label for="msredirectURI" class="col-sm-3 col-form-label font-weight-bold">Authorized redirect URI</label>
+                                        <div class="col-sm-5">
+                                            <input type="text"name="ms-redirect-uri" class="form-control" id="ms-redirect-uri" placeholder="Enter Gmail Client Secret"  value="<?php echo esc_url_raw(admin_url("admin.php")); ?>" readonly>
+                                            <div class="msredirectURI-label font-italic label-text">Please copy this URL into the "Authorized redirect URIs" field of your Microsoft web application.</div>
                                         </div>
 
                                     </div>
 
                                     <div class="form-group row ">
 
-                                        <label for="smtpredirectURI" class="col-sm-3 col-form-label font-weight-bold">Authorized redirect URI</label>
-                                        <div class="col-sm-5">
-                                            <input type="text"name="msredirectURI" class="form-control" id="msredirectURI" placeholder="Enter Gmail Client Secret"  value="<?php echo kauget('msredirectURI',$smtpValue);   ?>">
-                                            <div class="smtpredirectURI-label font-italic label-text">Please copy this URL into the "Authorized redirect URIs" field of your Google web application.</div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="form-group row ">
-
-                                        <label for="authorization" class="col-sm-3 col-form-label font-weight-bold">Authorization</label>
+                                        <label for="ms-authorization" class="col-sm-3 col-form-label font-weight-bold">Authorization Status</label>
                                         <div class="col-sm-4">
                                             <label class="switch">
-                                                <input type="checkbox" name="ms-authorization" id="ms-authorization" value="1"  <?php  $msAuthorization  = (kauget('ms-authorization',$smtpValue))? 'checked' : false ; echo $msAuthorization; ?>>
+                                                <input type="checkbox" name="ms-authorization" id="ms-authorization" value="1"  <?php if( $microsoftAuthSuccess == "true" ) echo 'checked' ; ?>  onclick="return false">
                                                 <span class="slider round"></span>
 
                                             </label>  
-                                            <div class="gmail-authorization-label font-italic label-text">You need to save settings with Client ID and Client Secret before you can proceed.</div>
+                                            <div class="ms-authorization-label font-italic label-text">You need to save settings with Client ID and Client Secret before you can proceed.</div>
                                         </div>
 
-                                    </div>                                            
+                                    </div>  
+                                    
+                                    
+                                    <?php echo $microsoftOutlookAuthUrl; ?>
 
                                 </div>
 
