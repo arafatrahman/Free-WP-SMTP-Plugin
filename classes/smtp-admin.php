@@ -28,6 +28,7 @@ class smtp_admin extends Setting{
             $todo = kauget('kau_form_submit',$_POST);
                     
             if($todo == "kau_misc_settings"){
+                 
                 self::saveMISC($_POST);
             }
             else if($todo == "kau_smtp_settings"){
@@ -42,7 +43,17 @@ class smtp_admin extends Setting{
                  $subject = kauget('email-subject',$_POST);
                  $to = kauget('recipient-email',$_POST);
                  $msg = kauget('email-body',$_POST);
-                 KauAuthExtends::sendTestMail($from, $fname, $subject, $to, $msg);
+                 
+                if(kauget('mailer-types', $smtpValue) == "2"){
+                    
+                     KauAuthExtends::sendTestMail($from, $fname, $subject, $to, $msg);
+                }
+                elseif (kauget('mailer-types', $smtpValue) == "4") {
+                   
+                   KauSmtpMail::sendSmtpMail($subject, $to, $msg);
+                }
+                
+                
                  
             }
             
@@ -55,17 +66,11 @@ class smtp_admin extends Setting{
 
             }
             
-           
-           
-           
-            
-         }
-         
+        }
         
+        include_once SMTP_PATH .  "/views/settings-view.php" ;
         
-         
-         include_once SMTP_PATH .  "/views/settings-view.php" ;
-         }
+    }
        
 
 }

@@ -1,5 +1,6 @@
 <div id="emailtesting" role="tabpanel" aria-labelledby="contact-tab" class="tab-pane fade px-4 py-5 <?php
 $emailSentMsg = '';
+
 if (kauget('kau_form_submit', $_POST) == "kau_testing_settings") {
     echo "show active";
     $emailSentMsg = '<div class="alert alert-success" id="gmail-email-sent" style="">
@@ -9,12 +10,22 @@ if (kauget('kau_form_submit', $_POST) == "kau_testing_settings") {
 ?>">
 
     <?php
-    $testingValue = self::getEmailTesting();
     echo $emailSentMsg;
+    $testingValue = Setting::getEmailTesting();
+    
+    
+    $smtpValue = Setting::getSMTP();
+    
 
     
     $emailSendButton = '';
-    if (KauAuthExtends::isKauGmailAuthRequired()) {
+    if(kauget('mailer-types',$smtpValue) == "4"){
+        $emailSendButton = '';
+    }
+
+    
+    $emailSendButton = '';
+    if (KauAuthExtends::isKauGmailAuthRequired() && empty(kauget('mailer-types', $smtpValue) =="4")) {
         $emailSendButton = 'disabled';
     }
     ?>
@@ -30,32 +41,32 @@ if (kauget('kau_form_submit', $_POST) == "kau_testing_settings") {
 
             <div class="form-group row ">
 
-                <label for="emailsubject" class="col-sm-3 col-form-label font-weight-bold">Email Subject</label>
+                <label for="emailsubject" class="col-sm-3 col-form-label font-weight-bold">Email Subject <span class="kau-required">*</span></label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" name="email-subject" id="email-subject" placeholder="Enter Email Subject"  value="<?php echo kauget('email-subject', $testingValue); ?>">
+                    <input type="text" class="form-control" name="email-subject" id="email-subject" placeholder="Enter Email Subject" required value="<?php echo kauget('email-subject', $testingValue); ?>">
                     <div class="emailsubject-label font-italic label-text">Subject of the email you want to send</div>
                 </div>
-                <div class="col-sm-4 kau-error-msg" id="kau-alert-msg" > <span class="error text-danger text-center" id="kau-testing-empty-sub" style="display:none" > <i class="fa fa-exclamation-circle " aria-hidden="true"></i> Subject Can't be Empty </span></div>
+                
             </div>
 
             <div class="form-group row ">
 
-                <label for="emailbody" class="col-sm-3 col-form-label font-weight-bold">Email Body</label>
+                <label for="emailbody" class="col-sm-3 col-form-label font-weight-bold">Email Body <span class="kau-required">*</span></label>
                 <div class="col-sm-5">
-                    <textarea class="form-control" name="email-body" id="email-body" rows="4"  value="<?php kauget('email-body', $testingValue); ?>"><?php echo kauget('email-body', $testingValue); ?></textarea>
+                    <textarea class="form-control" name="email-body" id="email-body" rows="4" required value="<?php kauget('email-body', $testingValue); ?>"><?php echo kauget('email-body', $testingValue); ?></textarea>
                     <div class="email-body-label font-italic label-text">Your Message Goes Here......</div>
                 </div>
-                <div class="col-sm-4 kau-error-msg" id="kau-alert-msg" > <span class="error text-danger text-center" id="kau-testing-empty-body" style="display:none" > <i class="fa fa-exclamation-circle " aria-hidden="true"></i> Body Can't be Empty </span></div>
+                
             </div>
 
             <div class="form-group row ">
 
-                <label for="recipientemail" class="col-sm-3 col-form-label font-weight-bold"> Recipient Email Address</label>
+                <label for="recipientemail" class="col-sm-3 col-form-label font-weight-bold"> Recipient Email Address <span class="kau-required">*</span></label>
                 <div class="col-sm-5">
-                    <input type="email" class="form-control" name="recipient-email"  id="recipient-email" placeholder="Enter Recipient Email Address"  value="<?php echo kauget('recipient-email', $testingValue); ?>">
+                    <input type="email" class="form-control" name="recipient-email"  id="recipient-email" placeholder="Enter Recipient Email Address" required  value="<?php echo kauget('recipient-email', $testingValue); ?>">
                     <div class="recipient-email-label font-italic label-text">Enter an Email Address where testing email will be send</div>
                 </div>
-                <div class="col-sm-4 kau-error-msg" id="kau-alert-msg" > <span class="error text-danger text-center" id="kau-testing-invalid-msg" style="display:none" > <i class="fa fa-exclamation-circle " aria-hidden="true"></i> Email Address invalid</span> <span class="error text-success text-center" id="kau-testing-valid-msg" style="display:none" > <i class="fa fa-check-circle"></i></i> WOW! Look great</span> <span class="error text-danger text-center" id="kau-testing-empty-msg" style="display:none;"> <i class="fa fa-exclamation-circle " aria-hidden="true"></i> Email Can't be Empty</span></div>
+                <div class="col-sm-4 kau-error-msg" id="kau-alert-msg" > <span class="error text-danger text-center" id="kau-testing-invalid-msg" style="display:none" > <i class="fa fa-exclamation-circle " aria-hidden="true"></i> Email Address invalid</span> <span class="error text-success text-center" id="kau-testing-valid-msg" style="display:none" > <i class="fa fa-check-circle"></i></i> WOW! Look great</span> </div>
 
             </div>
 

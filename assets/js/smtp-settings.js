@@ -132,7 +132,7 @@ jQuery(document).ready(function ($) {
 
     /* Email testing validation Start */
 
-  
+
 
     $("#recipient-email").change(function () {
 
@@ -164,79 +164,34 @@ jQuery(document).ready(function ($) {
 
 
 
-    $('#email-subject').blur(function () {
-        if ($(this).val()) {
-            $('#kau-testing-empty-sub').hide();
-            $('#email-subject').css('border-color', 'green');
-        }
-    });
+
     $('#retcipient-email').blur(function () {
         if ($(this).val()) {
             $('#kau-testing-empty-msg').hide();
             $('#retcipient-email').css('border-color', 'green');
         }
     });
-    $('#email-body').blur(function () {
-        if ($(this).val()) {
-            $('#kau-testing-empty-body').hide();
-            $('#email-body').css('border-color', 'green');
-        }
-    });
-
-
-    $('#emailTestingSubmit').click(function () {
-
-        var recipientEmail = $('#recipient-email').val();
-        var emailSubject = $('#email-subject').val();
-        var emailBody = $('#email-body').val();
 
 
 
-        if (emailSubject == '') {
-            $('#kau-testing-empty-sub').show();
-            $('#email-subject').css('border-color', 'red');
-            return false;
-        } else if (emailBody == '') {
-
-            $('#kau-testing-empty-body').show();
-            $('#email-body').css('border-color', 'red');
-            return false;
-        } else if (recipientEmail == '') {
-            $('#kau-testing-empty-msg').show();
-            $('#kau-testing-invalid-msg').hide();
-            $('#recipient-email').css('border-color', 'red');
-            return false;
-        }
-
-        return true;
 
 
-    });
-    
-    
+
     /* Email testing validation Close Here */
-    
-    
-    
-    
-  /* SMTP Settings Here */
-  
+
+
+
+
+    /* SMTP Settings Here */
+
     $('#kau-from-name').blur(function () {
         if ($(this).val()) {
             $('#kau-from-name-empty').hide();
             $('#kau-from-name').css('border-color', 'green');
         }
     });
-    $('#kau-from-email').blur(function () {
-        if ($(this).val()) {
-            $('#kau-from-email-empty').hide();
-            $('#kau-from-email').css('border-color', 'green');
-        }
-    });
-  
-  
-  
-   $("#kau-from-email").change(function () {
+
+    $("#kau-from-email").change(function () {
 
         var smtpEmail = $('#kau-from-email').val();
 
@@ -252,44 +207,27 @@ jQuery(document).ready(function ($) {
         if (IsEmail(smtpEmail) == true) {
 
             $('#kau-invalid-msg').hide();
+            $('#kau-from-email-empty').hide();
             $('#kau-valid-msg').show();
             $('#kau-from-email').css('border-color', 'green');
             return false;
         }
 
     });
-    
-        $('#kau_smtp_settings_save').click(function () {
-
-        $('#kau-settings-save-alert').show();
-        
-        var formEmail = $('#kau-from-email').val();
-        var formName = $('#kau-from-name').val();
-        
 
 
-
-        if (formEmail == '') {
-            $('#kau-from-email-empty').show();
-            $('#kau-invalid-msg').hide();
-            $('#kau-from-email').css('border-color', 'red');
-            return false;
-        } else if (formName == '') {
-
-            $('#kau-from-name-empty').show();
-            $('#kau-from-name').css('border-color', 'red');
-            return false;
-        }
-        
-        return true;
-
-
-    });
 
 
     /* SMTP Settings Close Here */
-    
-    
+
+$('input[name="mailer-types"]:radio').change(function () {
+        var mailerTypes = $("input[name='mailer-types']:checked").val();
+     
+    });
+
+
+
+
 
     function IsEmail(smtpEmail) {
 

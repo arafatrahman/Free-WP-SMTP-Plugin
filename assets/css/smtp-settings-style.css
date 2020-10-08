@@ -428,3 +428,7 @@ a.authentication-button{
    
 }
 
+.kau-required{
+    color: red !important;
+}
+

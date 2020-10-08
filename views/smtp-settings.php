@@ -82,19 +82,19 @@ else{
 
 
                             <div class="form-group row ">
-                                <label for="fromemail" class="col-sm-3 col-form-label font-weight-bold">From Email Address</label>
+                                <label for="fromemail" class="col-sm-3 col-form-label font-weight-bold">From Email Address <span class="kau-required">*</span></label>
                                 <div class="col-sm-5">
-                                    <input type="email" name="kau-from-email" class="form-control" id="kau-from-email" placeholder="From Email Address" value="<?php echo kauget('kau-from-email',$smtpValue);  ?>">  
+                                    <input type="email" name="kau-from-email" class="form-control" id="kau-from-email" placeholder="From Email Address" required  value="<?php echo kauget('kau-from-email',$smtpValue);  ?>">  
                                 </div>
 
                                 <div class="col-sm-4 kau-error-msg" id="kau-alert-msg" > <span class="error text-danger text-center" id="kau-invalid-msg" style="display:none" > <i class="fa fa-exclamation-circle " aria-hidden="true"></i> Email Address invalid</span> <span class="error text-success text-center" id="kau-valid-msg" style="display:none" > <i class="fa fa-check-circle"></i></i> WOW! Look great</span>   <span class="error text-danger text-center" id="kau-from-email-empty" style="display:none" > <i class="fa fa-exclamation-circle " aria-hidden="true"></i> Can't be Empty</span></div>
                             </div>
                             <div class="form-group row ">
-                                <label for="fromname" class="col-sm-3 col-form-label font-weight-bold">From Name</label>
+                                <label for="fromname" class="col-sm-3 col-form-label font-weight-bold">From Name <span class="kau-required">*</span></label>
                                 <div class="col-sm-5">
-                                    <input type="text" name="kau-from-name" class="form-control" id="kau-from-name" placeholder="From Name" value="<?php echo kauget('kau-from-name',$smtpValue); ?>">
+                                    <input type="text" name="kau-from-name" class="form-control" id="kau-from-name" placeholder="From Name" required  value="<?php echo kauget('kau-from-name',$smtpValue); ?>">
                                 </div>
-                                <div class="col-sm-4 kau-error-msg" id="kau-alert-msg" > <span class="error text-danger text-center" id="kau-from-name-empty" style="display:none" > <i class="fa fa-exclamation-circle " aria-hidden="true"></i> Can't be Empty</span> </div>
+                              
                             </div>
 
 
@@ -176,21 +176,21 @@ else{
 
                                     <div class="form-group row ">
 
-                                        <label for="gmailclientid" class="col-sm-3 col-form-label font-weight-bold">Client ID</label>
+                                        <label for="gmailclientid" class="col-sm-3 col-form-label font-weight-bold">Client ID <span class="kau-required">*</span></label>
                                         <div class="col-sm-5">
                                             <input type="text" class="form-control" name="gmail-client-id" id="gmail-client-id" placeholder="Enter Gmail Client ID" value="<?php echo  kauget('gmail-client-id',$smtpValue);   ?>">
                                             <div class="gmail-client-id-label font-italic label-text ">At registration the client application is assigned a <a target="_blank" href="https://console.developers.google.com/apis/credentials">Client ID</a> and a client secret (password) by the authorization server </div>
                                         </div>
-
+                                        
                                     </div>
                                     <div class="form-group row ">
 
-                                        <label for="gmailclientsecret" class="col-sm-3 col-form-label font-weight-bold">Client Secret</label>
+                                        <label for="gmailclientsecret" class="col-sm-3 col-form-label font-weight-bold">Client Secret <span class="kau-required">*</span></label>
                                         <div class="col-sm-5">
-                                            <input type="text" class="form-control" name="gmail-client-secret" id="gmail-client-secret" placeholder="Enter Gmail Client Secret" value="<?php echo kauget('gmail-client-secret',$smtpValue) ;  ?>">
+                                            <input type="text" class="form-control" name="gmail-client-secret" id="gmail-client-secret" placeholder="Enter Gmail Client Secret"   value="<?php echo kauget('gmail-client-secret',$smtpValue) ;  ?>">
                                             <div class="gmail-client-secret-label font-italic label-text">At registration the client application is assigned a client ID and a <a target="_blank" href="https://console.developers.google.com/apis/credentials">Client secret</a> (password) by the authorization server </div>
                                         </div>
-
+                                       
                                     </div>
 
                                     <div class="form-group row ">
@@ -312,9 +312,9 @@ else{
 
                                     <div class="form-group row ">
 
-                                        <label for="msClientID" class="col-sm-3 col-form-label font-weight-bold">Client ID</label>
+                                        <label for="msClientID" class="col-sm-3 col-form-label font-weight-bold">Client ID <span class="kau-required">*</span></label>
                                         <div class="col-sm-5">
-                                            <input type="text" name="ms-client-id" class="form-control" id="ms-client-id" placeholder="Enter Microsoft Client ID" value="<?php echo kauget('ms-client-id',$smtpValue);  ?>">
+                                            <input type="text" name="ms-client-id" class="form-control" id="ms-client-id"   placeholder="Enter Microsoft Client ID" value="<?php echo kauget('ms-client-id',$smtpValue);  ?>">
                                             <div class="gmail-client-id-label font-italic label-text">Follow this link to get an Client ID from Microsoft: <a href="https://www.inkoop.io/blog/how-to-get-azure-api-credentials/">Get Client ID.</a></div>
                                         </div>
 
@@ -322,9 +322,9 @@ else{
                                     
                                     <div class="form-group row ">
 
-                                        <label for="msClientSecret" class="col-sm-3 col-form-label font-weight-bold">Client Secret</label>
+                                        <label for="msClientSecret" class="col-sm-3 col-form-label font-weight-bold">Client Secret <span class="kau-required">*</span></label>
                                         <div class="col-sm-5">
-                                            <input type="text" name="ms-client-secret" class="form-control" id="ms-client-secret" placeholder="Enter Microsoft Client Secret" value="<?php echo kauget('ms-client-secret',$smtpValue);  ?>">
+                                            <input type="text" name="ms-client-secret" class="form-control" id="ms-client-secret"   placeholder="Enter Microsoft Client Secret" value="<?php echo kauget('ms-client-secret',$smtpValue);  ?>">
                                             <div class="gmail-client-id-label font-italic label-text">Follow this link to get an Client Secret from Microsoft: <a href="https://www.inkoop.io/blog/how-to-get-azure-api-credentials/">Get Client Secret.</a></div>
                                         </div>
 
@@ -381,12 +381,12 @@ else{
 
                                     <div class="form-group row ">
 
-                                <label for="smtphost" class="col-sm-3 col-form-label font-weight-bold">SMTP Host/Server</label>
+                                <label for="smtphost" class="col-sm-3 col-form-label font-weight-bold">SMTP Host/Server <span class="kau-required">*</span></label>
                                 <div class="col-sm-5">
-                                    <input type="text" name="smtp-host" class="form-control" id="smtp-host" placeholder="smtp.example.com" value="<?php echo kauget('smtp-host',$smtpValue); ?>">
+                                    <input type="text" name="kau-smtp-host" class="form-control" id="kau-smtp-host" placeholder="smtp.example.com"   value="<?php echo kauget('kau-smtp-host',$smtpValue); ?>">
                                     <div class="smtp-host-label font-italic label-text">The SMTP server which will be used to send email. for example smtp.gmail.com</div>
                                 </div>
-
+                                
                             </div>
 
 
@@ -394,14 +394,14 @@ else{
 
                             <div class="form-group row ">
 
-                                <label for="smtp-authorization" class="col-sm-3 col-form-label font-weight-bold">SMTP Authorization</label>
+                                <label for="smtp-authorization" class="col-sm-3 col-form-label font-weight-bold">SMTP Authorization <span class="kau-required">*</span></label>
                                 <div class="col-sm-6">
                                     <label class="switch ">
-                                        <input type="checkbox" name="authorization-smtp" id="authorization-smtp" value="1"   <?php  $authorizationSmtp  = (kauget('authorization-smtp',$smtpValue))? 'checked' : false ; echo $authorizationSmtp; ?>  >
+                                        <input type="checkbox" name="kau-smtp-authorization-smtp" id="kau-smtp-authorization-smtp"  value="true"   <?php  $authorizationSmtp  = (kauget('kau-smtp-authorization-smtp',$smtpValue))? 'checked' : false ; echo $authorizationSmtp; ?>  >
                                         <span class="slider round "></span>
                                     </label><div class="smtp-authorization-label font-italic label-text">Use Authentication when sending an email ( recommended: True)</div>
                                 </div>
-
+                              
 
                             </div>
 
@@ -409,23 +409,23 @@ else{
 
                             <div class="form-group row ">
 
-                                <label for="username-smtp" class="col-sm-3 col-form-label font-weight-bold">SMTP Username</label>
+                                <label for="username-smtp" class="col-sm-3 col-form-label font-weight-bold">SMTP Username <span class="kau-required">*</span></label>
                                 <div class="col-sm-5">
-                                    <input type="text" name="username-smtp" class="form-control" id="username-smtp" placeholder="Enter Your SMTP Username" value="<?php echo kauget('username-smtp',$smtpValue);  ?>">
+                                    <input type="email" name="kau-username-smtp" class="form-control" id="kau-username-smtp"   placeholder="Enter Your SMTP Username" value="<?php echo kauget('kau-username-smtp',$smtpValue);  ?>">
                                     <div class="username-smtp-label font-italic label-text">Your SMTP username goes here</div>
                                 </div>
-
+                                 
                             </div>
 
 
                             <div class="form-group row ">
 
-                                <label for="password-smtp" class="col-sm-3 col-form-label font-weight-bold">SMTP Password</label>
+                                <label for="password-smtp" class="col-sm-3 col-form-label font-weight-bold">SMTP Password <span class="kau-required">*</span></label>
                                 <div class="col-sm-5">
-                                    <input type="text" name="password-smtp" class="form-control" id="password-smtp" placeholder="Enter Your SMTP Password" value="<?php echo kauget('password-smtp',$smtpValue);  ?>">
+                                    <input type="text" name="kau-password-smtp" class="form-control" id="kau-password-smtp" placeholder="Enter Your SMTP Password"   value="<?php echo kauget('kau-password-smtp',$smtpValue);  ?>">
                                     <div class="password-smtp-label font-italic label-text">You need enter password every time you update the settings for security reason</div>
                                 </div>
-
+                                
                             </div>
 
 
@@ -470,28 +470,27 @@ else{
 
                             <div class="form-group row ">
 
-                                <label for="port-smtp" class="col-sm-3 col-form-label font-weight-bold">SMTP Port</label>
+                                <label for="port-smtp" class="col-sm-3 col-form-label font-weight-bold">SMTP Port <span class="kau-required">*</span></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="port-smtp" id="port-smtp" placeholder="Enter Your SMTP Port" value="<?php echo kauget('port-smtp',$smtpValue);  ?>">
+                                    <input type="text" class="form-control" name="kau-port-smtp" id="kau-port-smtp"   placeholder="Enter Your SMTP Port" value="<?php echo kauget('kau-port-smtp',$smtpValue);  ?>">
                                     <div class="password-smtp-label font-italic label-text">Enter the mail server port.Most mail servers use port 465.</div>
                                 </div>
+                                
+                            </div>             
+                                    
+                             <div class="form-group row ">
 
-                            </div>
-
-
-                            <div class="form-group row ">
-
-                                <label for="ssl-verification" class="col-sm-3 col-form-label font-weight-bold">SSL Certificate Verification</label>
-                                <div class="col-sm-9">
-                               
-
+                                <label for="smtp-authorization" class="col-sm-3 col-form-label font-weight-bold">HTML Allow </label>
+                                <div class="col-sm-6">
                                     <label class="switch ">
-                                        <input type="checkbox"name="ssl-verification" id="ssl-verification" value="1"  <?php  $sslVerification  = (kauget('ssl-verification',$smtpValue))? 'checked' : false ; echo $sslVerification; ?>  >
+                                        <input type="checkbox" name="kau-smtp-html-allow" id="kau-smtp-html-allow" value="true"   <?php  $authorizationSmtp  = (kauget('kau-smtp-html-allow',$smtpValue))? 'checked' : false ; echo $authorizationSmtp; ?>  >
                                         <span class="slider round "></span>
-                                    </label><div class="ssl-verification-label font-italic label-text">Fix the SSL configurations instead of bypassing it.</div>
+                                   
                                 </div>
+                                
 
-                            </div>                                                    
+                            </div>       
+                                    
 
                                 </div>
 
