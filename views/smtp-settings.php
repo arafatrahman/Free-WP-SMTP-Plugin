@@ -386,7 +386,7 @@ else{
                                     <input type="text" name="kau-smtp-host" class="form-control" id="kau-smtp-host" placeholder="smtp.example.com"   value="<?php echo kauget('kau-smtp-host',$smtpValue); ?>">
                                     <div class="smtp-host-label font-italic label-text">The SMTP server which will be used to send email. for example smtp.gmail.com</div>
                                 </div>
-                                
+                                <div class="col-sm-4 kau-error-msg" id="kau-alert-msg" > <span class="error text-danger text-center" id="kau-smtp-empty-host" style="display:none" > <i class="fa fa-exclamation-circle " aria-hidden="true"></i> Host Can't be Empty </span></div>
                             </div>
 
 
@@ -414,7 +414,7 @@ else{
                                     <input type="email" name="kau-username-smtp" class="form-control" id="kau-username-smtp"   placeholder="Enter Your SMTP Username" value="<?php echo kauget('kau-username-smtp',$smtpValue);  ?>">
                                     <div class="username-smtp-label font-italic label-text">Your SMTP username goes here</div>
                                 </div>
-                                 
+                               <div class="col-sm-4 kau-error-msg" id="kau-alert-msg" > <span class="error text-danger text-center" id="kau-invalid-email" style="display:none" > <i class="fa fa-exclamation-circle " aria-hidden="true"></i> Email Address invalid</span> <span class="error text-success text-center" id="kau-valid-email" style="display:none" > <i class="fa fa-check-circle"></i></i> WOW! Look great</span></div>  
                             </div>
 
 

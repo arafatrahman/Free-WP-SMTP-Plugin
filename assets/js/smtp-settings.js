@@ -214,16 +214,76 @@ jQuery(document).ready(function ($) {
         }
 
     });
+    
+    
+    $("#kau-username-smtp").change(function () {
+
+        var smtpEmail = $('#kau-username-smtp').val();
 
 
+        if (IsEmail(smtpEmail) == false) {
+          
+            $('#kau-invalid-email').show();
+            $('#kau-valid-email').hide();
+            $('#kau-username-smtp').css('border-color', 'red');
+            return false;
+        }
+
+        else if (IsEmail(smtpEmail) == true) {
+           
+            $('#kau-valid-email').show();
+            $('#kau-invalid-email').hide();
+            $('#kau-username-smtp').css('border-color', 'green');
+            return false;
+        }
+
+    });
+
+
+    
+    $('#kau_smtp_settings_save').click(function() {
+
+        
+        
+        
+       if($('#mailer-type-gmail').is(':checked')) { 
+        $("input[name='gmail-client-id']").attr("required","required");
+        $("input[name='gmail-client-secret']").attr("required","required");
+        }
+       
+       if($('#mailer-type-microsoft').is(':checked')) { 
+        $("input[name='ms-client-id']").attr("required","required");
+        $("input[name='ms-client-secret']").attr("required","required");
+       
+       }
+        
+       if($('#mailer-type-default').is(':checked')) { 
+        $("input[name='kau-smtp-host']").attr("required","required");
+        $("input[name='kau-smtp-authorization-smtp']").attr("required","required");
+        $("input[name='kau-username-smtp']").attr("required","required");
+        $("input[name='kau-password-smtp']").attr("required","required");
+        $("input[name='kau-port-smtp']").attr("required","required");
+       }
+    
+    
+    });
 
 
     /* SMTP Settings Close Here */
-
-$('input[name="mailer-types"]:radio').change(function () {
+    
+    
+    
+    /*
+    $('input[name="mailer-types"]:checked').change(function () {
         var mailerTypes = $("input[name='mailer-types']:checked").val();
-     
-    });
+        if(mailerTypes == "4"){
+            
+            $("input[name='kau-smtp-host']").attr("required","required");
+             $("input[name='kau-smtp-host']").css('border-color', 'red');
+        }
+    });*/
+
+
 
 
 
