@@ -32,6 +32,48 @@ class KauOutlookAuth {
         return $response->access_token;
     }
 
+    public static function sendOutlookMail($accessToken, $reciepent, $sub, $msg) {
+
+        $to = array();
+        $toFromForm = explode(";", $reciepent);
+        foreach ($toFromForm as $eachTo) {
+            if (strlen(trim($eachTo)) > 0) {
+                $thisTo = array(
+                    "EmailAddress" => array(
+                        "Address" => trim($eachTo)
+                    )
+                );
+                array_push($to, $thisTo);
+            }
+        }
+        if (count($to) == 0) {
+            die("Need email address to send email");
+        }
+
+        $request = array(
+            "Message" => array(
+                "Subject" => $sub,
+                "ToRecipients" => $to,
+                "Body" => array(
+                    "ContentType" => "HTML",
+                    "Content" => utf8_encode($msg)
+                )
+            )
+        );
+
+        $request = json_encode($request);
+        $headers = array(
+            "User-Agent: php-tutorial/1.0",
+            "Authorization: Bearer ".$accessToken,
+            "Accept: application/json",
+            "Content-Type: application/json",
+            "Content-Length: " . strlen($request)
+        );
+
+        $response = self::runCurl("https://outlook.office.com/api/v2.0/me/sendmail", $request, $headers);
+        
+    }
+
     public static function runCurl($url, $post = null, $headers = null) {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -58,8 +100,6 @@ class KauOutlookAuth {
         }
         return $response;
     }
-    
-    
 
     public static function isKauMicrosoftClientsSaved() {
         $smtpValue = Setting::getSMTP();
@@ -70,29 +110,47 @@ class KauOutlookAuth {
         $smtpValue = Setting::getSMTP();
         return empty(kauget('kau-microsoft-access-token', $smtpValue));
     }
-    
-    
-    
-    
-    /*
-      public static function getOutlookAccessToken() {
 
+    public static function getOutlookAccessToken() {
+        require_once SMTP_PATH . '/vendor/autoload.php';
+        $guzzle = new \GuzzleHttp\Client();
+        $url = 'https://login.microsoftonline.com/common/oauth2/v2.0/token';
+        $token = json_decode($guzzle->post($url, [
+                    'form_params' => [
+                        'client_id' => '17ce23c1-5bbf-48b6-8bc2-55c8c94cb1d6',
+                        'client_secret' => 'H-CC-cHQTBLCo2_h3qTcSTX02~_4VMnObb',
+                        'scope' => 'https://graph.microsoft.com/.default',
+                        'grant_type' => 'client_credentials',
+                    ],
+                ])->getBody()->getContents());
+        $accessToken = $token->access_token;
+        update_option('microsoft-access-token', $accessToken);
 
-      $guzzle = new \GuzzleHttp\Client();
-      $url = 'https://login.microsoftonline.com/common/oauth2/v2.0/token';
-      $token = json_decode($guzzle->post($url, [
-      'form_params' => [
-      'client_id' => '17ce23c1-5bbf-48b6-8bc2-55c8c94cb1d6',
-      'client_secret' => 'H-CC-cHQTBLCo2_h3qTcSTX02~_4VMnObb',
-      'scope' => 'https://graph.microsoft.com/.default',
-      'grant_type' => 'client_credentials',
-      ],
-      ])->getBody()->getContents());
-      $accessToken = $token->access_token;
+        $request = array(
+            "Message" => array(
+                "Subject" => "this is test",
+                "ToRecipients" => "ar.riyad.sign@gmail.com",
+                "Attachments" => "",
+                "Body" => array(
+                    "ContentType" => "HTML",
+                    "Content" => utf8_encode("this is test <br> riyad")
+                )
+            )
+        );
 
+        $request = json_encode($request);
+        $headers = array(
+            "User-Agent: php-tutorial/1.0",
+            "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJub25jZSI6Im5jdEtEcU9yUXByN25vbHhMbWhIRXI5YXp6cEJGREtsM2llN2NDT1hKaEEiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCJ9.eyJhdWQiOiJodHRwczovL2dyYXBoLm1pY3Jvc29mdC5jb20iLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC83MmY5ODhiZi04NmYxLTQxYWYtOTFhYi0yZDdjZDAxMWRiNDcvIiwiaWF0IjoxNjAyMjU5NTg4LCJuYmYiOjE2MDIyNTk1ODgsImV4cCI6MTYwMjM0NjI4OCwiYWlvIjoiRTJSZ1lEQm5ELzVnbnYxbTArbXorejkxWEY3UUFBQT0iLCJhcHBfZGlzcGxheW5hbWUiOiJyaXlhZCIsImFwcGlkIjoiMTdjZTIzYzEtNWJiZi00OGI2LThiYzItNTVjOGM5NGNiMWQ2IiwiYXBwaWRhY3IiOiIxIiwiaWRwIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvNzJmOTg4YmYtODZmMS00MWFmLTkxYWItMmQ3Y2QwMTFkYjQ3LyIsImlkdHlwIjoiYXBwIiwicmgiOiIwLkFSb0F2NGo1Y3ZHR3IwR1JxeTE4MEJIYlI4RWp6aGVfVzdaSWk4SlZ5TWxNc2RZYUFBQS4iLCJ0ZW5hbnRfcmVnaW9uX3Njb3BlIjoiV1ciLCJ0aWQiOiI3MmY5ODhiZi04NmYxLTQxYWYtOTFhYi0yZDdjZDAxMWRiNDciLCJ1dGkiOiJkVEFTZFpqSmNFZU5NTDMxMUpJYkFBIiwidmVyIjoiMS4wIiwieG1zX3RjZHQiOjEyODkyNDE1NDd9.NZ16c8DGQVo5Qxma2KpHT8VrZKUyebd2D8DkAPfXkQT3CSL6NY6Ry-nZ2NiKjqcLcTPdcKMEY4zAhdQ7rgrkdnMHMcmLKm0gzz3wv-gju6e18r6vkCno6q9eWH1TSooRAGKaoOrlH5jyiMMPdm1HbDnGhiTNsAJ7TNYWQCvXQI497N_WrbKaoptfBpC8imWRvk7kVtH-nnRUHVjfBB0CIQQTjy9aBG5RrkBzfjqg7I30A8Rvx4-j74BRNHP3e_se6e5hyjfidOM3wVLyGHjJx6SCFDAO8O8Jl54U_s5JJTjKnQkqXY1VjXXFI7QvhM0zh5x9-2cE00vFk_OLQ19P5g",
+            "Accept: application/json",
+            "Content-Type: application/json",
+            "Content-Length: " . strlen($request)
+        );
 
+        $response = self::runCurl("https://outlook.office.com/api/v2.0/me/sendmail", $request, $headers);
+        echo "<pre>";
+        print_r($response);
+        echo "</pre>";
+    }
 
-
-
-      } */
 }

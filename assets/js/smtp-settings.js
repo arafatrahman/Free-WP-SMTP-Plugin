@@ -216,7 +216,29 @@ jQuery(document).ready(function ($) {
     });
     
     
-    $("#kau-username-smtp").change(function () {
+    
+
+
+    
+    $('#kau_smtp_settings_save').click(function() {
+
+        
+        
+        
+       if($('#mailer-type-gmail').is(':checked')) { 
+        $("input[name='gmail-client-id']").attr("required","required");
+        $("input[name='gmail-client-secret']").attr("required","required");
+        }
+       
+       if($('#mailer-type-microsoft').is(':checked')) { 
+        $("input[name='ms-client-id']").attr("required","required");
+        $("input[name='ms-client-secret']").attr("required","required");
+       
+       }
+        
+       if($('#mailer-type-default').is(':checked')) { 
+           
+           $("#kau-username-smtp").change(function () {
 
         var smtpEmail = $('#kau-username-smtp').val();
 
@@ -238,26 +260,6 @@ jQuery(document).ready(function ($) {
         }
 
     });
-
-
-    
-    $('#kau_smtp_settings_save').click(function() {
-
-        
-        
-        
-       if($('#mailer-type-gmail').is(':checked')) { 
-        $("input[name='gmail-client-id']").attr("required","required");
-        $("input[name='gmail-client-secret']").attr("required","required");
-        }
-       
-       if($('#mailer-type-microsoft').is(':checked')) { 
-        $("input[name='ms-client-id']").attr("required","required");
-        $("input[name='ms-client-secret']").attr("required","required");
-       
-       }
-        
-       if($('#mailer-type-default').is(':checked')) { 
         $("input[name='kau-smtp-host']").attr("required","required");
         $("input[name='kau-smtp-authorization-smtp']").attr("required","required");
         $("input[name='kau-username-smtp']").attr("required","required");
