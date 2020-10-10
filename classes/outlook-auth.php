@@ -11,12 +11,12 @@ class KauOutlookAuth {
         $params['redirect_uri'] = esc_url_raw(admin_url("admin.php"));
         $params['response_mode'] = 'query';
         $params['state'] = '4321';
-        $params['scope'] = 'https://outlook.office.com/mail.send';
+        $params['scope'] = 'offline_access https://outlook.office.com/mail.send';
 
         return $url . '?' . http_build_query($params);
     }
 
-    public static function saveOutlookAccessToken($code) {
+    public static function getOutlookToken($code) {
         $smtpValue = Setting::getSMTP();
         $token_request_data = array(
             "grant_type" => "authorization_code",
@@ -29,7 +29,7 @@ class KauOutlookAuth {
         $body = http_build_query($token_request_data);
         $response = self::runCurl('https://login.microsoftonline.com/common/oauth2/v2.0/token', $body);
         $response = json_decode($response);
-        return $response->access_token;
+        return $response;
     }
 
     public static function sendOutlookMail($accessToken, $reciepent, $sub, $msg) {

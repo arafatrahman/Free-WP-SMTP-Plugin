@@ -16,9 +16,11 @@ function kau_admin_init() {
     if (isset($_GET['code']) && isset($_GET['state'])) {
         
         $smtpValue = Setting::getSMTP();
-        $microsoftAccessToken = KauOutlookAuth::saveOutlookAccessToken($_GET['code']);
-        $smtpValue['kau-microsoft-access-token'] = $microsoftAccessToken;
+        $microsoftToken = KauOutlookAuth::getOutlookToken($_GET['code']);
+        $smtpValue['kau-microsoft-access-token'] = $microsoftToken->access_token;
+        $smtpValue['kau-microsoft-refresh_token'] = $microsoftToken->refresh_token;
         $smtpValue['kau-microsoft-authorization-code'] = $_GET['code'];
+        
         Setting ::saveSMTP($smtpValue);
         
         wp_safe_redirect(admin_url('admin.php?page=smtp_settings'));
