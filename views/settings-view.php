@@ -17,7 +17,7 @@ if (kauget('kau_form_submit', $_POST) == "kau_smtp_settings") {
         <div class="container col-12">
 
             <div class="row banner-text">
-                <?php $imgUrl = plugins_url('/brandlogo.png', __FILE__); ?>
+                <?php $imgUrl = KAU_ASSETS_DIR_URI . "/images/brandlogo.png"; ?>
                 <div class="col-3 kauniaweblogo"> <a href="http://kauniaweb.com/" target="_blank"> <img src="<?php echo $imgUrl ?>" alt="kauniaweb" > </a></div>
 
 

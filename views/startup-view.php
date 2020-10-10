@@ -8,7 +8,7 @@ $smtp_url = admin_url() . "admin.php?page=smtp_settings";
     <div class="container col-12">
 
         <div class="row banner-text">
-            <?php $imgUrl = plugins_url('/brandlogo.png', __FILE__); ?>
+            <?php $imgUrl = KAU_ASSETS_DIR_URI . "/images/brandlogo.png"; ?>
             <div class="col-3 kauniaweblogo"> <img src="<?php echo $imgUrl ?>" alt="kauniaweb" > </div>
 
 
@@ -67,7 +67,7 @@ $smtp_url = admin_url() . "admin.php?page=smtp_settings";
                 <a class="card-link" href="<?php echo $smtp_url; ?>" class="">
                     <div class="card">
                         <div class="text-center">
-                            <p><img class=" img-fluid" src="https://riyadly.com/wp-content/uploads/2020/09/settings-3.png" alt="card image"></p>
+                            <p><img class=" img-fluid" src="<?php echo KAU_ASSETS_DIR_URI . "/images/settings-1.png"; ?>" alt="card image"></p>
                             <h5 class="card-title"><b>SMTP Settings</b></h5>
                             <p class="card-text font-italic align-middle">if you want to Set your smtp settings properly click here now</p>
 
@@ -80,7 +80,7 @@ $smtp_url = admin_url() . "admin.php?page=smtp_settings";
                 <a class="card-link2" href="<?php echo $smtp_url; ?>" class="">
                     <div class="card">
                         <div class="text-center">
-                            <p><img class=" img-fluid" src="https://riyadly.com/wp-content/uploads/2020/09/process.png" alt="card image"></p>
+                            <p><img class=" img-fluid" src="<?php echo KAU_ASSETS_DIR_URI . "/images/settings-2.png"; ?>" alt="card image"></p>
                             <h5 class="card-title"><b>Misc Settings</b></h5>
                             <p class="card-text font-italic align-middle">if you want you can also set your miscellaneous settings here.</p>
 
@@ -92,7 +92,7 @@ $smtp_url = admin_url() . "admin.php?page=smtp_settings";
                 <a class="card-link3" href="<?php echo $smtp_url; ?>" class="">
                     <div class="card">
                         <div class="text-center">
-                            <p><img class=" img-fluid" src="https://riyadly.com/wp-content/uploads/2020/09/checklist.png" alt="card image"></p>
+                            <p><img class=" img-fluid" src="<?php echo KAU_ASSETS_DIR_URI . "/images/settings-3.png"; ?>" alt="card image"></p>
                             <h5 class="card-title"><b>Email Logs</b></h5>
                             <p class="card-text font-italic align-middle">Keep track of every email sent from your WordPress site</p>
 
@@ -131,7 +131,7 @@ $smtp_url = admin_url() . "admin.php?page=smtp_settings";
                 <a class="card-link4" href="<?php echo $smtp_url; ?>" class="">
                     <div class="card">
                         <div class="text-center">
-                            <p><img class=" img-fluid" src="https://riyadly.com/wp-content/uploads/2020/09/email.png" alt="card image"></p>
+                            <p><img class=" img-fluid" src="<?php echo KAU_ASSETS_DIR_URI . "/images/settings-4.png"; ?>" alt="card image"></p>
                             <h5 class="card-title"><b>Email Testing</b></h5>
                             <p class="card-text font-italic align-middle card-desc">For Confirmation you can also check by email testing</p>
 

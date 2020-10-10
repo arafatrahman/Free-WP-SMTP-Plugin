@@ -14,7 +14,7 @@ class KauSmtpMail {
 
 
         $mail->SMTPAuth = kauget('kau-smtp-authorization-smtp',$smtpValue);  
-        $mail->SMTPSecure = "ssl";            
+        $mail->SMTPSecure = kauget('kau-encryption-type',$smtpValue);            
         $mail->Host = kauget('kau-smtp-host',$smtpValue);  
         $mail->Port = kauget('kau-port-smtp',$smtpValue);      
         $mail->Username = kauget('kau-username-smtp',$smtpValue);

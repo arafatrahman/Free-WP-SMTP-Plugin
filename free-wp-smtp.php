@@ -10,6 +10,7 @@
  * License: GPL
  */
 define("SMTP_PATH", dirname(__FILE__));
+ define('KAU_ASSETS_DIR_URI', plugins_url('assets', __FILE__));
 
 function kau_admin_init() {
 
