@@ -31,6 +31,25 @@ class KauOutlookAuth {
         $response = json_decode($response);
         return $response;
     }
+    
+    public static function getNewAccessToken($refreshToken) {
+        $smtpValue = Setting::getSMTP();
+        $token_request_data = array(
+            
+            "refresh_toke" => $refreshToken,
+            "redirect_uri" => esc_url_raw(admin_url("admin.php")),
+            "scope" => 'https://outlook.office.com/mail.send',
+            "grant_type" => "refresh_token",
+            "client_id" => kauget('ms-client-id', $smtpValue),
+            "client_secret" => kauget('ms-client-secret', $smtpValue)
+        );
+        $body = http_build_query($token_request_data);
+        $response = self::runCurl('https://login.microsoftonline.com/common/oauth2/v2.0/token', $body);
+        $response = json_decode($response);
+        return $response->access_token;
+    }
+    
+    
 
     public static function sendOutlookMail($accessToken, $reciepent, $sub, $msg) {
 
