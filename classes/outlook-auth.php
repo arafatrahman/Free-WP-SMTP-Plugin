@@ -27,7 +27,7 @@ class KauOutlookAuth {
             "client_secret" => kauget('ms-client-secret', $smtpValue)
         );
         $body = http_build_query($token_request_data);
-        $response = self::runCurl('https://login.microsoftonline.com/common/oauth2/v2.0/token', $body);
+        $response = kau_Run_Curl('https://login.microsoftonline.com/common/oauth2/v2.0/token', $body);
         $response = json_decode($response);
         return $response;
     }
@@ -44,7 +44,7 @@ class KauOutlookAuth {
             "client_secret" => kauget('ms-client-secret', $smtpValue)
         );
         $body = http_build_query($token_request_data);
-        $response = self::runCurl('https://login.microsoftonline.com/common/oauth2/v2.0/token', $body);
+        $response = kau_Run_Curl('https://login.microsoftonline.com/common/oauth2/v2.0/token', $body);
         $response = json_decode($response);
         return $response->access_token;
     }
@@ -89,7 +89,7 @@ class KauOutlookAuth {
             "Content-Length: " . strlen($request)
         );
 
-        $response = self::runCurl("https://outlook.office.com/api/v2.0/me/sendmail", $request, $headers);
+        $response = kau_Run_Curl("https://outlook.office.com/api/v2.0/me/sendmail", $request, $headers);
         
     }
 

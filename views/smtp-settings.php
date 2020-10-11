@@ -132,6 +132,12 @@ if (kauget('kau_form_submit', $_POST) == "") {
                             ?> /> <span class="connection-type-label font-italic font-weight-bold">Microsoft</span>
                         </label>
                         <label class="btn btn-default active">
+                            <input type="radio" class="redio-color" id="mailer-type-sendinblue" name="mailer-types" value="5"  <?php
+                            $mailerTypes = (kauget('mailer-types', $smtpValue) == "5") ? 'checked' : false;
+                            echo $mailerTypes;
+                            ?> /> <span class="connection-type-label font-italic font-weight-bold">SendinBlue</span>
+                        </label>
+                        <label class="btn btn-default active">
                             <input type="radio" class="redio-color" id="mailer-type-default" name="mailer-types" value="4" <?php
                             $mailerTypes = (kauget('mailer-types', $smtpValue) == "4") ? 'checked' : false;
                             echo $mailerTypes;
@@ -164,6 +170,10 @@ if (kauget('kau_form_submit', $_POST) == "") {
                     <div class="font-italic label-text" id="microsoft-settings-label" style="display: none">
 
                         In Outlook,click file.Then Navigate to Account Settings>Account Settings.On the Email tab,double-click on the account you want to connect to Hubspot.Below Server Information,you can find your incomeing mail server (IMAP) and outgoing mail server (SMTP) name.
+                    </div>
+                    <div class="font-italic label-text" id="sendinblue-settings-label" style="display: none">
+
+                       Sendinblue is our recommended transactional email service. Founded in 2012, they serve 80,000+ growing companies around the world and send over 30 million emails each day
                     </div>
                     <div class="font-italic label-text" id="default-settings-label" style="display: none">
 
@@ -384,6 +394,44 @@ if (kauget('kau_form_submit', $_POST) == "") {
 
             </div>
             <!-- Mailer option Microsoft Settings Close Here--> 
+            
+            <!-- Mailer option Sendinblue Settings start Here-->    
+            <div class="smtp-settings-field" id="sendinblue-settings-id" style="display: none" >
+
+                <div class="form-group row mailer-section-label">
+                    <div class="col-md-12 mailerlabel">
+                        <div class="p-2 mb-2 bg-primary text-white col-md-3 "><img src="https://riyadly.com/wp-content/uploads/2020/09/microsoft-icon.png" class="gmail-icon"  width="20" height="20"><b>SendinBlue</b></div>
+                        <hr class="sendinblue-section-hr">
+                    </div>
+                </div>
+
+
+
+                <div class="settings-content">
+
+                    <div class="form-group row ">
+
+                        <label for="sendinblueAPIKey" class="col-sm-3 col-form-label font-weight-bold">API Key <span class="kau-required">*</span></label>
+                        <div class="col-sm-5">
+                            <input type="text" name="kau-sendinblue-api-key" class="form-control" id="kau-sendinblue-api-key"   placeholder="Enter Sendinblue Api Key" value="<?php echo kauget('kau-sendinblue-api-key', $smtpValue); ?>">
+                            <div class="gmail-client-id-label font-italic label-text">Follow this link to get an api key from Sendinblue: <a href="https://account.sendinblue.com/advanced/api">Get Sendinblue Api Key V3</a></div>
+                        </div>
+
+                    </div>
+
+                    
+
+                </div>
+
+
+
+
+
+            </div>
+            <!-- Mailer option Sendinblue Settings Close Here--> 
+            
+            
+            
             <div class="smtp-settings-field" id="default-settings-id" style="display: none" >
 
                 <div class="form-group row mailer-section-label">

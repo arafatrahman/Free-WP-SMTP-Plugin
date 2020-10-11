@@ -39,39 +39,6 @@ class KauSmtpMail {
             $error_message = "Successfully sent!";
         }
 
-        /*
-
-          $smtpValue = Setting::getSMTP();
-
-          try {
-
-          $mail->isSMTP();
-          $mail->Host = kauget('kau-smtp-host',$smtpValue);
-          $mail->SMTPAuth = kauget('kau-smtp-authorization-smtp',$smtpValue);
-          $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-          $mail->Port = kauget('kau-port-smtp',$smtpValue);
-
-          $mail->Username = kauget('kau-username-smtp',$smtpValue);
-          $mail->Password = kauget('kau-username-smtp',$smtpValue);
-          // Sender and recipient settings
-
-
-          $mail->setFrom(kauget('kau-username-smtp',$smtpValue));
-          $mail->addAddress(kauget('recipient-email',$smtpValue));
-          $mail->addReplyTo(kauget('kau-username-smtp',$smtpValue));
-          // Setting the email content
-          $mail->IsHTML(true);
-          $mail->Subject = kauget('email-subject',$smtpValue);
-          $mail->Body = kauget('email-body',$smtpValue);
-
-
-          $mail->send();
-
-          } catch (Exception $e) {
-          echo "Error in sending email. Mailer Error: {$mail->ErrorInfo}";
-          }
-         * 
-         */
     }
 
 }

@@ -28,9 +28,6 @@ class smtp_admin extends Setting{
             $todo = kauget('kau_form_submit',$_POST);
                     
             if($todo == "kau_misc_settings"){
-                
-                
-                
                 self::saveMISC($_POST);
             }
             else if($todo == "kau_smtp_settings"){
@@ -56,6 +53,15 @@ class smtp_admin extends Setting{
                   
                     $msAccessToken = kauget('kau-microsoft-access-token',$smtpValue);                   
                     KauOutlookAuth::sendOutlookMail($msAccessToken, $to, $subject, $msg);
+                }
+                
+                if(kauget('mailer-types', $smtpValue) == "5"){
+                    
+                    KauSendinBlue::sendmail();
+                    //$sendinblueApiKey = kauget('kau-sendinblue-api-key',$smtpValue);
+                    
+                   // KauSendinBlue::sendInMailEmailSending($sendinblueApiKey, $to, $subject, $msg, $from, $fname);
+                   
                 }
                 
                 elseif (kauget('mailer-types', $smtpValue) == "4") {

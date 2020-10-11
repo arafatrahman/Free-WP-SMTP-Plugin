@@ -61,14 +61,14 @@ class Google_Service_CloudIdentity_Resource_DevicesDeviceUsersClientStates exten
    * devices/{device}/deviceUsers/{deviceUser}
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string filter Optional. Additional restrictions when fetching list
-   * of client states.
    * @opt_param string customer Required. [Resource
    * name](https://cloud.google.com/apis/design/resource_names) of the customer.
    * If you're using this API for your own organization, use
    * `customers/my_customer` If you're using this API to manage another
    * organization, use `customers/{customer_id}`, where customer_id is the
    * customer to whom the device belongs.
+   * @opt_param string filter Optional. Additional restrictions when fetching list
+   * of client states.
    * @opt_param string pageToken Optional. A page token, received from a previous
    * `ListClientStates` call. Provide this to retrieve the subsequent page. When
    * paginating, all other parameters provided to `ListClientStates` must match
@@ -105,15 +105,15 @@ class Google_Service_CloudIdentity_Resource_DevicesDeviceUsersClientStates exten
    * @param Google_Service_CloudIdentity_GoogleAppsCloudidentityDevicesV1ClientState $postBody
    * @param array $optParams Optional parameters.
    *
+   * @opt_param string updateMask Optional. Comma-separated list of fully
+   * qualified names of fields to be updated. If not specified, all updatable
+   * fields in ClientState are updated.
    * @opt_param string customer Required. [Resource
    * name](https://cloud.google.com/apis/design/resource_names) of the customer.
    * If you're using this API for your own organization, use
    * `customers/my_customer` If you're using this API to manage another
    * organization, use `customers/{customer_id}`, where customer_id is the
    * customer to whom the device belongs.
-   * @opt_param string updateMask Optional. Comma-separated list of fully
-   * qualified names of fields to be updated. If not specified, all updatable
-   * fields in ClientState are updated.
    * @return Google_Service_CloudIdentity_Operation
    */
   public function patch($name, Google_Service_CloudIdentity_GoogleAppsCloudidentityDevicesV1ClientState $postBody, $optParams = array())

@@ -19,7 +19,8 @@ jQuery(document).ready(function ($) {
         $("#microsoft-settings-label").hide();
         $("#default-settings-label").hide();
         $("#default-settings-id").hide();
-
+        $("#sendinblue-settings-id").hide();
+        $("#sendinblue-settings-label").hide();
     }
     ;
 
@@ -33,7 +34,8 @@ jQuery(document).ready(function ($) {
         $("#microsoft-settings-label").hide();
         $("#default-settings-label").hide();
         $("#default-settings-id").hide();
-
+        $("#sendinblue-settings-id").hide();
+        $("#sendinblue-settings-label").hide();
 
     }
     ;
@@ -48,11 +50,27 @@ jQuery(document).ready(function ($) {
         $("#smtp-settings-label").hide();
         $("#default-settings-label").hide();
         $("#default-settings-id").hide();
-
+        $("#sendinblue-settings-id").hide();
+        $("#sendinblue-settings-label").hide();
 
     }
     ;
 
+    if ($('input#mailer-type-sendinblue').is(':checked')) {
+        $("#sendinblue-settings-id").show();
+        $("#sendinblue-settings-label").show();
+        $("#microsoft-settings-id").hide();
+        $("#microsoft-settings-label").hide();
+        $("#smtp-settings-id").hide();
+        $("#gmail-settings-id").hide();
+        $("#gmail-settings-label").hide();
+        $("#smtp-settings-label").hide();
+        $("#default-settings-label").hide();
+        $("#default-settings-id").hide();
+
+
+    }
+    ;
 
 
     if ($('input#mailer-type-default').is(':checked')) {
@@ -64,7 +82,8 @@ jQuery(document).ready(function ($) {
         $("#smtp-settings-label").hide();
         $("#microsoft-settings-id").hide();
         $("#microsoft-settings-label").hide();
-
+        $("#sendinblue-settings-id").hide();
+        $("#sendinblue-settings-label").hide();
 
     }
     ;
@@ -80,7 +99,8 @@ jQuery(document).ready(function ($) {
         $("#microsoft-settings-label").hide();
         $("#default-settings-label").hide();
         $("#default-settings-id").hide();
-
+        $("#sendinblue-settings-id").hide();
+        $("#sendinblue-settings-label").hide();
 
 
     });
@@ -94,7 +114,8 @@ jQuery(document).ready(function ($) {
         $("#microsoft-settings-label").hide();
         $("#default-settings-label").hide();
         $("#default-settings-id").hide();
-
+        $("#sendinblue-settings-id").hide();
+        $("#sendinblue-settings-label").hide();
 
     });
 
@@ -108,9 +129,27 @@ jQuery(document).ready(function ($) {
         $("#smtp-settings-label").hide();
         $("#default-settings-label").hide();
         $("#default-settings-id").hide();
-
+        $("#sendinblue-settings-id").hide();
+        $("#sendinblue-settings-label").hide();
 
     });
+    
+        $('#mailer-type-sendinblue').click(function () {
+         
+        $("#sendinblue-settings-id").show();
+        $("#sendinblue-settings-label").show();
+        $("#default-settings-label").hide();
+        $("#default-settings-id").hide();
+        $("#smtp-settings-id").hide();
+        $("#gmail-settings-id").hide();
+        $("#gmail-settings-label").hide();
+        $("#smtp-settings-label").hide();
+        $("#microsoft-settings-id").hide();
+        $("#microsoft-settings-label").hide();
+        
+
+    });
+
 
     $('#mailer-type-default').click(function () {
         $("#default-settings-label").show();
@@ -121,7 +160,8 @@ jQuery(document).ready(function ($) {
         $("#smtp-settings-label").hide();
         $("#microsoft-settings-id").hide();
         $("#microsoft-settings-label").hide();
-
+        $("#sendinblue-settings-id").hide();
+        $("#sendinblue-settings-label").hide();
 
     });
 
@@ -230,6 +270,12 @@ jQuery(document).ready(function ($) {
         $("input[name='gmail-client-secret']").attr("required","required");
         }
        
+       if($('#mailer-type-sendinblue').is(':checked')) { 
+        $("input[name='kau-sendinblue-api-key']").attr("required","required");
+        
+       
+       }
+        
        if($('#mailer-type-microsoft').is(':checked')) { 
         $("input[name='ms-client-id']").attr("required","required");
         $("input[name='ms-client-secret']").attr("required","required");
