@@ -93,32 +93,6 @@ class KauOutlookAuth {
         
     }
 
-    public static function runCurl($url, $post = null, $headers = null) {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, $post == null ? 0 : 1);
-        if ($post != null) {
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-        }
-        curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        if ($headers != null) {
-            curl_setopt($ch, CURLOPT_HEADER, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        }
-        $response = curl_exec($ch);
-        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-        if ($http_code >= 400) {
-            echo "Error executing request to Office365 api with error code=$http_code<br/><br/>\n\n";
-            echo "<pre>";
-            print_r($response);
-            echo "</pre>";
-            die();
-        }
-        return $response;
-    }
 
     public static function isKauMicrosoftClientsSaved() {
         $smtpValue = Setting::getSMTP();
