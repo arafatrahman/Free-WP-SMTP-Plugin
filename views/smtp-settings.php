@@ -12,8 +12,7 @@ if (kauget('kau_form_submit', $_POST) == "") {
     <?php
     $smtpValue = self::getSMTP();
 
-
-
+    
     $authenticationButton = '';
 
     $kauGmailClientID = kauget('gmail-client-id', $smtpValue);
@@ -42,6 +41,12 @@ if (kauget('kau_form_submit', $_POST) == "") {
         $gmailAuthSuccess = 'true';
         $authenticationButton = '';
     }
+    
+    if (isset($_GET['code'])) {
+        $gmailAuthSuccess = 'true';
+        $authenticationButton = '';
+    }
+    
     $microsoftOutlookAuthUrl = '';
     $microsoftAuthSuccess = 'false';
     if (KauOutlookAuth::isKauMicrosoftClientsSaved()) {
