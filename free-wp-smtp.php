@@ -36,7 +36,7 @@ if (isset($_SERVER['QUERY_STRING']) == 'page=smtp_settings') {
 }
 
 function SMTP_plugin_load() {
-    include_once dirname(__FILE__) . "/classes/mailgun.php";
+
     include_once dirname(__FILE__) . "/classes/sendin-blue.php";
     include_once dirname(__FILE__) . "/classes/outlook-auth.php";
     include_once dirname(__FILE__) . "/classes/kau-auth-extend.php";

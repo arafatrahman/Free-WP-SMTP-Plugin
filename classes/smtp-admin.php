@@ -28,7 +28,6 @@ class smtp_admin extends Setting{
             $todo = kauget('kau_form_submit',$_POST);
                     
             if($todo == "kau_misc_settings"){
-                KauMailGun::sendMailGunEmail();
                 self::saveMISC($_POST);
             }
             else if($todo == "kau_smtp_settings"){
