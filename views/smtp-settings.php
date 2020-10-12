@@ -65,7 +65,7 @@ if (kauget('kau_form_submit', $_POST) == "") {
 
 
 
-    <form role="form" name="smtp_settings_form" id="smtp-settings-form" method="post" action="" enctype="multipart/form-data">
+    <form role="form" name="smtp_settings_form" id="smtp-settings-form" method="post" action="<?php echo $_SERVER['PHP_SELF'] . '?page=smtp_settings'; ?>" enctype="multipart/form-data">
 
         <div class=" well smtp-setting-one-content ">
 
