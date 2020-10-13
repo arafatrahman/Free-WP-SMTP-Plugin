@@ -179,6 +179,11 @@ input:checked + .slider:before {
   border-top: 1px solid #007BFF;  
 }
 
+.zohomail-section-hr{
+   margin-top:  -9px;
+  border-top: 1px solid #6C757D;  
+}
+
 .microsoft-section-hr{
   margin-top:  -9px;
   border-top: 1px solid #17A2B8;  

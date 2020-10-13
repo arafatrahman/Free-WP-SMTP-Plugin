@@ -25,7 +25,7 @@ if (kauget('kau_form_submit', $_POST) == "kau_testing_settings") {
 
     
     $emailSendButton = '';
-    if (KauAuthExtends::isKauGmailAuthRequired() && empty(kauget('mailer-types', $smtpValue) =="3") && empty(kauget('mailer-types', $smtpValue) =="4") && empty(kauget('mailer-types', $smtpValue) =="5") ) {
+    if (KauAuthExtends::isKauGmailAuthRequired() && empty(kauget('mailer-types', $smtpValue) =="3") && empty(kauget('mailer-types', $smtpValue) =="4") && empty(kauget('mailer-types', $smtpValue) =="5") && empty(kauget('mailer-types', $smtpValue) =="6") ) {
         $emailSendButton = 'disabled';
     }
     ?>

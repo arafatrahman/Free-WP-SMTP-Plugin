@@ -37,8 +37,8 @@ class smtp_admin extends Setting{
             else if($todo == "kau_testing_settings"){
                  self::saveEmailTesting($_POST);
                  $smtpValue = self::getSMTP();
-                 $from = kauget('from-email',$smtpValue);
-                 $fname = kauget('from-name',$smtpValue);
+                 $from = kauget('kau-from-email',$smtpValue);
+                 $fname = kauget('kau-from-name',$smtpValue);
                  $subject = kauget('email-subject',$_POST);
                  $to = kauget('recipient-email',$_POST);
                  $msg = kauget('email-body',$_POST);
@@ -61,6 +61,15 @@ class smtp_admin extends Setting{
                     //$sendinblueApiKey = kauget('kau-sendinblue-api-key',$smtpValue);
                     
                    // KauSendinBlue::sendInMailEmailSending($sendinblueApiKey, $to, $subject, $msg, $from, $fname);
+                   
+                }
+                
+                if(kauget('mailer-types', $smtpValue) == "6"){
+                    
+                    $userID = kauget('kau-zohomail-user-id',$smtpValue);
+                    $zohoAccessToken = kauget('kau-zohoMail-access-token',$smtpValue);
+                    KauZohoMail::kauZohoMailSend($zohoAccessToken, $fname, $from, $to, $subject, $msg,$userID);
+                    
                    
                 }
                 

@@ -14,6 +14,19 @@ define("SMTP_PATH", dirname(__FILE__));
 
 function kau_admin_init() {
 
+
+    if (isset($_GET['code']) && isset($_GET['accounts-server'])) {
+       $smtpValue = Setting::getSMTP();
+       $zohoMailToken = KauZohoMail::getOZohoMailToken($_GET['code']);
+       $smtpValue['kau-zohoMail-access-token'] = $zohoMailToken->access_token;
+       $smtpValue['kau-zohoMail-authorization-code'] = $_GET['code'];
+       $zohoUserId =  KauZohoMail::saveZohoMailUserID($zohoMailToken->access_token,$smtpValue); 
+       $smtpValue['kau-zohomail-user-id'] = $zohoUserId;
+       Setting ::saveSMTP($smtpValue);
+       wp_safe_redirect(admin_url('admin.php?page=smtp_settings'));
+       exit();
+    }
+
     if (isset($_GET['code']) && isset($_GET['state'])) {
         
         $smtpValue = Setting::getSMTP();
@@ -36,7 +49,7 @@ if (isset($_SERVER['QUERY_STRING']) == 'page=smtp_settings') {
 }
 
 function SMTP_plugin_load() {
-
+    include_once dirname(__FILE__) . "/classes/zoho-mail.php";
     include_once dirname(__FILE__) . "/classes/sendin-blue.php";
     include_once dirname(__FILE__) . "/classes/outlook-auth.php";
     include_once dirname(__FILE__) . "/classes/kau-auth-extend.php";
