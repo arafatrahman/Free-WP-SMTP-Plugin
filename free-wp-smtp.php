@@ -17,10 +17,14 @@ function kau_admin_init() {
 
     if (isset($_GET['code']) && isset($_GET['accounts-server'])) {
        $smtpValue = Setting::getSMTP();
+      // $domainExtensions = kauget('zohomail-domain-extensions', $smtpValue);
+      
        $zohoMailToken = KauZohoMail::getOZohoMailToken($_GET['code']);
        $smtpValue['kau-zohoMail-access-token'] = $zohoMailToken->access_token;
        $smtpValue['kau-zohoMail-authorization-code'] = $_GET['code'];
-       $zohoUserId =  KauZohoMail::saveZohoMailUserID($zohoMailToken->access_token,$smtpValue); 
+       
+       
+       $zohoUserId =  KauZohoMail::saveZohoMailUserID($zohoMailToken->access_token);
        $smtpValue['kau-zohomail-user-id'] = $zohoUserId;
        Setting ::saveSMTP($smtpValue);
        wp_safe_redirect(admin_url('admin.php?page=smtp_settings'));

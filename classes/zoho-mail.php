@@ -4,7 +4,7 @@ class KauZohoMail {
 
     public static function kauZohoMailAuthUrl() {
         $smtpValue = Setting::getSMTP();
-        $url = 'https://accounts.zoho.com/oauth/v2/auth';
+        $url = "https://accounts.zoho".kauget('zohomail-domain-extensions', $smtpValue)."/oauth/v2/auth";
         $params = array();
         $params['client_id'] = kauget('kau-zohomail-client-id', $smtpValue);
         $params['response_type'] = 'code';
@@ -18,6 +18,7 @@ class KauZohoMail {
 
     public static function getOZohoMailToken($code) {
         $smtpValue = Setting::getSMTP();
+       
         $state = wp_create_nonce('redirect_url');
         $token_request_data = array(
             "grant_type" => "authorization_code",
@@ -27,13 +28,13 @@ class KauZohoMail {
             "client_secret" => kauget('kau-zohomail-client-secret', $smtpValue)
         );
         $body = http_build_query($token_request_data);
-        $response = kau_Run_Curl('https://accounts.zoho.com/oauth/v2/token', $body);
+        $response = kau_Run_Curl("https://accounts.zoho".kauget('zohomail-domain-extensions', $smtpValue)."/oauth/v2/token", $body);
         $response = json_decode($response);
         return $response;
     }
 
-    public static function kauZohoMailSend($accessToken,$fromName,$fromEmail, $to, $sub, $msg,$msgType,$userID) {
-        
+    public static function kauZohoMailSend($accessToken,$fromName,$fromEmail, $to, $sub, $msg,$msgType,$userID,$domainExtensions) {
+       
          if (!is_array($to)) {
             $to = explode(',', $to);
         }
@@ -65,7 +66,7 @@ class KauZohoMail {
         );
         
        
-        $mailSendUrl= 'https://mail.zoho.com/api/accounts/'.$userID.'/messages';
+        $mailSendUrl= "https://mail.zoho".$domainExtensions."/api/accounts/".$userID.'/messages';
         $sendingResponse = wp_remote_post($mailSendUrl, $KauArgs);
         $http_code = wp_remote_retrieve_response_code($sendingResponse);
         if ($http_code == '200') {
@@ -76,9 +77,10 @@ class KauZohoMail {
         
     }
     
-    public static function saveZohoMailUserID($accessToken,$smtpValue) {
-        
-       $urlZohoAccounts = 'https://mail.zoho.com/api/accounts';
+    public static function saveZohoMailUserID($accessToken) {
+       $smtpValue = Setting::getSMTP();
+       
+       $urlZohoAccounts = "https://mail.zoho".kauget('zohomail-domain-extensions', $smtpValue)."/api/accounts";
        $headr = array();
        $accesstoken = get_option('zmail_access_token');
        $headr[] = 'Authorization: Zoho-oauthtoken '.$accessToken;

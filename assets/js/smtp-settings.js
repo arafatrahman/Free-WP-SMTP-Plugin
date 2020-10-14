@@ -331,6 +331,12 @@ jQuery(document).ready(function ($) {
         
        
        }
+       
+       if($('#mailer-type-zohomail').is(':checked')) { 
+        $("input[name='kau-zohomail-client-id']").attr("required","required");
+        $("input[name='kau-zohomail-client-secret']").attr("required","required");
+       
+       }
         
        if($('#mailer-type-microsoft').is(':checked')) { 
         $("input[name='ms-client-id']").attr("required","required");

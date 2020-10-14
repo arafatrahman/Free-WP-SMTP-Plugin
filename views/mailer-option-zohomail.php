@@ -36,6 +36,20 @@ if (KauZohoMail::isKauZohoClientsSaved() && KauZohoMail::isKauZohomailAuthRequir
 
     <div class="settings-content">
 
+
+        <div class="form-group row ">
+            <label for="zohomail-domain-extensions" class="col-sm-3 col-form-label font-weight-bold">Domain Extensions<span class="kau-required">*</span></label>
+            <div class="col-sm-5">
+                <select class="form-control" id="zohomail-domain-extensions"  name="zohomail-domain-extensions" id="cars">
+                    <option <?php if (kauget('zohomail-domain-extensions', $smtpValue) == ".com") echo 'selected="selected"'; ?> value=".com" >.com</option>
+                    <option <?php if (kauget('zohomail-domain-extensions', $smtpValue) == ".eu") echo 'selected="selected"'; ?> value=".eu">.eu</option>
+                    <option <?php if (kauget('zohomail-domain-extensions', $smtpValue) == ".in") echo 'selected="selected"'; ?> value=".in">.in</option>
+                    <option <?php if (kauget('zohomail-domain-extensions', $smtpValue) == ".com.cn") echo 'selected="selected"'; ?> value=".com.cn">.com.cn</option>
+                    <option <?php if (kauget('zohomail-domain-extensions', $smtpValue) == ".com.eu") echo 'selected="selected"'; ?> value=".com.eu">.com.eu</option>
+                </select>
+            </div>
+        </div>
+
         <div class="form-group row ">
 
             <label for="zohomail-client-id" class="col-sm-3 col-form-label font-weight-bold">Client Id<span class="kau-required">*</span></label>
@@ -74,9 +88,9 @@ if (KauZohoMail::isKauZohoClientsSaved() && KauZohoMail::isKauZohomailAuthRequir
             <div class="col-sm-6">
                 <label class="switch ">
                     <input type="checkbox" name="kau-zoho-html-allow" id="kau-zoho-html-allow" value="true"   <?php
-$zohoHtmlAllow = (kauget('kau-zoho-html-allow', $smtpValue)) ? 'checked' : false;
-echo $zohoHtmlAllow;
-?>  >
+                    $zohoHtmlAllow = (kauget('kau-zoho-html-allow', $smtpValue)) ? 'checked' : false;
+                    echo $zohoHtmlAllow;
+                    ?>  >
                     <span class="slider round "></span>
 
             </div>
@@ -93,13 +107,13 @@ echo $zohoHtmlAllow;
                     <span class="slider round"></span>
 
                 </label>  
-                
+
             </div>
 
         </div>
 
 
-<?php echo $zohoAuthButton ?>
+        <?php echo $zohoAuthButton ?>
 
 
 
