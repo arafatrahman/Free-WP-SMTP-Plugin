@@ -67,8 +67,9 @@ class smtp_admin extends Setting{
                 if(kauget('mailer-types', $smtpValue) == "6"){
                     
                     $userID = kauget('kau-zohomail-user-id',$smtpValue);
+                    $msgType = kauget('kau-zoho-html-allow',$smtpValue);
                     $zohoAccessToken = kauget('kau-zohoMail-access-token',$smtpValue);
-                    KauZohoMail::kauZohoMailSend($zohoAccessToken, $fname, $from, $to, $subject, $msg,$userID);
+                    KauZohoMail::kauZohoMailSend($zohoAccessToken, $fname, $from, $to, $subject, $msg,$msgType,$userID);
                     
                    
                 }

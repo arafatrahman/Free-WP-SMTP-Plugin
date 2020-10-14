@@ -71,7 +71,6 @@ class KauAuthExtends {
         $service = new Google_Service_Gmail(KauGmailAuth2::getGmailClient());
         $message->setRaw($mime);
         $message = $service->users_messages->send('me', $message);
-
         return $message;
         
     }

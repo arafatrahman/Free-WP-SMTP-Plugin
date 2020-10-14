@@ -3,7 +3,7 @@
 
                 <div class="form-group row mailer-section-label">
                     <div class="col-md-12 mailerlabel">
-                        <div class="p-2 mb-2 bg-primary text-white col-md-2 "><img src="https://riyadly.com/wp-content/uploads/2020/09/microsoft-icon.png" class="gmail-icon"  width="20" height="20"><b>SendinBlue</b></div>
+                        <div class="p-2 mb-2 bg-primary text-white col-md-2 "><img src="<?php echo KAU_ASSETS_DIR_URI . "/images/sendinblue.png"; ?>" class="gmail-icon"  width="20" height="20"><b>SendinBlue</b></div>
                         <hr class="sendinblue-section-hr">
                     </div>
                 </div>

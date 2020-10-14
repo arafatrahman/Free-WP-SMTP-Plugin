@@ -7,7 +7,7 @@
 
                 <div class="form-group row mailer-section-label">
                     <div class="col-md-12 mailerlabel">
-                        <div class="p-2 mb-2 bg-success text-white col-md-2 "></span><img src="https://riyadly.com/wp-content/uploads/2020/09/smtpp.png" class="gmail-icon"  width="20" height="20"><b>SMTP.com</b></div>
+                        <div class="p-2 mb-2 bg-success text-white col-md-2 "></span><img src="<?php echo KAU_ASSETS_DIR_URI . "/images/smtp.png"; ?>" class="gmail-icon"  width="20" height="20"><b>SMTP.com</b></div>
                         <hr class="smtp-section-hr">
                     </div>
                 </div>

@@ -32,7 +32,7 @@ class KauZohoMail {
         return $response;
     }
 
-    public static function kauZohoMailSend($accessToken,$fromName,$fromEmail, $to, $sub, $msg,$userID) {
+    public static function kauZohoMailSend($accessToken,$fromName,$fromEmail, $to, $sub, $msg,$msgType,$userID) {
         
          if (!is_array($to)) {
             $to = explode(',', $to);
@@ -43,7 +43,15 @@ class KauZohoMail {
         $zohoData['content'] =  $msg;
         $toAddresses = implode(',', $to);
         $zohoData['toAddress'] = $toAddresses;
+        
+        if($msgType == "true"){
+        $zohoData['mailFormat'] = 'html';  
+        }
+        else{
         $zohoData['mailFormat'] = 'plaintext';
+        }
+        
+        
         $kauZohoHeaders = array(
             'Authorization' => 'Zoho-oauthtoken '.$accessToken,
             'Content-Type' => 'application/json'
@@ -61,6 +69,7 @@ class KauZohoMail {
         $sendingResponse = wp_remote_post($mailSendUrl, $KauArgs);
         $http_code = wp_remote_retrieve_response_code($sendingResponse);
         if ($http_code == '200') {
+            
             return true;
         }
         return false;

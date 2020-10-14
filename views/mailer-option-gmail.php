@@ -3,7 +3,7 @@
 
                 <div class="form-group row mailer-section-label">
                     <div class="col-md-12 mailerlabel">
-                        <div class="p-2 mb-2 gmail-back-color text-white col-md-3 "><b><img src="https://riyadly.com/wp-content/uploads/2020/09/gmail-icon.png" class="gmail-icon"  width="20" height="20">GMAIL Settings</b></div>
+                        <div class="p-2 mb-2 gmail-back-color text-white col-md-3 "><b><img src="<?php echo KAU_ASSETS_DIR_URI . "/images/gmail-icon.png"; ?>" class="gmail-icon"  width="20" height="20">GMAIL Settings</b></div>
                         <hr class="gmail-section-hr">
                     </div>
                 </div>
