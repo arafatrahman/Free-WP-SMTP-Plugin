@@ -6,11 +6,12 @@ class KauOutlookAuth {
         $smtpValue = Setting::getSMTP();
         $url = 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize';
         $params = array();
+        $state = wp_create_nonce( 'redirect_url');
         $params['client_id'] = kauget('ms-client-id', $smtpValue);
         $params['response_type'] = 'code';
         $params['redirect_uri'] = esc_url_raw(admin_url("admin.php"));
         $params['response_mode'] = 'query';
-        $params['state'] = '4321';
+        $params['state'] = $state;
         $params['scope'] = 'offline_access https://outlook.office.com/mail.send';
 
         return $url . '?' . http_build_query($params);
@@ -22,7 +23,7 @@ class KauOutlookAuth {
             "grant_type" => "authorization_code",
             "code" => $code,
             "redirect_uri" => esc_url_raw(admin_url("admin.php")),
-            "scope" => 'https://outlook.office.com/mail.send',
+            "scope" => 'offline_access https://outlook.office.com/mail.send',
             "client_id" => kauget('ms-client-id', $smtpValue),
             "client_secret" => kauget('ms-client-secret', $smtpValue)
         );
@@ -36,9 +37,9 @@ class KauOutlookAuth {
         $smtpValue = Setting::getSMTP();
         $token_request_data = array(
             
-            "refresh_toke" => $refreshToken,
+            "refresh_token" => $refreshToken,
             "redirect_uri" => esc_url_raw(admin_url("admin.php")),
-            "scope" => 'https://outlook.office.com/mail.send',
+            "scope" => 'offline_access https://outlook.office.com/mail.send',
             "grant_type" => "refresh_token",
             "client_id" => kauget('ms-client-id', $smtpValue),
             "client_secret" => kauget('ms-client-secret', $smtpValue)
@@ -51,7 +52,15 @@ class KauOutlookAuth {
     
     
 
-    public static function sendOutlookMail($accessToken, $reciepent, $sub, $msg) {
+    public static function sendOutlookMail($accessToken,$refreshToken,$reciepent, $sub, $msg) {
+        
+        
+        if(empty(get_option('kau_outlook_integ_timestamp')) || time() - get_option('kau_outlook_integ_timestamp') > 3000) {
+                    update_option('kau_outlook_integ_timestamp',time(), false);
+                    $smtpValue = Setting::getSMTP();
+                    $smtpValue['kau-microsoft-access-token'] = self::getNewAccessToken($refreshToken) ;
+                    Setting::saveSMTP($smtpValue);  
+            }
 
         $to = array();
         $toFromForm = explode(";", $reciepent);

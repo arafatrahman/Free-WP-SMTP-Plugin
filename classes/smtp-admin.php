@@ -51,8 +51,9 @@ class smtp_admin extends Setting{
                 if(kauget('mailer-types', $smtpValue) == "3"){
                     
                   
-                    $msAccessToken = kauget('kau-microsoft-access-token',$smtpValue);                   
-                    KauOutlookAuth::sendOutlookMail($msAccessToken, $to, $subject, $msg);
+                    $msAccessToken = kauget('kau-microsoft-access-token',$smtpValue); 
+                    $msRefreshToken = kauget('kau-microsoft-refresh-token',$smtpValue);
+                    KauOutlookAuth::sendOutlookMail($msAccessToken,$msRefreshToken,$to, $subject, $msg);
                 }
                 
                 if(kauget('mailer-types', $smtpValue) == "5"){

@@ -74,7 +74,7 @@ if (KauZohoMail::isKauZohoClientsSaved() && KauZohoMail::isKauZohomailAuthRequir
 
             <label for="zohomail-redirect-uri" class="col-sm-3 col-form-label font-weight-bold">Authorized redirect URI</label>
             <div class="col-sm-5">
-                <input type="text" class="form-control"name="zohomail-redirect-uri" id="zohomail-redirect-uri" placeholder="Authorized redirect URI Goes Here" value="<?php echo esc_url_raw(admin_url("admin.php?page=smtp_settings")); ?>" readonly >
+                <input type="text" class="form-control"name="zohomail-redirect-uri" id="zohomail-redirect-uri" placeholder="Authorized redirect URI Goes Here" value="<?php echo esc_url_raw(admin_url("admin.php")); ?>" readonly >
                 <div class="gmailredirectURI-label font-italic label-text">Please copy this URL into the "Authorized redirect URIs" field of your Zoho Mail application.</div>
             </div>
 

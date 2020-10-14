@@ -36,7 +36,7 @@ function kau_admin_init() {
         $smtpValue = Setting::getSMTP();
         $microsoftToken = KauOutlookAuth::getOutlookToken($_GET['code']);
         $smtpValue['kau-microsoft-access-token'] = $microsoftToken->access_token;
-        $smtpValue['kau-microsoft-refresh_token'] = $microsoftToken->refresh_token;
+        $smtpValue['kau-microsoft-refresh-token'] = $microsoftToken->refresh_token;
         $smtpValue['kau-microsoft-authorization-code'] = $_GET['code'];
         
         Setting ::saveSMTP($smtpValue);
