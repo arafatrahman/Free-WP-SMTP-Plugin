@@ -6,11 +6,13 @@ class KauZohoMail {
         $smtpValue = Setting::getSMTP();
         $url = "https://accounts.zoho".kauget('zohomail-domain-extensions', $smtpValue)."/oauth/v2/auth";
         $params = array();
+        $state = wp_create_nonce( 'redirect_url');
         $params['client_id'] = kauget('kau-zohomail-client-id', $smtpValue);
         $params['response_type'] = 'code';
+        $params['state'] = $state;
+        $params['prompt'] = 'consent';
         $params['access_type'] = 'offline';
         $params['redirect_uri'] = esc_url_raw(admin_url("admin.php"));
-        $params['state'] = '54321';
         $params['scope'] = 'VirtualOffice.messages.CREATE,VirtualOffice.accounts.READ';
 
         return $url . '?' . http_build_query($params);
@@ -25,7 +27,9 @@ class KauZohoMail {
             "code" => $code,
             "redirect_uri" => esc_url_raw(admin_url("admin.php")),
             "client_id" => kauget('kau-zohomail-client-id', $smtpValue),
-            "client_secret" => kauget('kau-zohomail-client-secret', $smtpValue)
+            "client_secret" => kauget('kau-zohomail-client-secret', $smtpValue),
+            "scope" => "VirtualOffice.messages.CREATE,VirtualOffice.accounts.READ",
+            "state" => $state,
         );
         $body = http_build_query($token_request_data);
         $response = kau_Run_Curl("https://accounts.zoho".kauget('zohomail-domain-extensions', $smtpValue)."/oauth/v2/token", $body);
@@ -33,9 +37,19 @@ class KauZohoMail {
         return $response;
     }
 
-    public static function kauZohoMailSend($accessToken,$fromName,$fromEmail, $to, $sub, $msg,$msgType,$userID,$domainExtensions) {
+    public static function kauZohoMailSend($accessToken,$fromName,$fromEmail, $to, $sub, $msg,$msgType,$userID,$domainExtensions,$clientId,$clientSecret) {
        
-         if (!is_array($to)) {
+        if(empty(get_option('kau_zohomail_integ_timestamp')) || time() - get_option('kau_zohomail_integ_timestamp') > 3000) {
+                    update_option('kau_zohomail_integ_timestamp',time(), false);
+                    $urlForRefreshToken ='https://accounts.zoho'.$domainExtensions.'/oauth/v2/token?refresh_token='.base64_decode($accessToken).'&grant_type=refresh_token&client_id='.$clientId.'&client_secret='.$clientSecret.'&redirect_uri='.admin_url().'admin.php&scope=VirtualOffice.messages.CREATE,VirtualOffice.accounts.READ';
+                    $zohoAccessToken = wp_remote_retrieve_body(wp_remote_post($urlForRefreshToken));
+                    $response = json_decode($zohoAccessToken);
+                    $smtpValue = Setting::getSMTP();
+                    $smtpValue['kau-zohoMail-access-token'] = $response->access_token ;
+                    Setting::saveSMTP($smtpValue);  
+                }
+        
+        if (!is_array($to)) {
             $to = explode(',', $to);
         }
         $zohoData = array();

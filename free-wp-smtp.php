@@ -21,9 +21,9 @@ function kau_admin_init() {
       
        $zohoMailToken = KauZohoMail::getOZohoMailToken($_GET['code']);
        $smtpValue['kau-zohoMail-access-token'] = $zohoMailToken->access_token;
+       $smtpValue['kau-zohoMail-refresh-token'] = $zohoMailToken->refresh_token;
+       $smtpValue['kau-zohoMail-expires-in'] = $zohoMailToken->expires_in;
        $smtpValue['kau-zohoMail-authorization-code'] = $_GET['code'];
-       
-       
        $zohoUserId =  KauZohoMail::saveZohoMailUserID($zohoMailToken->access_token);
        $smtpValue['kau-zohomail-user-id'] = $zohoUserId;
        Setting ::saveSMTP($smtpValue);

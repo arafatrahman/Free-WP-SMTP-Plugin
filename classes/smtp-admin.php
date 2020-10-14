@@ -69,8 +69,10 @@ class smtp_admin extends Setting{
                     $userID = kauget('kau-zohomail-user-id',$smtpValue);
                     $domainExtensions = kauget('zohomail-domain-extensions', $smtpValue);
                     $msgType = kauget('kau-zoho-html-allow',$smtpValue);
+                    $clientId = kauget('kau-zohomail-client-id', $smtpValue);
+                    $clientSecret = kauget('kau-zohomail-client-secret', $smtpValue);
                     $zohoAccessToken = kauget('kau-zohoMail-access-token',$smtpValue);
-                    KauZohoMail::kauZohoMailSend($zohoAccessToken, $fname, $from, $to, $subject, $msg,$msgType,$userID,$domainExtensions);
+                    KauZohoMail::kauZohoMailSend($zohoAccessToken, $fname, $from, $to, $subject, $msg,$msgType,$userID,$domainExtensions,$clientId,$clientSecret);
                     
                    
                 }
