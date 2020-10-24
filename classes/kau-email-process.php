@@ -199,9 +199,19 @@ class kauEmailProcess {
 
     public static function mailSendingByMicrosoft($reciepent, $subject, $message, $headers, $attachments) {
 
+        
+        /*
+        
+        $content = base64_encode(file_get_contents($attachments['0']));
+        $attachFile = array(
+                "@odata.type" => "#Microsoft.OutlookServices.FileAttachment",
+                "Name" => $attachments['0'],
+                "ContentBytes" => $content
+            );
+        */
+        
+        
         $to = array();
-
-
         foreach ($reciepent as $address) {
 
             $toFromForm = explode(";", $address);
@@ -224,6 +234,7 @@ class kauEmailProcess {
             "Message" => array(
                 "Subject" => $subject,
                 "ToRecipients" => $to,
+               // "Attachments" => $attachFile,
                 "Body" => array(
                     "ContentType" => "HTML",
                     "Content" => utf8_encode($message)
