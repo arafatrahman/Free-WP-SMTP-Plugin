@@ -10,49 +10,48 @@
  * License: GPL
  */
 define("SMTP_PATH", dirname(__FILE__));
- define('KAU_ASSETS_DIR_URI', plugins_url('assets', __FILE__));
+define('KAU_ASSETS_DIR_URI', plugins_url('assets', __FILE__));
 
 function kau_admin_init() {
 
 
     if (isset($_GET['code']) && isset($_GET['accounts-server'])) {
-       $smtpValue = Setting::getSMTP();
-      // $domainExtensions = kauget('zohomail-domain-extensions', $smtpValue);
-      
-       $zohoMailToken = KauZohoMail::getOZohoMailToken($_GET['code']);
-       $smtpValue['kau-zohoMail-access-token'] = $zohoMailToken->access_token;
-       $smtpValue['kau-zohoMail-refresh-token'] = $zohoMailToken->refresh_token;
-       $smtpValue['kau-zohoMail-expires-in'] = $zohoMailToken->expires_in;
-       $smtpValue['kau-zohoMail-authorization-code'] = $_GET['code'];
-       $zohoUserId =  KauZohoMail::saveZohoMailUserID($zohoMailToken->access_token);
-       $smtpValue['kau-zohomail-user-id'] = $zohoUserId;
-       Setting ::saveSMTP($smtpValue);
-       wp_safe_redirect(admin_url('admin.php?page=smtp_settings'));
-       exit();
+        $smtpValue = Setting::getSMTP();
+        // $domainExtensions = kauget('zohomail-domain-extensions', $smtpValue);
+
+        $zohoMailToken = KauZohoMail::getOZohoMailToken($_GET['code']);
+        $smtpValue['kau-zohoMail-access-token'] = $zohoMailToken->access_token;
+        $smtpValue['kau-zohoMail-refresh-token'] = $zohoMailToken->refresh_token;
+        $smtpValue['kau-zohoMail-expires-in'] = $zohoMailToken->expires_in;
+        $smtpValue['kau-zohoMail-authorization-code'] = $_GET['code'];
+        $zohoUserId = KauZohoMail::saveZohoMailUserID($zohoMailToken->access_token);
+        $smtpValue['kau-zohomail-user-id'] = $zohoUserId;
+        Setting ::saveSMTP($smtpValue);
+        wp_safe_redirect(admin_url('admin.php?page=smtp_settings'));
+        exit();
     }
 
     if (isset($_GET['code']) && isset($_GET['state'])) {
-        
+
         $smtpValue = Setting::getSMTP();
         $microsoftToken = KauOutlookAuth::getOutlookToken($_GET['code']);
         $smtpValue['kau-microsoft-access-token'] = $microsoftToken->access_token;
         $smtpValue['kau-microsoft-refresh-token'] = $microsoftToken->refresh_token;
         $smtpValue['kau-microsoft-authorization-code'] = $_GET['code'];
-        
+
         Setting ::saveSMTP($smtpValue);
-        
+
         wp_safe_redirect(admin_url('admin.php?page=smtp_settings'));
         exit();
     }
 }
 
-
-
 if (isset($_SERVER['QUERY_STRING']) == 'page=smtp_settings') {
-   add_action('admin_init', 'kau_admin_init');
+    add_action('admin_init', 'kau_admin_init');
 }
 
 function SMTP_plugin_load() {
+    include_once dirname(__FILE__) . "/classes/kau-email-process.php";
     include_once dirname(__FILE__) . "/classes/zoho-mail.php";
     include_once dirname(__FILE__) . "/classes/sendin-blue.php";
     include_once dirname(__FILE__) . "/classes/outlook-auth.php";
@@ -91,4 +90,42 @@ function smtp_admin_styles() {
         wp_enqueue_style('bootstrap4', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
         wp_enqueue_style('bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css');
     }
+}
+
+if (!function_exists('wp_mail')) {
+
+    function wp_mail($to, $subject, $message, $headers = '', $attachments = array()) {
+
+        $atts = apply_filters('wp_mail', compact('to', 'subject', 'message', 'headers', 'attachments'));
+
+        if (isset($atts['to'])) {
+            $to = $atts['to'];
+        }
+        if (!is_array($to)) {
+            $to = explode(',', $to);
+        }
+        if (isset($atts['subject'])) {
+            $subject = $atts['subject'];
+        }
+        if (isset($atts['message'])) {
+            $message = $atts['message'];
+        }
+        if (isset($atts['headers'])) {
+            $headers = $atts['headers'];
+        }
+        if (isset($atts['attachments'])) {
+            $attachments = $atts['attachments'];
+        }
+        
+        
+        
+        if (!is_array($attachments)) {
+            $attachments = implode("\n", str_replace("\r\n", "\n", $attachments));
+        }
+
+        kauEmailProcess::kauEmailSending($to,$subject,$message,$headers,$attachments);
+
+        
+    }
+
 }
