@@ -52,8 +52,8 @@ if (isset($_SERVER['QUERY_STRING']) == 'page=smtp_settings') {
 
 function SMTP_plugin_load() {
     include_once dirname(__FILE__) . "/classes/kau-email-process.php";
+    include_once dirname(__FILE__) . "/classes/mailgun.php";
     include_once dirname(__FILE__) . "/classes/zoho-mail.php";
-    include_once dirname(__FILE__) . "/classes/sendin-blue.php";
     include_once dirname(__FILE__) . "/classes/outlook-auth.php";
     include_once dirname(__FILE__) . "/classes/kau-auth-extend.php";
     include_once dirname(__FILE__) . "/classes/gmail-auth.php";
@@ -116,16 +116,14 @@ if (!function_exists('wp_mail')) {
         if (isset($atts['attachments'])) {
             $attachments = $atts['attachments'];
         }
-        
-        
-        
+
+
+
         if (!is_array($attachments)) {
             $attachments = implode("\n", str_replace("\r\n", "\n", $attachments));
         }
-
-        kauEmailProcess::kauEmailSending($to,$subject,$message,$headers,$attachments);
-
         
+        kauEmailProcess::kauEmailSending($to,$subject,$message,$headers,$attachments);
     }
 
 }

@@ -118,12 +118,7 @@ if (kauget('kau_form_submit', $_POST) == "") {
 
                     <div class="container mailer-type">
 
-                        <label class="btn btn-default active">
-                            <input type="radio" class="redio-color" id="mailer-type-smtp" name="mailer-types" value="1" <?php
-                            $mailerTypes = (kauget('mailer-types', $smtpValue) == "1") ? 'checked' : false;
-                            echo $mailerTypes;
-                            ?> /><span class="connection-type-label font-italic font-weight-bold">SMTP</span> 
-                        </label>
+                        
                         <label class="btn btn-default active">
                             <input type="radio" class="redio-color" id="mailer-type-gmail" name="mailer-types" value="2" <?php
                             $mailerTypes = (kauget('mailer-types', $smtpValue) == "2") ? 'checked' : false;
@@ -137,10 +132,10 @@ if (kauget('kau_form_submit', $_POST) == "") {
                             ?> /> <span class="connection-type-label font-italic font-weight-bold">Microsoft</span>
                         </label>
                         <label class="btn btn-default active">
-                            <input type="radio" class="redio-color" id="mailer-type-sendinblue" name="mailer-types" value="5"  <?php
+                            <input type="radio" class="redio-color" id="mailer-type-mailgun" name="mailer-types" value="5"  <?php
                             $mailerTypes = (kauget('mailer-types', $smtpValue) == "5") ? 'checked' : false;
                             echo $mailerTypes;
-                            ?> /> <span class="connection-type-label font-italic font-weight-bold">SendinBlue</span>
+                            ?> /> <span class="connection-type-label font-italic font-weight-bold">MailGun</span>
                         </label>
                         
                         <label class="btn btn-default active">
@@ -184,9 +179,9 @@ if (kauget('kau_form_submit', $_POST) == "") {
 
                         In Outlook,click file.Then Navigate to Account Settings>Account Settings.On the Email tab,double-click on the account you want to connect to Hubspot.Below Server Information,you can find your incomeing mail server (IMAP) and outgoing mail server (SMTP) name.
                     </div>
-                    <div class="font-italic label-text" id="sendinblue-settings-label" style="display: none">
+                    <div class="font-italic label-text" id="mailgun-settings-label" style="display: none">
 
-                       Sendinblue is our recommended transactional email service. Founded in 2012, they serve 80,000+ growing companies around the world and send over 30 million emails each day
+                       mailgun is our recommended transactional email service. Founded in 2012, they serve 80,000+ growing companies around the world and send over 30 million emails each day
                     </div>
                     
                     <div class="font-italic label-text" id="zohomail-settings-label" style="display: none">
@@ -207,9 +202,8 @@ if (kauget('kau_form_submit', $_POST) == "") {
 
 
             <?php include_once "mailer-option-gmail.php"; ?>
-            <?php include_once "mailer-option-smtp.php"; ?>
             <?php include_once "mailer-option-microsoft.php"; ?>
-            <?php include_once "mailer-option-sendinblue.php"; ?>
+            <?php include_once "mailer-option-mailgun.php"; ?>
             <?php include_once "mailer-option-zohomail.php"; ?>
             <?php include_once "mailer-option-default.php"; ?>
 

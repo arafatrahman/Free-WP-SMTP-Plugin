@@ -57,12 +57,11 @@ class smtp_admin extends Setting{
                 }
                 
                 if(kauget('mailer-types', $smtpValue) == "5"){
-                    
-                    KauSendinBlue::sendmail();
-                    //$sendinblueApiKey = kauget('kau-sendinblue-api-key',$smtpValue);
-                    
-                   // KauSendinBlue::sendInMailEmailSending($sendinblueApiKey, $to, $subject, $msg, $from, $fname);
-                   
+                   $mailgunApikey = kauget('kau-mailgun-api-key', $smtpValue);
+                   $mailgunApiUrl = kauget('kau-mailgun-api-url', $smtpValue);
+                   $html = kauget('kau-mailgun-html-allow', $smtpValue);
+                   KauMailGun::sendMailgunTestEmail($from, $fname, $subject, $to, $msg,$mailgunApikey,$mailgunApiUrl,$html);
+                
                 }
                 
                 if(kauget('mailer-types', $smtpValue) == "6"){

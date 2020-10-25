@@ -8,36 +8,18 @@ jQuery(document).ready(function ($) {
 
     $("#gmail-settings-id").hide();
 
-    if ($('input#mailer-type-smtp').is(':checked')) {
-
-
-        $("#smtp-settings-id").show();
-        $("#smtp-settings-label").show();
-        $("#gmail-settings-id").hide();
-        $("#microsoft-settings-id").hide();
-        $("#gmail-settings-label").hide();
-        $("#microsoft-settings-label").hide();
-        $("#default-settings-label").hide();
-        $("#default-settings-id").hide();
-        $("#sendinblue-settings-id").hide();
-        $("#sendinblue-settings-label").hide();
-        $("#zohomail-settings-id").hide();
-        $("#zohomail-settings-label").hide();
-    }
-    ;
+   
 
 
     if ($('input#mailer-type-gmail').is(':checked')) {
         $("#gmail-settings-id").show();
         $("#gmail-settings-label").show();
-        $("#smtp-settings-id").hide();
         $("#microsoft-settings-id").hide();
-        $("#smtp-settings-label").hide();
         $("#microsoft-settings-label").hide();
         $("#default-settings-label").hide();
         $("#default-settings-id").hide();
-        $("#sendinblue-settings-id").hide();
-        $("#sendinblue-settings-label").hide();
+        $("#mailgun-settings-id").hide();
+        $("#mailgun-settings-label").hide();
         $("#zohomail-settings-id").hide();
         $("#zohomail-settings-label").hide();
 
@@ -48,29 +30,25 @@ jQuery(document).ready(function ($) {
     if ($('input#mailer-type-microsoft').is(':checked')) {
         $("#microsoft-settings-id").show();
         $("#microsoft-settings-label").show();
-        $("#smtp-settings-id").hide();
         $("#gmail-settings-id").hide();
         $("#gmail-settings-label").hide();
-        $("#smtp-settings-label").hide();
         $("#default-settings-label").hide();
         $("#default-settings-id").hide();
-        $("#sendinblue-settings-id").hide();
-        $("#sendinblue-settings-label").hide();
+        $("#mailgun-settings-id").hide();
+        $("#mailgun-settings-label").hide();
         $("#zohomail-settings-id").hide();
         $("#zohomail-settings-label").hide();
 
     }
     ;
 
-    if ($('input#mailer-type-sendinblue').is(':checked')) {
-        $("#sendinblue-settings-id").show();
-        $("#sendinblue-settings-label").show();
+    if ($('input#mailer-type-mailgun').is(':checked')) {
+        $("#mailgun-settings-id").show();
+        $("#mailgun-settings-label").show();
         $("#microsoft-settings-id").hide();
         $("#microsoft-settings-label").hide();
-        $("#smtp-settings-id").hide();
         $("#gmail-settings-id").hide();
         $("#gmail-settings-label").hide();
-        $("#smtp-settings-label").hide();
         $("#zohomail-settings-id").hide();
         $("#zohomail-settings-label").hide();
         $("#default-settings-label").hide();
@@ -88,12 +66,10 @@ jQuery(document).ready(function ($) {
         $("#zohomail-settings-label").show();
         $("#microsoft-settings-id").hide();
         $("#microsoft-settings-label").hide();
-        $("#smtp-settings-id").hide();
         $("#gmail-settings-id").hide();
         $("#gmail-settings-label").hide();
-        $("#smtp-settings-label").hide();
-        $("#sendinblue-settings-id").hide();
-        $("#sendinblue-settings-label").hide();
+        $("#mailgun-settings-id").hide();
+        $("#mailgun-settings-label").hide();
         $("#default-settings-label").hide();
         $("#default-settings-id").hide();
     }
@@ -104,14 +80,12 @@ jQuery(document).ready(function ($) {
     if ($('input#mailer-type-default').is(':checked')) {
         $("#default-settings-id").show();
         $("#default-settings-label").show();
-        $("#smtp-settings-id").hide();
         $("#gmail-settings-id").hide();
         $("#gmail-settings-label").hide();
-        $("#smtp-settings-label").hide();
         $("#microsoft-settings-id").hide();
         $("#microsoft-settings-label").hide();
-        $("#sendinblue-settings-id").hide();
-        $("#sendinblue-settings-label").hide();
+        $("#mailgun-settings-id").hide();
+        $("#mailgun-settings-label").hide();
         $("#zohomail-settings-id").hide();
         $("#zohomail-settings-label").hide();
 
@@ -120,34 +94,17 @@ jQuery(document).ready(function ($) {
 
 
 
-    $('#mailer-type-smtp').click(function () {
-        $("#smtp-settings-id").show();
-        $("#smtp-settings-label").show();
-        $("#gmail-settings-id").hide();
-        $("#microsoft-settings-id").hide();
-        $("#gmail-settings-label").hide();
-        $("#microsoft-settings-label").hide();
-        $("#default-settings-label").hide();
-        $("#default-settings-id").hide();
-        $("#sendinblue-settings-id").hide();
-        $("#sendinblue-settings-label").hide();
-        $("#zohomail-settings-id").hide();
-        $("#zohomail-settings-label").hide();
-
-
-    });
+  
 
     $('#mailer-type-gmail').click(function () {
         $("#gmail-settings-id").show();
         $("#gmail-settings-label").show();
-        $("#smtp-settings-id").hide();
         $("#microsoft-settings-id").hide();
-        $("#smtp-settings-label").hide();
         $("#microsoft-settings-label").hide();
         $("#default-settings-label").hide();
         $("#default-settings-id").hide();
-        $("#sendinblue-settings-id").hide();
-        $("#sendinblue-settings-label").hide();
+        $("#mailgun-settings-id").hide();
+        $("#mailgun-settings-label").hide();
         $("#zohomail-settings-id").hide();
         $("#zohomail-settings-label").hide();
 
@@ -157,29 +114,24 @@ jQuery(document).ready(function ($) {
     $('#mailer-type-microsoft').click(function () {
         $("#microsoft-settings-id").show();
         $("#microsoft-settings-label").show();
-        $("#smtp-settings-id").hide();
         $("#gmail-settings-id").hide();
         $("#gmail-settings-label").hide();
-        $("#smtp-settings-label").hide();
         $("#default-settings-label").hide();
         $("#default-settings-id").hide();
-        $("#sendinblue-settings-id").hide();
-        $("#sendinblue-settings-label").hide();
+        $("#mailgun-settings-id").hide();
+        $("#mailgun-settings-label").hide();
         $("#zohomail-settings-id").hide();
         $("#zohomail-settings-label").hide();
 
     });
     
-        $('#mailer-type-sendinblue').click(function () {
-         
-        $("#sendinblue-settings-id").show();
-        $("#sendinblue-settings-label").show();
+        $('#mailer-type-mailgun').click(function () {
+        $("#mailgun-settings-id").show();
+        $("#mailgun-settings-label").show();
         $("#default-settings-label").hide();
         $("#default-settings-id").hide();
-        $("#smtp-settings-id").hide();
         $("#gmail-settings-id").hide();
         $("#gmail-settings-label").hide();
-        $("#smtp-settings-label").hide();
         $("#microsoft-settings-id").hide();
         $("#microsoft-settings-label").hide();
         $("#zohomail-settings-id").hide();
@@ -193,12 +145,10 @@ jQuery(document).ready(function ($) {
         $("#zohomail-settings-label").show();
         $("#microsoft-settings-id").hide();
         $("#microsoft-settings-label").hide();
-        $("#smtp-settings-id").hide();
         $("#gmail-settings-id").hide();
         $("#gmail-settings-label").hide();
-        $("#smtp-settings-label").hide();
-        $("#sendinblue-settings-id").hide();
-        $("#sendinblue-settings-label").hide();
+        $("#mailgun-settings-id").hide();
+        $("#mailgun-settings-label").hide();
         $("#default-settings-label").hide();
         $("#default-settings-id").hide();
 
@@ -208,14 +158,12 @@ jQuery(document).ready(function ($) {
     $('#mailer-type-default').click(function () {
         $("#default-settings-label").show();
         $("#default-settings-id").show();
-        $("#smtp-settings-id").hide();
         $("#gmail-settings-id").hide();
         $("#gmail-settings-label").hide();
-        $("#smtp-settings-label").hide();
         $("#microsoft-settings-id").hide();
         $("#microsoft-settings-label").hide();
-        $("#sendinblue-settings-id").hide();
-        $("#sendinblue-settings-label").hide();
+        $("#mailgun-settings-id").hide();
+        $("#mailgun-settings-label").hide();
         $("#zohomail-settings-id").hide();
         $("#zohomail-settings-label").hide();
 

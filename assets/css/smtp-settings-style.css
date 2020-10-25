@@ -174,7 +174,7 @@ input:checked + .slider:before {
    margin-top:  -9px;
   border-top: 1px solid #28A745;  
 }
-.sendinblue-section-hr{
+.mailgun-section-hr{
    margin-top:  -9px;
   border-top: 1px solid #007BFF;  
 }

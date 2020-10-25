@@ -14,7 +14,7 @@ class kauEmailProcess {
         } elseif (kauget('mailer-types', $smtpValue) == "4") {
             return "default";
         } elseif (kauget('mailer-types', $smtpValue) == "5") {
-            return "sendinblue";
+            return "mailgun";
         } elseif (kauget('mailer-types', $smtpValue) == "6") {
             return "zohomail";
         }
@@ -32,6 +32,9 @@ class kauEmailProcess {
         } elseif ($kauEmailProvider == "microsoft") {
 
             self::mailSendingByMicrosoft($to, $subject, $message, $headers, $attachments);
+        } elseif ($kauEmailProvider == "mailgun") {
+
+            self::mailSendingByMailgun($to, $subject, $message, $headers, $attachments);
         } elseif ($kauEmailProvider == "zohomail") {
 
             self::mailSendingByZohomail($to, $subject, $message, $headers, $attachments);
@@ -90,6 +93,57 @@ class kauEmailProcess {
         }
     }
 
+    public static function mailSendingByMailgun($to, $subject, $message, $headers, $attachments) {
+
+        $mailgunData = array();
+        $smtpValue = Setting::getSMTP();
+        $fromEmail = kauget('kau-from-email', $smtpValue);
+        $fromName = kauget('kau-from-name', $smtpValue);
+        $mailgunApikey = kauget('kau-mailgun-api-key', $smtpValue);
+        $mailgunApiUrl = kauget('kau-mailgun-api-url', $smtpValue);
+        $html = kauget('kau-mailgun-html-allow', $smtpValue);
+        $mailgunData['from'] = $fromName. '<'.$fromEmail.'>';
+        
+        foreach ($to as $address) {
+            $mailgunData['to'] = $address;
+        }
+        $mailgunData['subject'] = $subject;
+        
+        if($html == "true"){
+           $mailgunData['html'] = $message;
+        }
+        else{
+           $mailgunData['text'] = $message;
+        }
+        
+        
+        
+        if (!empty($attachments)) {
+            foreach ($attachments as $attachFile) {
+            $mailgunData['attachment'] = curl_file_create($attachFile);
+            }
+        }
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $mailgunApiUrl .'/messages');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        if (!empty($attachments)) {
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: multipart/form-data'));
+        }
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $mailgunData);
+        curl_setopt($ch, CURLOPT_USERPWD, 'api' . ':' . $mailgunApikey);
+
+        $result = curl_exec($ch);
+        
+        
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+        curl_close($ch);
+        
+    }
+    
     public static function mailSendingByZohomail($to, $subject, $message, $headers, $attachments) {
 
         $smtpValue = Setting::getSMTP();
