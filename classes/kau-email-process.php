@@ -102,48 +102,46 @@ class kauEmailProcess {
         $mailgunApikey = kauget('kau-mailgun-api-key', $smtpValue);
         $mailgunApiUrl = kauget('kau-mailgun-api-url', $smtpValue);
         $html = kauget('kau-mailgun-html-allow', $smtpValue);
-        $mailgunData['from'] = $fromName. '<'.$fromEmail.'>';
-        
+        $mailgunData['from'] = $fromName . '<' . $fromEmail . '>';
+
         foreach ($to as $address) {
             $mailgunData['to'] = $address;
         }
         $mailgunData['subject'] = $subject;
-        
-        if($html == "true"){
-           $mailgunData['html'] = $message;
+
+        if ($html == "true") {
+            $mailgunData['html'] = $message;
+        } else {
+            $mailgunData['text'] = $message;
         }
-        else{
-           $mailgunData['text'] = $message;
-        }
-        
-        
-        
+
+
+
         if (!empty($attachments)) {
             foreach ($attachments as $attachFile) {
-            $mailgunData['attachment'] = curl_file_create($attachFile);
+                $mailgunData['attachment'] = curl_file_create($attachFile);
             }
         }
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, $mailgunApiUrl .'/messages');
+        curl_setopt($ch, CURLOPT_URL, $mailgunApiUrl . '/messages');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
         if (!empty($attachments)) {
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: multipart/form-data'));
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: multipart/form-data'));
         }
         curl_setopt($ch, CURLOPT_POSTFIELDS, $mailgunData);
         curl_setopt($ch, CURLOPT_USERPWD, 'api' . ':' . $mailgunApikey);
 
         $result = curl_exec($ch);
-        
-        
+
+
         if (curl_errno($ch)) {
             echo 'Error:' . curl_error($ch);
         }
         curl_close($ch);
-        
     }
-    
+
     public static function mailSendingByZohomail($to, $subject, $message, $headers, $attachments) {
 
         $smtpValue = Setting::getSMTP();
@@ -253,18 +251,24 @@ class kauEmailProcess {
 
     public static function mailSendingByMicrosoft($reciepent, $subject, $message, $headers, $attachments) {
 
-        
-        /*
-        
-        $content = base64_encode(file_get_contents($attachments['0']));
-        $attachFile = array(
-                "@odata.type" => "#Microsoft.OutlookServices.FileAttachment",
-                "Name" => $attachments['0'],
-                "ContentBytes" => $content
-            );
-        */
-        
-        
+
+        if (!empty($attachments)) {
+            $attachment = array();
+            for ($i = 0; $i < 6; $i++) {
+
+                if (strlen(trim($attachments[$i])) > 0) {
+                    $content = base64_encode(file_get_contents($attachments[$i]));
+                    $fileName = pathinfo($attachments[$i]);
+                    $attach = array(
+                        "@odata.type" => "#Microsoft.OutlookServices.FileAttachment",
+                        "Name" => $fileName['basename'],
+                        "ContentBytes" => $content
+                    );
+                    array_push($attachment, $attach);
+                }
+            }
+        }
+
         $to = array();
         foreach ($reciepent as $address) {
 
@@ -288,14 +292,17 @@ class kauEmailProcess {
             "Message" => array(
                 "Subject" => $subject,
                 "ToRecipients" => $to,
-               // "Attachments" => $attachFile,
                 "Body" => array(
                     "ContentType" => "HTML",
                     "Content" => utf8_encode($message)
                 ),
             )
         );
-
+        
+        if (!empty($attachments)) {
+        $request['Message']['Attachments'] = $attachment;
+        }
+        
         $request = json_encode($request);
         $smtpValue = Setting::getSMTP();
         $headers = array(
@@ -307,6 +314,8 @@ class kauEmailProcess {
         );
 
         $response = kau_Run_Curl("https://outlook.office.com/api/v2.0/me/sendmail", $request, $headers);
+        
+        
     }
 
     public static function mailSendingByGmail($to, $subject, $message, $headers, $attachments) {
