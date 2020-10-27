@@ -12,7 +12,7 @@ if (kauget('kau_form_submit', $_POST) == "") {
     <?php
     $smtpValue = self::getSMTP();
 
-    
+
     $authenticationButton = '';
 
     $kauGmailClientID = kauget('gmail-client-id', $smtpValue);
@@ -23,16 +23,16 @@ if (kauget('kau_form_submit', $_POST) == "") {
 
         if (KauAuthExtends::isKauGmailAuthRequired()) {
             $authenticationButton = ' 
-        
-                    <div class="form-group row ">
-                        <div class="col-6">
-                          <a href="' . KauGmailAuth2::getGmailClient()->createAuthUrl() . '" class="authentication-button" >         
-                              
-                             <i class="fa fa-google" aria-hidden="true"></i><b> Authentication </b>
-                                
-                           </a>  
+                
+                    <div class="form-group row api-autheication-btn">
+                        <div class="col-6" >
+                          <a href="' . KauGmailAuth2::getGmailClient()->createAuthUrl() . '" class="btn kau-api-autheication">
+                            <span class="autheication-btn-txt">Authorization</span>
+                            <span class="round"><i class="fa fa-chevron-right"></i></span>
+                          </a>
                         </div>
-                    </div> ';
+ 
+                    </div>';
         }
     }
 
@@ -41,27 +41,29 @@ if (kauget('kau_form_submit', $_POST) == "") {
         $gmailAuthSuccess = 'true';
         $authenticationButton = '';
     }
-    
+
     if (isset($_GET['code'])) {
         $gmailAuthSuccess = 'true';
         $authenticationButton = '';
     }
-    
+
     $microsoftOutlookAuthUrl = '';
     $microsoftAuthSuccess = 'false';
     if (KauOutlookAuth::isKauMicrosoftClientsSaved()) {
         if (KauOutlookAuth::isKauMicrosoftAuthRequired()) {
             $microsoftOutlookAuthUrl = ' 
-        
-                    <div class="form-group row ">
-                        <div class="col-6">
-                          <a href="' . KauOutlookAuth::getOutlookAuthURL() . '" class="authentication-button" >         
-                              
-                             <i class="fa fa-microsoft" aria-hidden="true"></i><b> Outlook Auth </b>
-                                
-                           </a>  
+                    
+                    <div class="form-group row api-autheication-btn">
+                        <div class="col-6" >
+                          <a href="' . KauOutlookAuth::getOutlookAuthURL() . '" class="btn kau-api-autheication">
+                            <span class="autheication-btn-txt">Authorization</span>
+                            <span class="round"><i class="fa fa-chevron-right"></i></span>
+                          </a>
                         </div>
-                    </div> ';
+ 
+                    </div>
+
+                    ';
         } else {
             $microsoftAuthSuccess = 'true';
         }
@@ -118,7 +120,7 @@ if (kauget('kau_form_submit', $_POST) == "") {
 
                     <div class="container mailer-type">
 
-                        
+
                         <label class="btn btn-default active">
                             <input type="radio" class="redio-color" id="mailer-type-gmail" name="mailer-types" value="2" <?php
                             $mailerTypes = (kauget('mailer-types', $smtpValue) == "2") ? 'checked' : false;
@@ -137,14 +139,14 @@ if (kauget('kau_form_submit', $_POST) == "") {
                             echo $mailerTypes;
                             ?> /> <span class="connection-type-label font-italic font-weight-bold">MailGun</span>
                         </label>
-                        
+
                         <label class="btn btn-default active">
                             <input type="radio" class="redio-color" id="mailer-type-zohomail" name="mailer-types" value="6"  <?php
                             $mailerTypes = (kauget('mailer-types', $smtpValue) == "6") ? 'checked' : false;
                             echo $mailerTypes;
                             ?> /> <span class="connection-type-label font-italic font-weight-bold">Zoho Mail</span>
                         </label>
-                        
+
                         <label class="btn btn-default active">
                             <input type="radio" class="redio-color" id="mailer-type-default" name="mailer-types" value="4" <?php
                             $mailerTypes = (kauget('mailer-types', $smtpValue) == "4") ? 'checked' : false;
@@ -181,14 +183,14 @@ if (kauget('kau_form_submit', $_POST) == "") {
                     </div>
                     <div class="font-italic label-text" id="mailgun-settings-label" style="display: none">
 
-                       mailgun is our recommended transactional email service. Founded in 2012, they serve 80,000+ growing companies around the world and send over 30 million emails each day
+                        mailgun is our recommended transactional email service. Founded in 2012, they serve 80,000+ growing companies around the world and send over 30 million emails each day
                     </div>
-                    
+
                     <div class="font-italic label-text" id="zohomail-settings-label" style="display: none">
 
-                       Ad-free Business Email Hosting with a clean, minimalist interface. Integrated Calendar, Contacts, Notes, Tasks apps. Free for up to 5 users.
+                        Ad-free Business Email Hosting with a clean, minimalist interface. Integrated Calendar, Contacts, Notes, Tasks apps. Free for up to 5 users.
                     </div>
-                    
+
                     <div class="font-italic label-text" id="default-settings-label" style="display: none">
 
                         You currently have the native WordPress option selected. Please select any other Mailer option above to continue the setup.

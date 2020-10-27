@@ -6,19 +6,24 @@ if (KauZohoMail::isKauZohoClientsSaved() && KauZohoMail::isKauZohomailAuthRequir
 
 
     $zohoAuthButton = ' 
-        
-                    <div class="form-group row ">
-                        <div class="col-6">
-                          <a href="' . KauZohoMail::kauZohoMailAuthUrl() . '" class="authentication-button" >         
-                              
-                             <i class="fa fa-google" aria-hidden="true"></i><b> Authentication </b>
-                                
-                           </a>  
+                    
+                    <div class="form-group row api-autheication-btn">
+                        <div class="col-6" >
+                          <a href="' . KauZohoMail::kauZohoMailAuthUrl() . '" class="btn kau-api-autheication">
+                            <span class="autheication-btn-txt">Authorization</span>
+                            <span class="round"><i class="fa fa-chevron-right"></i></span>
+                          </a>
                         </div>
-                    </div> ';
-} else {
-    $zohoAuthSuccess = 'true';
+ 
+                    </div>';
+
+                   
 }
+$smtpValue = Setting::getSMTP();
+if (kauget('kau-zohoMail-access-token', $smtpValue)) {
+        $zohoAuthSuccess = 'true';
+        $zohoAuthButton = '';
+    }
 ?>
 
 
