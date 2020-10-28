@@ -10,7 +10,7 @@ class smtp_admin extends Setting{
          public static function add_smtp_menu(){
             
 
-            add_menu_page('WP SMTP Startup Page', 'Free WP SMTP', 'manage_options', 'smtpstartup',array(__CLASS__,"main_menu"));
+            add_menu_page('WP SMTP Startup Page', 'Free WP SMTP', 'manage_options', 'smtpstartup',array(__CLASS__,"main_menu"),KAU_ASSETS_DIR_URI . '/images/sending.svg');
             add_submenu_page( 'smtpstartup', 'SMTP Settings Page', 'SMTP Settings', 'manage_options', "smtp_settings",array(__CLASS__,"smtp_settings"));           
             
 
