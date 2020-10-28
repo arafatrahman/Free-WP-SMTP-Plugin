@@ -45,6 +45,7 @@ class kauEmailProcess {
             return false;
         }
     }
+    
 
     public static function mailSendingByDefault($to, $subject, $message, $headers, $attachments) {
 
@@ -76,13 +77,17 @@ class kauEmailProcess {
 
         $mail->Body = $message;
 
+
+
         foreach ($to as $address) {
             $mail->AddAddress($address);
         }
-
-        foreach ($attachments as $attachFile) {
-            $mail->AddAttachment($attachFile);
+        if (!empty($attachments)) {
+            foreach ($attachments as $attachFile) {
+                $mail->AddAttachment($attachFile);
+            }
         }
+
         //set reasonable timeout
         $mail->Timeout = 10;
 
@@ -298,11 +303,11 @@ class kauEmailProcess {
                 ),
             )
         );
-        
+
         if (!empty($attachments)) {
-        $request['Message']['Attachments'] = $attachment;
+            $request['Message']['Attachments'] = $attachment;
         }
-        
+
         $request = json_encode($request);
         $smtpValue = Setting::getSMTP();
         $headers = array(
@@ -314,8 +319,6 @@ class kauEmailProcess {
         );
 
         $response = kau_Run_Curl("https://outlook.office.com/api/v2.0/me/sendmail", $request, $headers);
-        
-        
     }
 
     public static function mailSendingByGmail($to, $subject, $message, $headers, $attachments) {
@@ -337,10 +340,11 @@ class kauEmailProcess {
         $mail->AddReplyTo($from, $fname);
         $mail->Subject = $subject;
         $mail->isHTML(true);
-        foreach ($attachments as $attachFile) {
-            $mail->AddAttachment($attachFile);
+        if (!empty($attachments)) {
+            foreach ($attachments as $attachFile) {
+                $mail->AddAttachment($attachFile);
+            }
         }
-
         $mail->Body = $message;
         //create the MIME Message
         $mail->preSend();
