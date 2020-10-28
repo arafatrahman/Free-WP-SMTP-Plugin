@@ -5,6 +5,9 @@ class KauSmtpMail {
     public static function sendSmtpMail($subject, $to, $msg) {
         
         require_once SMTP_PATH . '/vendor/autoload.php';
+        require_once ABSPATH . WPINC . '/PHPMailer/PHPMailer.php';
+        require_once ABSPATH . WPINC . '/PHPMailer/SMTP.php';
+        require_once ABSPATH . WPINC . '/class-phpmailer.php';
         global $wp_version;
 
         if (version_compare($wp_version, '5.4.99') > 0) {
