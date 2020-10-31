@@ -45,56 +45,183 @@ class kauEmailProcess {
             return false;
         }
     }
-    
 
     public static function mailSendingByDefault($to, $subject, $message, $headers, $attachments) {
 
-        require_once SMTP_PATH . '/vendor/autoload.php';
-        require_once ABSPATH . WPINC . '/PHPMailer/PHPMailer.php';
-        require_once ABSPATH . WPINC . '/PHPMailer/SMTP.php';
-        require_once ABSPATH . WPINC . '/class-phpmailer.php';
-        $mail = new PHPMailer\PHPMailer\PHPMailer;
+        global $phpmailer;
         $smtpValue = Setting::getSMTP();
-        $mail->IsSMTP();
-        $mail->SMTPDebug = 0;
-        $mail->SMTPAuth = kauget('kau-smtp-authorization-smtp', $smtpValue);
-        $mail->SMTPSecure = kauget('kau-encryption-type', $smtpValue);
-        $mail->Host = kauget('kau-smtp-host', $smtpValue);
-        $mail->Port = kauget('kau-port-smtp', $smtpValue);
-        $mail->Username = kauget('kau-username-smtp', $smtpValue);
-        $mail->Password = kauget('kau-password-smtp', $smtpValue);
 
+        // (Re)create it, if it's gone missing.
+        if (!( $phpmailer instanceof PHPMailer\PHPMailer\PHPMailer )) {
+            require_once ABSPATH . WPINC . '/PHPMailer/PHPMailer.php';
+            require_once ABSPATH . WPINC . '/PHPMailer/SMTP.php';
+            require_once ABSPATH . WPINC . '/PHPMailer/Exception.php';
+            $phpmailer = new PHPMailer\PHPMailer\PHPMailer(true);
 
-        $mail->From = kauget('kau-from-email', $smtpValue);
-        $mail->FromName = kauget('kau-from-name', $smtpValue);
-
-        $mail->SetFrom(kauget('kau-from-email', $smtpValue), kauget('kau-from-name', $smtpValue));
-
-        $mail->SMTPAutoTLS = false;
-        $mail->Subject = $subject;
-
-        $mail->IsHTML(true);
-
-        $mail->Body = $message;
-
-
-
-        foreach ($to as $address) {
-            $mail->AddAddress($address);
+            $phpmailer::$validator = static function ( $email ) {
+                return (bool) is_email($email);
+            };
         }
-        if (!empty($attachments)) {
-            foreach ($attachments as $attachFile) {
-                $mail->AddAttachment($attachFile);
+
+        // Headers.
+        $cc = array();
+        $bcc = array();
+        $reply_to = array();
+
+        if (empty($headers)) {
+            $headers = array();
+        } else {
+            if (!is_array($headers)) {
+                // Explode the headers out, so this function can take
+                // both string headers and an array of headers.
+                $tempheaders = explode("\n", str_replace("\r\n", "\n", $headers));
+            } else {
+                $tempheaders = $headers;
+            }
+            $headers = array();
+
+            // If it's actually got contents.
+            if (!empty($tempheaders)) {
+                // Iterate through the raw headers.
+                foreach ((array) $tempheaders as $header) {
+                    if (strpos($header, ':') === false) {
+                        if (false !== stripos($header, 'boundary=')) {
+                            $parts = preg_split('/boundary=/i', trim($header));
+                            $boundary = trim(str_replace(array("'", '"'), '', $parts[1]));
+                        }
+                        continue;
+                    }
+                    // Explode them out.
+                    list( $name, $content ) = explode(':', trim($header), 2);
+
+                    // Cleanup crew.
+                    $name = trim($name);
+                    $content = trim($content);
+
+                    switch (strtolower($name)) {
+
+                       
+                        case 'cc':
+                            $cc = array_merge((array) $cc, explode(',', $content));
+                            break;
+                        case 'bcc':
+                            $bcc = array_merge((array) $bcc, explode(',', $content));
+                            break;
+                        case 'reply-to':
+                            $reply_to = array_merge((array) $reply_to, explode(',', $content));
+                            break;
+                        default:
+                            // Add it to our grand headers array.
+                            $headers[trim($name)] = trim($content);
+                            break;
+                    }
+                }
             }
         }
 
-        //set reasonable timeout
-        $mail->Timeout = 10;
+        // Empty out the values that may be set.
+        $phpmailer->clearAllRecipients();
+        $phpmailer->clearAttachments();
+        $phpmailer->clearCustomHeaders();
+        $phpmailer->clearReplyTos();
 
-        if (!$mail->Send()) {
-            $error_message = "Mailer Error: " . $mail->ErrorInfo;
-        } else {
-            $error_message = "Successfully sent!";
+        $phpmailer->setFrom(kauget('kau-from-email', $smtpValue), kauget('kau-from-name', $smtpValue), false);
+        $phpmailer->Subject = $subject;
+        $phpmailer->Body = $message;
+        $addressHeaders = compact('to', 'cc', 'bcc', 'reply_to');
+
+        foreach ($addressHeaders as $addressHeaders => $addresses) {
+            if (empty($addresses)) {
+                continue;
+            }
+
+            foreach ((array) $addresses as $address) {
+                try {
+
+                    $recipientName = '';
+
+                    if (preg_match('/(.*)<(.+)>/', $address, $matches)) {
+                        if (count($matches) == 3) {
+                            $recipientName = $matches[1];
+                            $address = $matches[2];
+                        }
+                    }
+
+                    switch ($addressHeaders) {
+                        case 'to':
+                            $phpmailer->addAddress($address, $recipientName);
+                            break;
+                        case 'cc':
+                            $phpmailer->addCc($address, $recipientName);
+                            break;
+                        case 'bcc':
+                            $phpmailer->addBcc($address, $recipientName);
+                            break;
+                        case 'reply_to':
+                            $phpmailer->addReplyTo($address, $recipientName);
+                            break;
+                    }
+                } catch (PHPMailer\PHPMailer\Exception $e) {
+                    continue;
+                }
+            }
+        }
+
+
+
+        $phpmailer->isSMTP();
+        $phpmailer->Host = kauget('kau-smtp-host', $smtpValue);
+        $phpmailer->SMTPAuth = kauget('kau-smtp-authorization-smtp', $smtpValue);
+        $phpmailer->Username = kauget('kau-username-smtp', $smtpValue);
+        $phpmailer->Password = kauget('kau-password-smtp', $smtpValue);
+        $phpmailer->SMTPSecure = kauget('kau-encryption-type', $smtpValue);
+        $phpmailer->Port = kauget('kau-port-smtp', $smtpValue);
+        $phpmailer->SMTPAutoTLS = false;
+
+
+
+        $phpmailer->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
+
+        if (!isset($content_type)) {
+            $content_type = 'text/plain';
+        }
+
+        $content_type = apply_filters('wp_mail_content_type', $content_type);
+
+        $phpmailer->ContentType = $content_type;
+
+        // Set whether it's plaintext, depending on $content_type.
+        if ('text/html' === $content_type) {
+            $phpmailer->isHTML(true);
+        }
+
+
+        if (!empty($attachments)) {
+            foreach ($attachments as $attachment) {
+                try {
+                    $phpmailer->addAttachment($attachment);
+                } catch (PHPMailer\PHPMailer\Exception $e) {
+                    continue;
+                }
+            }
+        }
+
+        // Send!
+        try {
+            return $phpmailer->send();
+        } catch (PHPMailer\PHPMailer\Exception $e) {
+
+            $mail_error_data = compact('to', 'subject', 'message', 'headers', 'attachments');
+            $mail_error_data['phpmailer_exception_code'] = $e->getCode();
+            do_action('wp_mail_failed', new WP_Error('wp_mail_failed', $e->getMessage(), $mail_error_data));
+
+            return false;
         }
     }
 
