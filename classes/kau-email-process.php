@@ -100,7 +100,7 @@ class kauEmailProcess {
 
                     switch (strtolower($name)) {
 
-                       
+
                         case 'cc':
                             $cc = array_merge((array) $cc, explode(',', $content));
                             break;
@@ -297,9 +297,91 @@ class kauEmailProcess {
             Setting::saveSMTP($smtpValue);
         }
 
+        $content_type = null;
+        // Headers
+        $cc = array();
+        $bcc = array(); 
+        $reply_to = array();
+        if (empty($headers)) {
+            $headers = array();
+        } else {
+            if (!is_array($headers)) {
+                // Explode the headers out, so this function can take both
+                // string headers and an array of headers.
+                $tempheaders = explode("\n", str_replace("\r\n", "\n", $headers));
+            } else {
+                $tempheaders = $headers;
+            }
+            $headers = array();
+            // If it's actually got contents
+            if (!empty($tempheaders)) {
+                // Iterate through the raw headers
+                foreach ((array) $tempheaders as $header) {
+                    if (strpos($header, ':') === false) {
+                        if (false !== stripos($header, 'boundary=')) {
+                            $parts = preg_split('/boundary=/i', trim($header));
+                            $boundary = trim(str_replace(array("'", '"'), '', $parts[1]));
+                        }
+                        continue;
+                    }
+                    // Explode them out
+                    list( $name, $content ) = explode(':', trim($header), 2);
+
+                    // Cleanup crew
+                    $name = trim($name);
+                    $content = trim($content);
+                    $content_type = null;
+                    switch (strtolower($name)) {
+                        case 'content-type':
+                            if (strpos($content, ';') !== false) {
+                                list( $type, $charset_content ) = explode(';', $content);
+                                $content_type = trim($type);
+                                if (false !== stripos($charset_content, 'charset=')) {
+                                    $charset = trim(str_replace(array('charset=', '"'), '', $charset_content));
+                                } elseif (false !== stripos($charset_content, 'boundary=')) {
+                                    $boundary = trim(str_replace(array('BOUNDARY=', 'boundary=', '"'), '', $charset_content));
+                                    $charset = '';
+                                }
+
+                                // Avoid setting an empty $content_type.
+                            } elseif ('' !== trim($content)) {
+                                $content_type = trim($content);
+                            }
+                            break;
+                        case 'cc':
+                            $cc = array_merge((array) $cc, explode(',', $content));
+                            break;
+                        case 'bcc':
+                            $bcc = array_merge((array) $bcc, explode(',', $content));
+                            break;
+                        case 'reply-to':
+                            $reply_to = array_merge((array) $reply_to, explode(',', $content));
+                            break;
+                        default:
+                            $headers[trim($name)] = trim($content);
+                            break;
+                    }
+                }
+            }
+        }
 
         $zohoData = array();
         $zohoData['fromAddress'] = $fromName . '<' . $fromEmail . '>';
+        $zohoBcc = '';
+        if (sizeof($bcc) > 0) {
+            $zohoBcc = implode(',', $bcc);
+        }
+        if ($zohoBcc != '') {
+            $zohoData['bccAddress'] = $zohoBcc;
+        }
+        $zohoCc = '';
+        if (sizeof($cc) > 0) {
+            $zohoCc = implode(',', $cc);
+        }
+        if ($zohoCc != '') {
+            $zohoData['ccAddress'] = $zohoCc;
+        }
+        
         $zohoData['subject'] = $subject;
         $zohoData['content'] = $message;
         $toAddresses = implode(',', $to);
@@ -449,7 +531,7 @@ class kauEmailProcess {
     }
 
     public static function mailSendingByGmail($to, $subject, $message, $headers, $attachments) {
-        
+
         global $phpmailer;
         $smtpValue = Setting::getSMTP();
 
@@ -460,9 +542,8 @@ class kauEmailProcess {
             require_once ABSPATH . WPINC . '/PHPMailer/SMTP.php';
             require_once ABSPATH . WPINC . '/PHPMailer/Exception.php';
             $phpmailer = new PHPMailer\PHPMailer\PHPMailer(true);
-
         }
-        
+
         // Headers.
         $cc = array();
         $bcc = array();
@@ -517,13 +598,13 @@ class kauEmailProcess {
                 }
             }
         }
-        
-         // Empty out the values that may be set.
+
+        // Empty out the values that may be set.
         $phpmailer->clearAllRecipients();
         $phpmailer->clearAttachments();
         $phpmailer->clearCustomHeaders();
         $phpmailer->clearReplyTos();
-        
+
         $phpmailer->setFrom(kauget('kau-from-email', $smtpValue), kauget('kau-from-name', $smtpValue), false);
         $phpmailer->SMTPOptions = array(
             'ssl' => array(
@@ -532,14 +613,14 @@ class kauEmailProcess {
                 'allow_self_signed' => true
             )
         );
-        
+
         $phpmailer->Subject = $subject;
         $content_type = apply_filters('wp_mail_content_type', $content_type);
         $phpmailer->ContentType = $content_type;
         if ('text/html' === $content_type) {
             $phpmailer->isHTML(true);
         }
-        
+
         // Set destination addresses, using appropriate methods for handling addresses.
         $address_headers = compact('to', 'cc', 'bcc', 'reply_to');
 
@@ -579,7 +660,7 @@ class kauEmailProcess {
                 }
             }
         }
-        
+
         if (!empty($attachments)) {
             foreach ($attachments as $attachment) {
                 try {
