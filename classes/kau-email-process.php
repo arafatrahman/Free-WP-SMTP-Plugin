@@ -449,33 +449,150 @@ class kauEmailProcess {
     }
 
     public static function mailSendingByGmail($to, $subject, $message, $headers, $attachments) {
-        require_once SMTP_PATH . '/vendor/autoload.php';
-        require_once ABSPATH . WPINC . '/class-phpmailer.php';
-
+        
+        global $phpmailer;
         $smtpValue = Setting::getSMTP();
-        $mail = new PHPMailer\PHPMailer\PHPMailer;
-        $mail->CharSet = "UTF-8";
-        $mail->Encoding = "base64";
-        $from = kauget('kau-from-email', $smtpValue);
-        $fname = kauget('kau-from-name', $smtpValue);
-        $mail->From = $from;
-        $mail->FromName = $fname;
-        foreach ($to as $address) {
-            $mail->AddAddress($address);
-        }
 
-        $mail->AddReplyTo($from, $fname);
-        $mail->Subject = $subject;
-        $mail->isHTML(true);
-        if (!empty($attachments)) {
-            foreach ($attachments as $attachFile) {
-                $mail->AddAttachment($attachFile);
+        // (Re)create it, if it's gone missing.
+        require_once SMTP_PATH . '/vendor/autoload.php';
+        if (!( $phpmailer instanceof PHPMailer\PHPMailer\PHPMailer )) {
+            require_once ABSPATH . WPINC . '/PHPMailer/PHPMailer.php';
+            require_once ABSPATH . WPINC . '/PHPMailer/SMTP.php';
+            require_once ABSPATH . WPINC . '/PHPMailer/Exception.php';
+            $phpmailer = new PHPMailer\PHPMailer\PHPMailer(true);
+
+        }
+        
+        // Headers.
+        $cc = array();
+        $bcc = array();
+        $reply_to = array();
+
+        if (empty($headers)) {
+            $headers = array();
+        } else {
+            if (!is_array($headers)) {
+                // Explode the headers out, so this function can take
+                // both string headers and an array of headers.
+                $tempheaders = explode("\n", str_replace("\r\n", "\n", $headers));
+            } else {
+                $tempheaders = $headers;
+            }
+            $headers = array();
+
+            // If it's actually got contents.
+            if (!empty($tempheaders)) {
+                // Iterate through the raw headers.
+                foreach ((array) $tempheaders as $header) {
+                    if (strpos($header, ':') === false) {
+                        if (false !== stripos($header, 'boundary=')) {
+                            $parts = preg_split('/boundary=/i', trim($header));
+                            $boundary = trim(str_replace(array("'", '"'), '', $parts[1]));
+                        }
+                        continue;
+                    }
+                    // Explode them out.
+                    list( $name, $content ) = explode(':', trim($header), 2);
+
+                    // Cleanup crew.
+                    $name = trim($name);
+                    $content = trim($content);
+
+                    switch (strtolower($name)) {
+
+                        case 'cc':
+                            $cc = array_merge((array) $cc, explode(',', $content));
+                            break;
+                        case 'bcc':
+                            $bcc = array_merge((array) $bcc, explode(',', $content));
+                            break;
+                        case 'reply-to':
+                            $reply_to = array_merge((array) $reply_to, explode(',', $content));
+                            break;
+                        default:
+                            // Add it to our grand headers array.
+                            $headers[trim($name)] = trim($content);
+                            break;
+                    }
+                }
             }
         }
-        $mail->Body = $message;
+        
+         // Empty out the values that may be set.
+        $phpmailer->clearAllRecipients();
+        $phpmailer->clearAttachments();
+        $phpmailer->clearCustomHeaders();
+        $phpmailer->clearReplyTos();
+        
+        $phpmailer->setFrom(kauget('kau-from-email', $smtpValue), kauget('kau-from-name', $smtpValue), false);
+        $phpmailer->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
+        
+        $phpmailer->Subject = $subject;
+        $content_type = apply_filters('wp_mail_content_type', $content_type);
+        $phpmailer->ContentType = $content_type;
+        if ('text/html' === $content_type) {
+            $phpmailer->isHTML(true);
+        }
+        
+        // Set destination addresses, using appropriate methods for handling addresses.
+        $address_headers = compact('to', 'cc', 'bcc', 'reply_to');
+
+        foreach ($address_headers as $address_header => $addresses) {
+            if (empty($addresses)) {
+                continue;
+            }
+
+            foreach ((array) $addresses as $address) {
+                try {
+                    // Break $recipient into name and address parts if in the format "Foo <bar@baz.com>".
+                    $recipient_name = '';
+
+                    if (preg_match('/(.*)<(.+)>/', $address, $matches)) {
+                        if (count($matches) == 3) {
+                            $recipient_name = $matches[1];
+                            $address = $matches[2];
+                        }
+                    }
+
+                    switch ($address_header) {
+                        case 'to':
+                            $phpmailer->addAddress($address, $recipient_name);
+                            break;
+                        case 'cc':
+                            $phpmailer->addCc($address, $recipient_name);
+                            break;
+                        case 'bcc':
+                            $phpmailer->addBcc($address, $recipient_name);
+                            break;
+                        case 'reply_to':
+                            $phpmailer->addReplyTo($address, $recipient_name);
+                            break;
+                    }
+                } catch (PHPMailer\PHPMailer\Exception $e) {
+                    continue;
+                }
+            }
+        }
+        
+        if (!empty($attachments)) {
+            foreach ($attachments as $attachment) {
+                try {
+                    $phpmailer->addAttachment($attachment);
+                } catch (PHPMailer\PHPMailer\Exception $e) {
+                    continue;
+                }
+            }
+        }
+        $phpmailer->Body = $message;
         //create the MIME Message
-        $mail->preSend();
-        $mime = $mail->getSentMIMEMessage();
+        $phpmailer->preSend();
+        $mime = $phpmailer->getSentMIMEMessage();
         $mime = rtrim(strtr(base64_encode($mime), '+/', '-_'), '=');
 
         //create the Gmail Message
