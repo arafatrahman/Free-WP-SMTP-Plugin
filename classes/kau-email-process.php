@@ -540,6 +540,80 @@ class kauEmailProcess {
             }
         }
 
+        // Headers
+        if (empty($headers)) {
+            $headers = array();
+        } else {
+            if (!is_array($headers)) {
+                $tempheaders = explode("\n", str_replace("\r\n", "\n", $headers));
+            } else {
+                $tempheaders = $headers;
+            }
+            $headers = array();
+            $cc = array();
+            $bcc = array();
+
+            // If it's actually got contents
+            if (!empty($tempheaders)) {
+                // Iterate through the raw headers
+                foreach ((array) $tempheaders as $header) {
+                    if (strpos($header, ':') === false) {
+                        if (false !== stripos($header, 'boundary=')) {
+                            $parts = preg_split('/boundary=/i', trim($header));
+                            $boundary = trim(str_replace(array("'", '"'), '', $parts[1]));
+                        }
+                        continue;
+                    }
+                    // Explode them out
+                    list($name, $content) = explode(':', trim($header), 2);
+
+                    // Cleanup crew
+                    $name = trim($name);
+                    $content = trim($content);
+
+                    switch (strtolower($name)) {
+                        case 'cc':
+                            $cc = array_merge((array) $cc, explode(',', $content));
+                            break;
+                        case 'bcc':
+                            $bcc = array_merge((array) $bcc, explode(',', $content));
+                            break;
+                        default:
+                            // Add it to our grand headers array
+                            $headers[trim($name)] = trim($content);
+                            break;
+                    }
+                }
+            }
+        }
+        $ccEmail = array();
+        $bccEmail = array();
+        $address_headers = compact('cc', 'bcc');
+        foreach ($address_headers as $address_header => $ccAddresses) {
+
+            foreach ($ccAddresses as $address) {
+
+                $toCc = explode(";", $address);
+                foreach ($toCc as $eachCc) {
+                    if (strlen(trim($eachCc)) > 0) {
+                        $thisCC = array(
+                            "EmailAddress" => array(
+                                "Address" => trim($eachCc)
+                            )
+                        );
+                        switch ($address_header) {
+                            case 'cc':
+                                array_push($ccEmail, $thisCC);
+                                break;
+                            case 'bcc':
+                                array_push($bccEmail, $thisCC);
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+
         $to = array();
         foreach ($reciepent as $address) {
 
@@ -563,12 +637,20 @@ class kauEmailProcess {
             "Message" => array(
                 "Subject" => $subject,
                 "ToRecipients" => $to,
+                "CcRecipients" => $ccEmail,
                 "Body" => array(
                     "ContentType" => "HTML",
                     "Content" => utf8_encode($message)
                 ),
             )
         );
+        
+        if($address_header == "cc"){
+            $request['Message']['CcRecipients'] = $ccEmail;
+        }
+        elseif($address_header == "bcc"){
+            $request['Message']['BccRecipients'] = $bccEmail;
+        }
 
         if (!empty($attachments)) {
             $request['Message']['Attachments'] = $attachment;
