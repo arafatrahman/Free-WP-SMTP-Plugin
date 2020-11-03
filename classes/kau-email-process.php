@@ -523,6 +523,14 @@ class kauEmailProcess {
     public static function mailSendingByMicrosoft($reciepent, $subject, $message, $headers, $attachments) {
 
 
+        if (empty(get_option('kau_outlook_integ_timestamp')) || time() - get_option('kau_outlook_integ_timestamp') > 3000) {
+            update_option('kau_outlook_integ_timestamp', time(), false);
+            $smtpValue = Setting::getSMTP();
+            $smtpValue['kau-microsoft-access-token'] = self::getNewAccessToken($refreshToken);
+            Setting::saveSMTP($smtpValue);
+        }
+
+
         if (!empty($attachments)) {
             $attachment = array();
             for ($i = 0; $i < 6; $i++) {
@@ -644,11 +652,10 @@ class kauEmailProcess {
                 ),
             )
         );
-        
-        if($address_header == "cc"){
+
+        if ($address_header == "cc") {
             $request['Message']['CcRecipients'] = $ccEmail;
-        }
-        elseif($address_header == "bcc"){
+        } elseif ($address_header == "bcc") {
             $request['Message']['BccRecipients'] = $bccEmail;
         }
 
