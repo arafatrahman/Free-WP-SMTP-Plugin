@@ -17,7 +17,7 @@
             <label for="mailgunAPIKey" class="col-sm-3 col-form-label font-weight-bold">API Key <span class="kau-required">*</span></label>
             <div class="col-sm-5">
                 <input type="text" name="kau-mailgun-api-key" class="form-control" id="kau-mailgun-api-key"   placeholder="Enter mailgun Api Key" value="<?php echo kauget('kau-mailgun-api-key', $smtpValue); ?>">
-                <div class="gmail-client-id-label font-italic label-text">Follow this link to get an api key from Sendinblue: <a href="https://account.sendinblue.com/advanced/api">Get mailgun Api Key V3</a></div>
+                <div class="gmail-client-id-label font-italic label-text">Follow this link to get an api key from Mailgun: <a href="https://login.mailgun.com/login/">Get mailgun Api Key V3</a></div>
             </div>
 
         </div>
@@ -27,7 +27,7 @@
             <label for="mailgunAPIurl" class="col-sm-3 col-form-label font-weight-bold">API base URL <span class="kau-required">*</span></label>
             <div class="col-sm-5">
                 <input type="text" name="kau-mailgun-api-url" class="form-control" id="kau-mailgun-api-url"   placeholder="Enter mailgun API base URL" value="<?php echo kauget('kau-mailgun-api-url', $smtpValue); ?>">
-                <div class="gmail-client-id-label font-italic label-text">Follow this link to get an api key from Sendinblue: <a href="https://account.sendinblue.com/advanced/api">Get mailgun API base URL</a></div>
+                <div class="gmail-client-id-label font-italic label-text">Follow this link to get an api base url Mailgun: <a href="https://login.mailgun.com/login/">Get mailgun API base URL</a></div>
             </div>
 
         </div>
