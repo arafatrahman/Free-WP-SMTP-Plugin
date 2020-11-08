@@ -761,11 +761,8 @@ class kauEmailProcess {
         );
 
         $phpmailer->Subject = $subject;
-        $content_type = apply_filters('wp_mail_content_type', $content_type);
-        $phpmailer->ContentType = $content_type;
-        if ('text/html' === $content_type) {
-            $phpmailer->isHTML(true);
-        }
+        $phpmailer->isHTML(true);
+        
 
         // Set destination addresses, using appropriate methods for handling addresses.
         $address_headers = compact('to', 'cc', 'bcc', 'reply_to');
