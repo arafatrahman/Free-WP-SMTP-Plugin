@@ -526,7 +526,7 @@ class kauEmailProcess {
         if (empty(get_option('kau_outlook_integ_timestamp')) || time() - get_option('kau_outlook_integ_timestamp') > 3000) {
             update_option('kau_outlook_integ_timestamp', time(), false);
             $smtpValue = Setting::getSMTP();
-            $smtpValue['kau-microsoft-access-token'] = self::getNewAccessToken($refreshToken);
+            $smtpValue['kau-microsoft-access-token'] = KauOutlookAuth::getNewAccessToken($refreshToken);
             Setting::saveSMTP($smtpValue);
         }
 
