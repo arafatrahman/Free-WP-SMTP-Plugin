@@ -10,7 +10,7 @@ $imgUrl = KAU_ASSETS_DIR_URI . '/images/underdevelopment.png';
 
 <form role="form" name="misc-settings-form" id="misc-settings-form" method="post" action="" enctype="multipart/form-data">
 
-    <div style="background-image: url('<?php echo $imgUrl ?>');width: 1100px; height: 560px;">
+    <div style="background-image: url('<?php echo $imgUrl ?>');width: 1000px; height: 560px;">
                        <div class=" well smtp-setting-one-content " style="display: none">
 
                            <div class="form-group row ">
