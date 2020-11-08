@@ -49,59 +49,6 @@ class KauOutlookAuth {
         $response = json_decode($response);
         return $response->access_token;
     }
-    
-    
-
-    public static function sendOutlookMail($accessToken,$refreshToken,$reciepent, $sub, $msg) {
-        
-        
-        if(empty(get_option('kau_outlook_integ_timestamp')) || time() - get_option('kau_outlook_integ_timestamp') > 3000) {
-                    update_option('kau_outlook_integ_timestamp',time(), false);
-                    $smtpValue = Setting::getSMTP();
-                    $smtpValue['kau-microsoft-access-token'] = self::getNewAccessToken($refreshToken) ;
-                    Setting::saveSMTP($smtpValue);  
-            }
-
-        $to = array();
-        $toFromForm = explode(";", $reciepent);
-        foreach ($toFromForm as $eachTo) {
-            if (strlen(trim($eachTo)) > 0) {
-                $thisTo = array(
-                    "EmailAddress" => array(
-                        "Address" => trim($eachTo)
-                    )
-                );
-                array_push($to, $thisTo);
-            }
-        }
-        if (count($to) == 0) {
-            die("Need email address to send email");
-        }
-
-        $request = array(
-            "Message" => array(
-                "Subject" => $sub,
-                "ToRecipients" => $to,
-                "Body" => array(
-                    "ContentType" => "HTML",
-                    "Content" => utf8_encode($msg)
-                )
-            )
-        );
-
-        $request = json_encode($request);
-        $headers = array(
-            "User-Agent: php-tutorial/1.0",
-            "Authorization: Bearer ".$accessToken,
-            "Accept: application/json",
-            "Content-Type: application/json",
-            "Content-Length: " . strlen($request)
-        );
-
-        $response = kau_Run_Curl("https://outlook.office.com/api/v2.0/me/sendmail", $request, $headers);
-        
-    }
-
 
     public static function isKauMicrosoftClientsSaved() {
         $smtpValue = Setting::getSMTP();

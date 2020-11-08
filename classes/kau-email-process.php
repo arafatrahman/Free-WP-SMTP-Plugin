@@ -350,7 +350,7 @@ class kauEmailProcess {
             $zohoAccessToken = wp_remote_retrieve_body(wp_remote_post($urlForRefreshToken));
             $response = json_decode($zohoAccessToken);
             $smtpValue = Setting::getSMTP();
-            $smtpValue['kau-zohoMail-access-token'] = $response->access_token;
+            $smtpValue['kau-zohoMail-access-token'] =  isset($response->access_token);
             Setting::saveSMTP($smtpValue);
         }
 
