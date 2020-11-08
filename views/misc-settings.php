@@ -4,14 +4,14 @@
 <?php 
 
 $miscValue = self::getMISC();
+$imgUrl = KAU_ASSETS_DIR_URI . '/images/underdevelopment.png';
 
-
-?>
-                       
+?>                   
 
 <form role="form" name="misc-settings-form" id="misc-settings-form" method="post" action="" enctype="multipart/form-data">
 
-                       <div class=" well smtp-setting-one-content ">
+    <div style="background-image: url('<?php echo $imgUrl ?>');width: 1100px; height: 560px;">
+                       <div class=" well smtp-setting-one-content " style="display: none">
 
                            <div class="form-group row ">
                                <label for="smtpactivation" class="col-sm-3 col-form-label font-weight-bold">Debug Mode Enable</label>
@@ -73,7 +73,7 @@ $miscValue = self::getMISC();
 
                        </div>
 
-                       <div class="row">
+                       <div class="row" style="display: none">
                             <div class="col-6">
                            
                             <button type="submit" name="kau_form_submit" class="btn savebtn" value="kau_misc_settings"><i class="fa fa-cog" aria-hidden="true" ></i><b> Save Settings</b></button>
@@ -87,5 +87,5 @@ $miscValue = self::getMISC();
                         </div>
 
 
-                   </div>
-                   </form>                       
+    </div>               </div>
+</form>                       
