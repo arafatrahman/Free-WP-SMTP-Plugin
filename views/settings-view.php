@@ -1,3 +1,6 @@
+
+<?php include_once "suggest-popup.php"; ?>
+
 <!-- Main Settings Section start -->        
 
 <?php
