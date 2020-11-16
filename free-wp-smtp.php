@@ -121,7 +121,8 @@ if (!function_exists('wp_mail')) {
             $attachments = implode("\n", str_replace("\r\n", "\n", $attachments));
         }
         
-        kauEmailProcess::kauEmailSending($to,$subject,$message,$headers,$attachments);
+       $mailSent= kauEmailProcess::kauEmailSending($to,$subject,$message,$headers,$attachments);
+        return $mailSent;
     }
 
 }
