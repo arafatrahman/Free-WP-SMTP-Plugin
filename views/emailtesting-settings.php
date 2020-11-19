@@ -23,9 +23,16 @@ if (kauget('kau_form_submit', $_POST) == "kau_testing_settings") {
         $emailSendButton = '';
     }
 
+   
     
     $emailSendButton = '';
     if (KauAuthExtends::isKauGmailAuthRequired() && empty(kauget('mailer-types', $smtpValue) =="3") && empty(kauget('mailer-types', $smtpValue) =="4") && empty(kauget('mailer-types', $smtpValue) =="5") && empty(kauget('mailer-types', $smtpValue) =="6") ) {
+        $emailSendButton = 'disabled';
+    }
+    
+    $emailSendButton = '';
+    if(kauget('smtp-activation',$smtpValue) == ""){
+        
         $emailSendButton = 'disabled';
     }
     ?>

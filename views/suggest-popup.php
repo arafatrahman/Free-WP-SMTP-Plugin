@@ -18,9 +18,7 @@
                 <p style="font-size: 14px;color:green;text-align: center;"><b>If any errors occur, please refresh and try again.</b></p>
 
             </div>
-            <div class="modal-footer" style="background:linear-gradient(to right, #0099ff -35%, #ff6699 100%)" height="30px;">
-                
-            </div>
+            
         </div>
     </div>
 </div>

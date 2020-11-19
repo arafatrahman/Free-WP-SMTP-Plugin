@@ -24,6 +24,11 @@ class kauEmailProcess {
 
     public static function kauEmailSending($to, $subject, $message, $headers, $attachments) {
 
+        $smtpValue = Setting::getSMTP();
+        if (kauget('smtp-activation', $smtpValue) == "") {
+            return;
+        }
+
         $kauEmailProvider = self::kauEmailProvider();
 
         if ($kauEmailProvider == "gmail") {
@@ -350,7 +355,7 @@ class kauEmailProcess {
             $zohoAccessToken = wp_remote_retrieve_body(wp_remote_post($urlForRefreshToken));
             $response = json_decode($zohoAccessToken);
             $smtpValue = Setting::getSMTP();
-            $smtpValue['kau-zohoMail-access-token'] =  isset($response->access_token);
+            $smtpValue['kau-zohoMail-access-token'] = isset($response->access_token);
             Setting::saveSMTP($smtpValue);
         }
 
@@ -762,7 +767,7 @@ class kauEmailProcess {
 
         $phpmailer->Subject = $subject;
         $phpmailer->isHTML(true);
-        
+
 
         // Set destination addresses, using appropriate methods for handling addresses.
         $address_headers = compact('to', 'cc', 'bcc', 'reply_to');
