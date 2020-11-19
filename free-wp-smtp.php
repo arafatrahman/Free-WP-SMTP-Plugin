@@ -80,7 +80,11 @@ function smtp_admin_styles() {
     } elseif ('free-wp-smtp_page_smtp_settings' === $screen->id) {
         // echo "<script type='text/javascript'>alert('worked');</script>";
         wp_enqueue_script('wpsmtp_admin_js', plugins_url('assets/js/smtp-settings.js', __FILE__), array(), '1.0');
-        wp_enqueue_script('bootjquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js', array('jquery'), '', true);
+        wp_register_script('jquery1', 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js', array('jquery'), '', true);
+        wp_register_script('jquery2', 'https://code.jquery.com/jquery-3.4.1.slim.min.js', array('jquery'), '', true);
+        wp_enqueue_script('jquery');
+        wp_enqueue_script('jquery');
+        
         wp_enqueue_script('bootjquery2', 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js', array('jquery'), '', true);
 
 
