@@ -9,6 +9,11 @@
  * Author URI: Author's website
  * License: GPL
  */
+
+if (!defined('ABSPATH')) {
+    die;
+}
+
 define("SMTP_PATH", dirname(__FILE__));
 define('KAU_ASSETS_DIR_URI', plugins_url('assets', __FILE__));
 
@@ -130,3 +135,9 @@ if (!function_exists('wp_mail')) {
     }
 
 }
+
+function delete_kau_smtp_data(){
+    delete_option(Setting::SMTP_SETTINGS);
+}
+
+register_deactivation_hook(__FILE__, 'delete_kau_smtp_data');
