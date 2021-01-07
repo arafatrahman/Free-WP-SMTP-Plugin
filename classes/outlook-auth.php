@@ -7,7 +7,7 @@ class KauOutlookAuth {
         $url = 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize';
         $params = array();
         $state = wp_create_nonce( 'redirect_url');
-        $params['client_id'] = kauget('ms-client-id', $smtpValue);
+        $params['client_id'] = wpmsget('ms-client-id', $smtpValue);
         $params['response_type'] = 'code';
         $params['redirect_uri'] = esc_url_raw(admin_url("admin.php"));
         $params['response_mode'] = 'query';
@@ -18,22 +18,24 @@ class KauOutlookAuth {
     }
 
     public static function getOutlookToken($code) {
+
         $smtpValue = Setting::getSMTP();
         $token_request_data = array(
             "grant_type" => "authorization_code",
             "code" => $code,
             "redirect_uri" => esc_url_raw(admin_url("admin.php")),
             "scope" => 'offline_access https://outlook.office.com/mail.send',
-            "client_id" => kauget('ms-client-id', $smtpValue),
-            "client_secret" => kauget('ms-client-secret', $smtpValue)
+            "client_id" => sanitize_text_field(wpmsget('ms-client-id', $smtpValue)),
+            "client_secret" => sanitize_text_field(wpmsget('ms-client-secret', $smtpValue))
         );
         $body = http_build_query($token_request_data);
-        $response = kau_Run_Curl('https://login.microsoftonline.com/common/oauth2/v2.0/token', $body);
+        $response = wpms_Run_Curl('https://login.microsoftonline.com/common/oauth2/v2.0/token', $body);
         $response = json_decode($response);
         return $response;
     }
     
     public static function getNewAccessToken($refreshToken) {
+        
         $smtpValue = Setting::getSMTP();
         $token_request_data = array(
             
@@ -41,23 +43,23 @@ class KauOutlookAuth {
             "redirect_uri" => esc_url_raw(admin_url("admin.php")),
             "scope" => 'offline_access https://outlook.office.com/mail.send',
             "grant_type" => "refresh_token",
-            "client_id" => kauget('ms-client-id', $smtpValue),
-            "client_secret" => kauget('ms-client-secret', $smtpValue)
+            "client_id" => sanitize_text_field(wpmsget('ms-client-id', $smtpValue)),
+            "client_secret" => sanitize_text_field(wpmsget('ms-client-secret', $smtpValue))
         );
         $body = http_build_query($token_request_data);
-        $response = kau_Run_Curl('https://login.microsoftonline.com/common/oauth2/v2.0/token', $body);
+        $response = wpms_Run_Curl('https://login.microsoftonline.com/common/oauth2/v2.0/token', $body);
         $response = json_decode($response);
         return $response->access_token;
     }
 
     public static function isKauMicrosoftClientsSaved() {
         $smtpValue = Setting::getSMTP();
-        return !empty(kauget('ms-client-id', $smtpValue)) && !empty(kauget('ms-client-secret', $smtpValue));
+        return !empty(sanitize_text_field(wpmsget('ms-client-id', $smtpValue))) && !empty(sanitize_text_field(wpmsget('ms-client-secret', $smtpValue)));
     }
 
     public static function isKauMicrosoftAuthRequired() {
         $smtpValue = Setting::getSMTP();
-        return empty(kauget('kau-microsoft-access-token', $smtpValue));
+        return empty(sanitize_text_field(wpmsget('kau-microsoft-access-token', $smtpValue)));
     }
 
    

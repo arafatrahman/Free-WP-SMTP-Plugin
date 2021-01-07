@@ -6,52 +6,51 @@ class KauGmailAuth2 extends KauAuthExtends {
 
         //Make object of Google API Client for call Google API
        // require_once dirname(__FILE__) . '/vendor/autoload.php';
-        $google_client = self::getGoogleClientConfig();
-        $google_client->setAccessType('offline');
-        $google_client->setApprovalPrompt('force');
-        $google_client->setIncludeGrantedScopes(true);
+        $googleClient = self::getGoogleClientConfig();
+        $googleClient->setAccessType('offline');
+        $googleClient->setApprovalPrompt('force');
+        $googleClient->setIncludeGrantedScopes(true);
 
-        $google_client->setScopes(array(Google_Service_Gmail::MAIL_GOOGLE_COM));
+        $googleClient->setScopes(array(Google_Service_Gmail::MAIL_GOOGLE_COM));
 
-        $google_client->addScope('email');
+        $googleClient->addScope('email');
 
-        $google_client->addScope('profile');
-        $google_client = apply_filters('kau_free_smtp_gmail_auth_get_client', $google_client);
+        $googleClient->addScope('profile');
+        $googleClient = apply_filters('wpsm_gmail_auth_get_client', $googleClient);
 
         if (isset($_GET['code'])) {
             
-            $google_client->fetchAccessTokenWithAuthCode($_GET['code']);
-            
+            $googleClient->fetchAccessTokenWithAuthCode(urldecode($_GET['code']));   
 
             $smtpValue = Setting::getSMTP();
-            $smtpValue['kau-gmail-access-token'] = $google_client->getAccessToken();
-            $smtpValue['kau-gmail-refesh-token'] = $google_client->getRefreshToken();
+            $smtpValue['kau-gmail-access-token'] = $googleClient->getAccessToken();
+            $smtpValue['kau-gmail-refesh-token'] = $googleClient->getRefreshToken();
             Setting ::saveSMTP($smtpValue);
         }
 
 
         // Refresh the token if it's expired.
-        if ($google_client->isAccessTokenExpired()) {
-            $refresh = $google_client->getRefreshToken();
+        if ($googleClient->isAccessTokenExpired()) {
+            $refresh = $googleClient->getRefreshToken();
             $smtpValue = Setting::getSMTP();
 
-            if (empty($refresh) && kauget('kau-gmail-refesh-token',$smtpValue)) {
-                $refresh = kauget('kau-gmail-refesh-token',$smtpValue);
+            if (empty($refresh) && wpmsget('kau-gmail-refesh-token',$smtpValue)) {
+                $refresh = wpmsget('kau-gmail-refesh-token',$smtpValue);
             }
 
             if (!empty($refresh)) {
-                $google_client->fetchAccessTokenWithRefreshToken($refresh);
+                $googleClient->fetchAccessTokenWithRefreshToken($refresh);
                 
                 $smtpValue = Setting::getSMTP();
-                $smtpValue['kau-gmail-access-token'] = $google_client->getAccessToken();
-                $smtpValue['kau-gmail-refesh-token'] = $google_client->getRefreshToken();
+                $smtpValue['kau-gmail-access-token'] = $googleClient->getAccessToken();
+                $smtpValue['kau-gmail-refesh-token'] = $googleClient->getRefreshToken();
                 Setting ::saveSMTP($smtpValue);
             }
         }
 
         
 
-        return $google_client;
+        return $googleClient;
     }
 
 }

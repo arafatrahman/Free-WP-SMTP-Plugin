@@ -2,9 +2,9 @@
 
  class Setting {
 
-    const SMTP_SETTINGS = 'kau_smtp_settings';
-    const MISC_SETTINGS = 'kau_misc_settings';
-    const EMAIL_TESTING = 'kau_email_testing';
+    const SMTP_SETTINGS = 'wpms_smtp_settings';
+    const MISC_SETTINGS = 'wpms_misc_settings';
+    const EMAIL_TESTING = 'wpms_email_testing';
 
     public static function saveSMTP($value) {
              update_option(self::SMTP_SETTINGS, json_encode($value));

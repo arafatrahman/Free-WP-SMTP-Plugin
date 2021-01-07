@@ -5,17 +5,17 @@ class kauEmailProcess {
     public static function kauEmailProvider() {
 
         $smtpValue = Setting::getSMTP();
-        if (kauget('mailer-types', $smtpValue) == "1") {
+        if (wpmsget('mailer-types', $smtpValue) == "1") {
             return "smtp";
-        } elseif (kauget('mailer-types', $smtpValue) == "2") {
+        } elseif (wpmsget('mailer-types', $smtpValue) == "2") {
             return "gmail";
-        } elseif (kauget('mailer-types', $smtpValue) == "3") {
+        } elseif (wpmsget('mailer-types', $smtpValue) == "3") {
             return "microsoft";
-        } elseif (kauget('mailer-types', $smtpValue) == "4") {
+        } elseif (wpmsget('mailer-types', $smtpValue) == "4") {
             return "default";
-        } elseif (kauget('mailer-types', $smtpValue) == "5") {
+        } elseif (wpmsget('mailer-types', $smtpValue) == "5") {
             return "mailgun";
-        } elseif (kauget('mailer-types', $smtpValue) == "6") {
+        } elseif (wpmsget('mailer-types', $smtpValue) == "6") {
             return "zohomail";
         }
 
@@ -25,14 +25,14 @@ class kauEmailProcess {
     public static function kauEmailSending($to, $subject, $message, $headers, $attachments) {
 
         $smtpValue = Setting::getSMTP();
-        if (kauget('smtp-activation', $smtpValue) == "") {
+        if (wpmsget('smtp-activation', $smtpValue) == "") {
             return;
         }
 
         $kauEmailProvider = self::kauEmailProvider();
 
         if ($kauEmailProvider == "gmail") {
-
+            
             self::mailSendingByGmail($to, $subject, $message, $headers, $attachments);
         } elseif ($kauEmailProvider == "microsoft") {
 
@@ -130,7 +130,7 @@ class kauEmailProcess {
         $phpmailer->clearCustomHeaders();
         $phpmailer->clearReplyTos();
 
-        $phpmailer->setFrom(kauget('kau-from-email', $smtpValue), kauget('kau-from-name', $smtpValue), false);
+        $phpmailer->setFrom(wpmsget('kau-from-email', $smtpValue), wpmsget('kau-from-name', $smtpValue), false);
         $phpmailer->Subject = $subject;
         $phpmailer->Body = $message;
         $addressHeaders = compact('to', 'cc', 'bcc', 'reply_to');
@@ -175,15 +175,15 @@ class kauEmailProcess {
 
 
         $phpmailer->isSMTP();
-        $phpmailer->Host = kauget('kau-smtp-host', $smtpValue);
-        $phpmailer->SMTPAuth = kauget('kau-smtp-authorization-smtp', $smtpValue);
-        $phpmailer->Username = kauget('kau-username-smtp', $smtpValue);
-        $phpmailer->Password = kauget('kau-password-smtp', $smtpValue);
-        $phpmailer->SMTPSecure = kauget('kau-encryption-type', $smtpValue);
-        $phpmailer->Port = kauget('kau-port-smtp', $smtpValue);
+         $phpmailer->Host = sanitize_text_field( trim(wpmsget('kau-smtp-host', $smtpValue)));
+        $phpmailer->SMTPAuth = sanitize_text_field( trim(wpmsget('kau-smtp-authorization-smtp', $smtpValue)));
+        $phpmailer->Username = sanitize_email( trim(wpmsget('kau-username-smtp', $smtpValue)));
+        $phpmailer->Password = sanitize_text_field( trim(wpmsget('kau-password-smtp', $smtpValue)));
+        $phpmailer->SMTPSecure = sanitize_text_field( trim(wpmsget('kau-encryption-type', $smtpValue)));
+        $phpmailer->Port = sanitize_text_field( trim(wpmsget('kau-port-smtp', $smtpValue)));
         $phpmailer->SMTPAutoTLS = false;
 
-
+        
 
         $phpmailer->SMTPOptions = array(
             'ssl' => array(
@@ -219,9 +219,11 @@ class kauEmailProcess {
 
         // Send!
         try {
+            
             return $phpmailer->send();
+           
         } catch (PHPMailer\PHPMailer\Exception $e) {
-
+          
             $mail_error_data = compact('to', 'subject', 'message', 'headers', 'attachments');
             $mail_error_data['phpmailer_exception_code'] = $e->getCode();
             do_action('wp_mail_failed', new WP_Error('wp_mail_failed', $e->getMessage(), $mail_error_data));
@@ -234,11 +236,11 @@ class kauEmailProcess {
 
         $mailgunData = array();
         $smtpValue = Setting::getSMTP();
-        $fromEmail = kauget('kau-from-email', $smtpValue);
-        $fromName = kauget('kau-from-name', $smtpValue);
-        $mailgunApikey = kauget('kau-mailgun-api-key', $smtpValue);
-        $mailgunApiUrl = kauget('kau-mailgun-api-url', $smtpValue);
-        $html = kauget('kau-mailgun-html-allow', $smtpValue);
+        $fromEmail = wpmsget('kau-from-email', $smtpValue);
+        $fromName = wpmsget('kau-from-name', $smtpValue);
+        $mailgunApikey = wpmsget('kau-mailgun-api-key', $smtpValue);
+        $mailgunApiUrl = wpmsget('kau-mailgun-api-url', $smtpValue);
+        $html = wpmsget('kau-mailgun-html-allow', $smtpValue);
         $mailgunData['from'] = $fromName . '<' . $fromEmail . '>';
 
         // Headers
@@ -339,18 +341,18 @@ class kauEmailProcess {
     public static function mailSendingByZohomail($to, $subject, $message, $headers, $attachments) {
 
         $smtpValue = Setting::getSMTP();
-        $accessToken = kauget('kau-zohoMail-access-token', $smtpValue);
+        $accessToken = wpmsget('kau-zohoMail-access-token', $smtpValue);
 
-        $fromEmail = kauget('kau-from-email', $smtpValue);
-        $fromName = kauget('kau-from-name', $smtpValue);
-        $msgType = kauget('kau-zoho-html-allow', $smtpValue);
-        $userID = kauget('kau-zohomail-user-id', $smtpValue);
-        $domainExtensions = kauget('zohomail-domain-extensions', $smtpValue);
-        $clientId = kauget('kau-zohomail-client-id', $smtpValue);
-        $clientSecret = kauget('kau-zohomail-client-secret', $smtpValue);
+        $fromEmail = wpmsget('kau-from-email', $smtpValue);
+        $fromName = wpmsget('kau-from-name', $smtpValue);
+        $msgType = wpmsget('kau-zoho-html-allow', $smtpValue);
+        $userID = wpmsget('kau-zohomail-user-id', $smtpValue);
+        $domainExtensions = wpmsget('zohomail-domain-extensions', $smtpValue);
+        $clientId = wpmsget('kau-zohomail-client-id', $smtpValue);
+        $clientSecret = wpmsget('kau-zohomail-client-secret', $smtpValue);
 
-        if (empty(get_option('kau_zohomail_integ_timestamp')) || time() - get_option('kau_zohomail_integ_timestamp') > 3000) {
-            update_option('kau_zohomail_integ_timestamp', time(), false);
+        if (empty(get_option('wpms_zohomail_integ_timestamp')) || time() - get_option('wpms_zohomail_integ_timestamp') > 3000) {
+            update_option('wpms_zohomail_integ_timestamp', time(), false);
             $urlForRefreshToken = 'https://accounts.zoho' . $domainExtensions . '/oauth/v2/token?refresh_token=' . base64_decode($accessToken) . '&grant_type=refresh_token&client_id=' . $clientId . '&client_secret=' . $clientSecret . '&redirect_uri=' . admin_url() . 'admin.php&scope=VirtualOffice.messages.CREATE,VirtualOffice.accounts.READ';
             $zohoAccessToken = wp_remote_retrieve_body(wp_remote_post($urlForRefreshToken));
             $response = json_decode($zohoAccessToken);
@@ -527,10 +529,11 @@ class kauEmailProcess {
 
     public static function mailSendingByMicrosoft($reciepent, $subject, $message, $headers, $attachments) {
 
-
-        if (empty(get_option('kau_outlook_integ_timestamp')) || time() - get_option('kau_outlook_integ_timestamp') > 3000) {
-            update_option('kau_outlook_integ_timestamp', time(), false);
-            $smtpValue = Setting::getSMTP();
+        $smtpValue = Setting::getSMTP();
+        
+        $refreshToken = wpmsget('kau-microsoft-refresh-token', $smtpValue);
+        if (empty(get_option('wpms_outlook_integ_timestamp')) || time() - get_option('wpms_outlook_integ_timestamp') > 3000) {
+            update_option('wpms_outlook_integ_timestamp', time(), false);
             $smtpValue['kau-microsoft-access-token'] = KauOutlookAuth::getNewAccessToken($refreshToken);
             Setting::saveSMTP($smtpValue);
         }
@@ -669,16 +672,15 @@ class kauEmailProcess {
         }
 
         $request = json_encode($request);
-        $smtpValue = Setting::getSMTP();
         $headers = array(
             "User-Agent: php-tutorial/1.0",
-            "Authorization: Bearer " . kauget('kau-microsoft-access-token', $smtpValue),
+            "Authorization: Bearer " . wpmsget('kau-microsoft-access-token', $smtpValue),
             "Accept: application/json",
             "Content-Type: application/json",
             "Content-Length: " . strlen($request)
         );
 
-        $response = kau_Run_Curl("https://outlook.office.com/api/v2.0/me/sendmail", $request, $headers);
+        $response = wpms_Run_Curl("https://outlook.office.com/api/v2.0/me/sendmail", $request, $headers);
     }
 
     public static function mailSendingByGmail($to, $subject, $message, $headers, $attachments) {
@@ -687,7 +689,7 @@ class kauEmailProcess {
         $smtpValue = Setting::getSMTP();
 
         // (Re)create it, if it's gone missing.
-        require_once SMTP_PATH . '/vendor/autoload.php';
+        require_once WPMS_PATH . '/vendor/autoload.php';
         if (!( $phpmailer instanceof PHPMailer\PHPMailer\PHPMailer )) {
             require_once ABSPATH . WPINC . '/PHPMailer/PHPMailer.php';
             require_once ABSPATH . WPINC . '/PHPMailer/SMTP.php';
@@ -750,13 +752,14 @@ class kauEmailProcess {
             }
         }
 
-        // Empty out the values that may be set.
+        //Empty out the values that may be set.
         $phpmailer->clearAllRecipients();
         $phpmailer->clearAttachments();
         $phpmailer->clearCustomHeaders();
         $phpmailer->clearReplyTos();
 
-        $phpmailer->setFrom(kauget('kau-from-email', $smtpValue), kauget('kau-from-name', $smtpValue), false);
+        
+        $phpmailer->setFrom(sanitize_email(wpmsget('kau-from-email', $smtpValue)), sanitize_text_field(wpmsget('kau-from-name', $smtpValue)), false);
         $phpmailer->SMTPOptions = array(
             'ssl' => array(
                 'verify_peer' => false,

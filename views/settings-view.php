@@ -5,7 +5,7 @@
 
 <?php
 $kauSettingsSave = '';
-if (kauget('kau_form_submit', $_POST) == "kau_smtp_settings") {
+if (wpmsget('wpms_form_submit', $_POST) == "wpms_smtp_settings") {
 
     $kauSettingsSave = ' <div class="notice notice-success is-dismissible  " id ="kau-settings-save-alert">
             <p class=" text-success "> <strong><i class="fa fa-check-circle"></i> Settings Saved!</strong> Your Settings Successfully Saved</p>
@@ -20,19 +20,19 @@ if (kauget('kau_form_submit', $_POST) == "kau_smtp_settings") {
         <div class="container col-12">
 
             <div class="row banner-text">
-                <?php $imgUrl = KAU_ASSETS_DIR_URI . "/images/brandlogo.png"; ?>
-                <div class="col-3 kauniaweblogo"> <a href="http://kauniaweb.com/" target="_blank"> <img src="<?php echo $imgUrl ?>" alt="kauniaweb" > </a></div>
+                <?php $imgUrl = esc_url(WPMS_ASSETS_DIR_URI . "/images/brandlogo.png"); ?>
+                <div class="col-3 kauniaweblogo"> <a href="https://riyadly.com/" target="_blank"> <img src="<?php echo $imgUrl ?>" alt="kauniaweb" > </a></div>
 
 
 
-                <div class="col-6 cover-text text-center">
-                    <h3 class="text-white"><strong>FREE WP SMTP PUGIN</strong></h3>
-                    <span class="font-italic">Our goal is to make email deliverability easy and reliable. We want to ensure your emails reach the inbox.</span>
+                <div class="col-6 cover-text text-center" style="text-shadow: 1px 1px 2px #484848 !important;">
+                    <h3 class="text-white"><strong><?php esc_html_e('WP Mailer SMTP','wp-mailer-smtp')?></strong></h3>
+                    <span class="font-italic"><?php esc_html_e('Our goal is to send you emails from your WordPress website without any hassle.We hope that Now you can send emails through this plugin ','wp-mailer-smtp')?></span>
 
 
                 </div>
 
-                <div class="col-3">  <a href="<?php echo $smtp_url; ?>" class="button-get-started" ><b>DOCUMENTATION</b></a> </div>
+                <div class="col-3">  <a href="https://riyadly.com/wp-mailer-smtp-documentation-for-wordpress/" class="button-get-started" ><b><?php esc_html_e('DOCUMENTATION','wp-mailer-smtp')?></b></a> </div>
 
 
 
@@ -51,27 +51,27 @@ if (kauget('kau_form_submit', $_POST) == "kau_smtp_settings") {
             <ul  role="tablist" class="nav nav-tabs nav-pills flex-column flex-sm-row text-center bg-light border-0 rounded-nav">
                 <li class="nav-item flex-sm-fill">
                     <a id="home-tab" data-toggle="tab" href="#smtp" role="tab" aria-controls="home" aria-selected="true" class="nav-link border-0 text-uppercase font-weight-bold  <?php
-                    if (kauget('kau_form_submit', $_POST) == "kau_smtp_settings") {
+                    if (wpmsget('wpms_form_submit', $_POST) == "wpms_smtp_settings") {
                         echo "show active";
                     }
-                    ?> <?php if (kauget('kau_form_submit', $_POST) == "kau_smtp_reset_settings") echo "show active" ?> <?php
-                   if (kauget('kau_form_submit', $_POST) == "") {
+                    ?> <?php if (wpmsget('wpms_form_submit', $_POST) == "wpms_smtp_reset_settings") echo "show active" ?> <?php
+                   if (wpmsget('wpms_form_submit', $_POST) == "") {
                        echo "show active";
                    }
-                    ?> ">SMTP Settings</a>
+                    ?> "><?php esc_html_e('SMTP Settings','wp-mailer-smtp')?></a>
                 </li>
                 <li class="nav-item flex-sm-fill">
-                    <a id="profile-tab" data-toggle="tab" href="#misc" role="tab" aria-controls="profile" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold <?php if (kauget('kau_form_submit', $_POST) == "kau_misc_settings") echo "show active" ?> <?php if (kauget('kau_form_submit', $_POST) == "kau_misc_reset_settings") echo "show active" ?>">MISC Settings</a>
+                    <a id="profile-tab" data-toggle="tab" href="#misc" role="tab" aria-controls="profile" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold <?php if (wpmsget('wpms_form_submit', $_POST) == "wpms_misc_settings") echo "show active" ?> <?php if (wpmsget('wpms_form_submit', $_POST) == "wpms_misc_reset_settings") echo "show active" ?>"><?php esc_html_e('MISC Settings','wp-mailer-smtp')?></a>
                 </li>
                 <li class="nav-item flex-sm-fill">
-                    <a id="contact-tab" data-toggle="tab" href="#emaillogs" role="tab" aria-controls="contact" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold">Email Logs</a>
+                    <a id="contact-tab" data-toggle="tab" href="#emaillogs" role="tab" aria-controls="contact" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold"><?php esc_html_e('Email Logs','wp-mailer-smtp')?></a>
                 </li>
                 <li class="nav-item flex-sm-fill">
                     <a id="contact-tab" data-toggle="tab" href="#emailtesting" role="tab" aria-controls="contact" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold <?php
-                   if (kauget('kau_form_submit', $_POST) == "kau_testing_settings") {
+                   if (wpmsget('wpms_form_submit', $_POST) == "wpms_testing_settings") {
                        echo "show active";
                    }
-                    ?>">Email Testing</a>
+                    ?>"><?php esc_html_e('Email Testing','wp-mailer-smtp')?></a>
                 </li>
             </ul>
         </div>

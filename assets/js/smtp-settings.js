@@ -264,7 +264,7 @@ jQuery(document).ready(function ($) {
 
 
     
-    $('#kau_smtp_settings_save').click(function() {
+    $('#wpms_smtp_settings_save').click(function() {
 
         
         
